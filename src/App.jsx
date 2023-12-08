@@ -1,13 +1,14 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 import Home from './Home'
+
 import './App.css'
+import Register from './components/formulaire/register'
 
 function App() {
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -27,6 +28,9 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
+
+      {Register()}
+
     </>
   );
 }
