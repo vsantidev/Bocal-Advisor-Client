@@ -12,10 +12,6 @@ function Login() {
     const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
 
-    function handleClick(){
-        alert('You clicked')
-    };
-
     const handleInputEmail = (e) => {
         setEmail(e.target.value);
     };
@@ -44,7 +40,7 @@ function Login() {
         try{
             const response = await fetch("http://127.0.0.1:8000/api/login", options);
             const data = await response.json();
-            if (data.success) {
+            if (data) {
                 localStorage.setItem("@TokenUser", data.token);
                 setShowSuccessAlert(true);
                 alert("Vous etes connecter!!!!!!");
