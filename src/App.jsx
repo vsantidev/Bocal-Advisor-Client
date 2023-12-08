@@ -1,19 +1,38 @@
 import { useState } from 'react'
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Link } from 'react-router-dom';
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import Login from './components/login/login'
+
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+
+import Home from './Home'
 import './App.css'
+import Register from './components/formulaire/register'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Home />,
+    },
+    // {
+    //   path: "/PlayStation",
+    //   element: <PlayStation />,
+    // },
+    // {
+    //   path: "/Xbox",
+    //   element: <Xbox />,
+    // },
+
+  ]);
 
   return (
     <>
     <Login></Login>
+      <RouterProvider router={router} />
+
+      {Register()}
+
     </>
-  )
+  );
 }
 
-export default App
+export default App;
