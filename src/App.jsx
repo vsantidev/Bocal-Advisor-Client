@@ -1,10 +1,13 @@
-import { useState } from 'react'
+import React from 'react';
 
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import Login from './components/login/login'
-import Home from './Home'
+// ==================> IMPORT NAVIGATION <==================
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Home from './components/home/Home';
+import Login from './components/login/login';
+import Register from './components/formulaire/register';
+// ==================> IMPORT CSS <==================
 import './App.css'
-import Register from './components/formulaire/register'
+
 
 function App() {
 
@@ -13,23 +16,23 @@ function App() {
       path: "/",
       element: <Home />,
     },
-    // {
-    //   path: "/PlayStation",
-    //   element: <PlayStation />,
-    // },
-    // {
-    //   path: "/Xbox",
-    //   element: <Xbox />,
-    // },
+    {
+      path: "/register",
+      element: <Register />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
 
   ]);
 
   return (
     <>
-    <Login></Login>
+    {/* <Login></Login> */}
       <RouterProvider router={router} />
 
-      {Register()}
+      {/* {Register()} */}
 
     </>
   );

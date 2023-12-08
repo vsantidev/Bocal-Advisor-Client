@@ -1,6 +1,7 @@
 import { useState } from "react";
 import App from "../../App"
 import { Link, useNavigate } from "react-router-dom";
+import Navbar from "../../layouts/navbar";
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -63,6 +64,7 @@ function Login() {
 
     return(
         <>
+        <Navbar />
         <div>
             <form action="" method="post">
                 <input type="text" value={email} onChange={handleInputEmail} placeholder="Email"/>
