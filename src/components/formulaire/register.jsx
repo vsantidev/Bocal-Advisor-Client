@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Navbar from "../../layouts/navbar";
+import Navbar from "../../layouts/navbar/Navbar";
 
 function Register() {
     const [role, setRole] = useState('membre');
