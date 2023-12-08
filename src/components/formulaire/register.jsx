@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Navbar from "../../layouts/navbar";
 
 function Register() {
     const [role, setRole] = useState('membre');
@@ -48,26 +49,29 @@ function Register() {
 
 
     return (
-        <div className="formInscription">
+        <>
+            <Navbar />
+            <div className="formInscription">
+                <div>
+                    <p onClick={() => choiceInscription('membre')}>membre</p>
+                    <p onClick={() => choiceInscription('gerant')}>gerant</p>
+                </div>
 
-            <div>
-                <p onClick={() => choiceInscription('membre')}>membre</p>
-                <p onClick={() => choiceInscription('gerant')}>gerant</p>
+                {/* {console.log("hello : "+ role)} */}
+                <form action="" method="POST">
+                    <input type="text" name="lastname" placeholder="nom" required onChange={(e) => setLastname(e.target.value)}/>
+                    <input type="text" name="firstname" placeholder="prenom" required onChange={(e) => setFirstname(e.target.value)}/>
+                    <input type="email" name="email" placeholder="email" required onChange={(e) => setEmail(e.target.value)}/>
+                    <input type="text" name="username" placeholder="pseudo" required onChange={(e) => setUsername(e.target.value)}/>
+                    <input type="text" name="birthday" placeholder="date d'anniversaire" required onChange={(e) => setBirhday(e.target.value)}/>
+                    <input type="password" name="password" placeholder="mot de passe" required onChange={(e) => setPassword(e.target.value)}/>
+
+                    <button type="submit" onClick={handleRegister} >valider</button>
+                </form>
+                <a href="">Déja un compte ?</a>
             </div>
-            
-            {/* {console.log("hello : "+ role)} */}
-            <form action="" method="POST">
-                <input type="text" name="lastname" placeholder="nom" required onChange={(e) => setLastname(e.target.value)}/>
-                <input type="text" name="firstname" placeholder="prenom" required onChange={(e) => setFirstname(e.target.value)}/>
-                <input type="email" name="email" placeholder="email" required onChange={(e) => setEmail(e.target.value)}/>
-                <input type="text" name="username" placeholder="pseudo" required onChange={(e) => setUsername(e.target.value)}/>
-                <input type="text" name="birthday" placeholder="date d'anniversaire" required onChange={(e) => setBirhday(e.target.value)}/>
-                <input type="password" name="password" placeholder="mot de passe" required onChange={(e) => setPassword(e.target.value)}/>
+        </>
 
-                <button type="submit" onClick={handleRegister} >valider</button>
-            </form>
-            <a href="">Déja un compte ?</a>
-        </div>
     )
 }
 
