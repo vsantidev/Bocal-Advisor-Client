@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 import Home from './Home'
-
 import './App.css'
 import Register from './components/formulaire/register'
 
@@ -27,6 +26,7 @@ function App() {
 
   return (
     <>
+    <Login></Login>
       <RouterProvider router={router} />
 
       {Register()}
