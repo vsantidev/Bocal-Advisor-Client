@@ -5,8 +5,10 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './components/home/Home';
 import Login from './components/login/login';
 import Register from './components/formulaire/register';
+import Footer from './layouts/footer/Footer';
 // ==================> IMPORT CSS <==================
 import './App.css'
+
 
 
 function App() {
@@ -31,7 +33,7 @@ function App() {
     <>
     {/* <Login></Login> */}
       <RouterProvider router={router} />
-
+      <Footer />
       {/* {Register()} */}
 
     </>
