@@ -13,9 +13,13 @@
 .navContainer{
     position: absolute;
     top: 0;
+    height: 15%;
+    width: 100%;
 }
 .formRegister{
-    height: 80%;
+    position: relative;
+    top: 5%;
+    height: 75%;
     width: 80%;
     display: flex;
     flex-direction: column;
@@ -66,4 +70,19 @@
     background-color: green;
     border: none;
 }
-
+.formRegister label{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 30px;
+    gap: 2%;
+}
+.formRegister label input{
+    width: 10%;
+    height: 75%;
+}
+.navbar,
+.filterContainer{
+    height: 50%;
+    width: 100%;
+}
