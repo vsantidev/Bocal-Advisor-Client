@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.search,
+.search form {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search form input {
+    height: 90%;
+    width: 90%;
+    background-color: rgba(240, 248, 255, 0);
+    border-radius: 12px;
+    border: 2px solid black;
+    box-sizing: border-box;
+    padding-left: 20px;
+    outline: none;
+}

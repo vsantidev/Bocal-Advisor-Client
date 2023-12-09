@@ -2,6 +2,8 @@ import { useState } from "react";
 import App from "../../App"
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../layouts/navbar/Navbar";
+import "../formulaire/register.css";
+import Register from "../formulaire/register";
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -63,29 +65,36 @@ function Login() {
     };
 
     return(
-        <>
-        <Navbar />
-        <div>
-            <form action="" method="post">
-                <input type="text" value={email} onChange={handleInputEmail} placeholder="Email"/>
-                <label>{emailError}</label>
-                <input value={password} type={showPassword ? "text" : "password"} onChange={handleInputPassword} placeholder="Mot de Passe"/>
-                <label>
-                    <input type="checkbox" className="checkbox" onClick={() => setShowPassword(!showPassword)} />
-                    Afficher le mot de passe
-                </label>
-                <label>{passwordError}</label>
-                <div className={"inputContainer"}>
-                  <input className={"inputButton"} type="button" onClick={getLogin} value={"Connexion"} id="loginButton" />
-               </div>
-               <div className="noAccountContainer">
-                  <div>
-                    Vous n'avez pas encore de compte ?
-                  </div>
-               </div>
-            </form>
+        <div className="auth">
+            <div className="navContainer">
+                <div className="navbar">
+                    <Navbar />
+                </div>
+            </div>
+            
+            <div className="formRegister">
+                <form action="" method="post">
+                    <input type="text" value={email} onChange={handleInputEmail} placeholder="Email"/>
+                    <label>{emailError}</label>
+                    <input value={password} type={showPassword ? "text" : "password"} onChange={handleInputPassword} placeholder="Mot de Passe"/>
+                    <label>
+                        <input type="checkbox" className="checkbox" onClick={() => setShowPassword(!showPassword)} />
+                        Afficher le mot de passe
+                    </label>
+                    <label>{passwordError}</label>
+
+                    <div className={"inputContainer"}>
+                        <button className={"inputButton"} type="button" onClick={getLogin} value={"Connexion"} id="loginButton" >Connexion</button>
+                    </div>
+                    
+                    <div className="noAccountContainer">
+                        <div>
+                            <a href="Register">Vous n'avez pas encore de compte ?</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-        </>
     );
 }
 

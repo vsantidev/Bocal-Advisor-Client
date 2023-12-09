@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./register.css"
 
 import Navbar from "../../layouts/navbar/Navbar";
-
+import Login from "../login/login";
 
 function Register() {
     const [role, setRole] = useState('membre');
@@ -73,7 +73,9 @@ function Register() {
     return (
         <div className="auth">
             <div className="navContainer">
-                <Navbar />
+                <div className="navbar">
+                    <Navbar />
+                </div>
             </div>
 
             <div className="formRegister">
@@ -93,7 +95,7 @@ function Register() {
 
                     <button type="submit" onClick={handleRegister} >valider</button>
                 </form>
-                <a href="">Déja un compte ?</a>
+                <a href="Login">Déja un compte ?</a>
             </div>
         </div>
 
