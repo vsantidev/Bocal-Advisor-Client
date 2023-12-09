@@ -1,6 +1,9 @@
 import { useState } from "react";
 import App from "../../App";
 import { Link, useNavigate } from "react-router-dom";
+import Navbar from "../../layouts/navbar/Navbar";
+import "../register/Register.css";
+import Register from "../register/register";
 
 function Login() {
   //   const navigate = useNavigate();
@@ -63,8 +66,14 @@ function Login() {
   };
 
   return (
-    <>
-      <div>
+    <div className="auth">
+      <div className="navContainer">
+        <div className="navbar">
+          <Navbar />
+        </div>
+      </div>
+
+      <div className="formRegister">
         <form action="" method="post">
           <input
             type="text"
@@ -88,21 +97,27 @@ function Login() {
             Afficher le mot de passe
           </label>
           <label>{passwordError}</label>
+
           <div className={"inputContainer"}>
-            <input
+            <button
               className={"inputButton"}
               type="button"
               onClick={getLogin}
               value={"Connexion"}
               id="loginButton"
-            />
+            >
+              Connexion
+            </button>
           </div>
+
           <div className="noAccountContainer">
-            <div>Vous n'avez pas encore de compte ?</div>
+            <div>
+              <a href="Register">Vous n'avez pas encore de compte ?</a>
+            </div>
           </div>
         </form>
       </div>
-    </>
+    </div>
   );
 }
 

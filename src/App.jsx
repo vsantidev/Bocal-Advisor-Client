@@ -1,10 +1,13 @@
-import { useState } from "react";
+import React from "react";
 
+// ==================> IMPORT NAVIGATION <==================
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Login from "./components/Login/Login";
-import Home from "./Home";
+import Home from "./components/home/Home";
+import Login from "./components/login/login";
+import Register from "./components/register/register";
+import Footer from "./layouts/footer/Footer";
+// ==================> IMPORT CSS <==================
 import "./App.css";
-import Register from "./components/Register/Register";
 
 function App() {
   const router = createBrowserRouter([
@@ -12,21 +15,22 @@ function App() {
       path: "/",
       element: <Home />,
     },
-    // {
-    //   path: "/PlayStation",
-    //   element: <PlayStation />,
-    // },
-    // {
-    //   path: "/Xbox",
-    //   element: <Xbox />,
-    // },
+    {
+      path: "/register",
+      element: <Register />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
   ]);
 
   return (
     <>
-      <Login></Login>
+      {/* <Login></Login> */}
       <RouterProvider router={router} />
-      <Register></Register>
+      <Footer />
+      {/* {Register()} */}
     </>
   );
 }
