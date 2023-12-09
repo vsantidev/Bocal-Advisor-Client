@@ -1,7 +1,7 @@
 import { useState } from "react";
 import App from "../../App"
 import { Link, useNavigate } from "react-router-dom";
-import Navbar from "../../layouts/navbar";
+import Navbar from "../../layouts/navbar/Navbar";
 
 function Login() {
     const [email, setEmail] = useState("");

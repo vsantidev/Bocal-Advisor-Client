@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../../layouts/navbar";
+import Navbar from "../../layouts/navbar/Navbar";
 import { Link } from "react-router-dom";
 import Filter from "../filter/filter";
 
