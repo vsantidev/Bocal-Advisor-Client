@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Navbar from "../../layouts/navbar";
+import "./register.css"
 
 function Register() {
     const [role, setRole] = useState('membre');
@@ -10,7 +11,9 @@ function Register() {
     const [birthday, setBirhday] = useState('');
     const [password, setPassword] = useState('');
     let user = {firstname,lastname, email, password , username, birthday, role };
-    
+    let membre_btn = document.querySelector(".membre-btn");
+    let gerant_btn = document.querySelector('.gerant-btn');
+
     
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -36,25 +39,44 @@ function Register() {
         });
     }
 
+
+    console.log("ll ",membre_btn);
+
     function choiceInscription($choice){
         if ($choice == "gerant") {
             console.log('gerant');
-            setRole('gerant');
+            setRole('gerant'); 
+            
+            gerant_btn.style.backgroundColor = "green";
+            gerant_btn.style.color ="white"
+
+            membre_btn.style.backgroundColor = "white";
+            membre_btn.style.color ="green";
+
         } else {
             console.log('membre');
             setRole('membre');
+            
+            gerant_btn.style.backgroundColor = "white";
+            gerant_btn.style.color ="green"
+
+            membre_btn.style.backgroundColor = "green";
+            membre_btn.style.color ="white";
         }
     }
 
 
 
     return (
-        <>
-            <Navbar />
-            <div className="formInscription">
-                <div>
-                    <p onClick={() => choiceInscription('membre')}>membre</p>
-                    <p onClick={() => choiceInscription('gerant')}>gerant</p>
+        <div className="auth">
+            <div className="navContainer">
+                <Navbar />
+            </div>
+
+            <div className="formRegister">
+                <div className="choice-btn">
+                    <p className="membre-btn" onClick={() => choiceInscription('membre')}>membre</p>
+                    <p className="gerant-btn" onClick={() => choiceInscription('gerant')}>gerant</p>
                 </div>
 
                 {/* {console.log("hello : "+ role)} */}
@@ -70,7 +92,7 @@ function Register() {
                 </form>
                 <a href="">Déja un compte ?</a>
             </div>
-        </>
+        </div>
 
     )
 }
