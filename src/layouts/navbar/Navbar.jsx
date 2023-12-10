@@ -8,7 +8,7 @@ export default function Navbar() {
     <div className="navbar">
       <div className="home">
         <nav>
-          <Link to="/">BocalAdvisor</Link>
+          <Link to="/" className="brand">BocalAdvisor</Link>
         </nav>
       </div>
 
@@ -18,10 +18,10 @@ export default function Navbar() {
 
       <div className="login">
         <nav>
-          <Link to="/register">Inscription</Link>
+          <Link to="/register" className="login-title">Inscription</Link>
         </nav>
         <nav>
-          <Link to="/login">Connexion</Link>
+          <Link to="/login" className="login-title">Connexion</Link>
         </nav>
       </div>
     </div>

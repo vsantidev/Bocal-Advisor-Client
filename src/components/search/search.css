@@ -14,22 +14,25 @@
 .search form input {
     height: 90%;
     width: 90%;
+    padding: 1.1rem;
+    font-size: 1.1rem;
     background-color: rgba(240, 248, 255, 0);
-    border-radius: 12px;
-    border: 2px solid black;
+    border-radius: 8px;
+    border: .1rem solid rgb(135, 135, 135);
     box-sizing: border-box;
     padding-left: 20px;
     outline: none;
+    text-transform: initial;
 }
 .search form button{
     position: absolute;
     right: 6%;
     height: 60%;
-    background-color: green;
     display: flex;
     justify-content: center;
     align-items: center;
+    border: none;
 }
-.search form button:hover{
-    background-color: springgreen;
-}
+/* .search form button:hover{
+    background-color: #426B1F;
+} */
