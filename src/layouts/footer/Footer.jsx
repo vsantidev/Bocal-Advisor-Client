@@ -25,6 +25,7 @@ export default function Footer() {
             <a href="#">06000 Nice</a>
             <a href="#">04 93 62 44 58</a>
             <a href="https://maps.app.goo.gl/t14GyQ3uu78UErnf8" target="_blank">
+              <i className="fa-solid fa-caret-right"></i>
               Carte
             </a>
           </div>
@@ -50,23 +51,15 @@ export default function Footer() {
               <i className="fa-brands fa-pinterest"></i>Pinterest
             </a>
           </div>
-
-          <div className="box">
-            <h3>Newsletter</h3>
-            <p>Abonnez-vous aux dernières news</p>
-            <form action="">
-              <input type="email" placeholder="Entrez votre email" id="" />
-              <input type="submit" value="subscribe" className="button" />
-            </form>
-          </div>
         </div>
-        <div className="credits">
-          {" "}
-          Projet réalisé en collaboration avec <span>Dennys</span>,{" "}
+
+        <div className="credits">          
+          Projet réalisé en collaboration avec <span>Dennys</span>,
           <span>Sergio</span>, <span>Véronique</span>, <span>Zaïnab</span> |
           Formation développeur web & mobile | &copy; Bocal Academy 2023, all
           rights reserved.
         </div>
+
       </section>
       {/* SECTION FOOTER END */}
     </>
