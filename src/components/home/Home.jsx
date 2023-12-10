@@ -3,6 +3,7 @@ import Navbar from "../../layouts/navbar/Navbar";
 import { Link } from "react-router-dom";
 import NavFilter from "../navFilter/navFilter";
 import CreatePlaces from "./CreatePlaces";
+import RenderPlaces from "./RenderPlaces";
 import "./home.css";
 
 export default function Home() {
@@ -25,6 +26,10 @@ export default function Home() {
 
       <div className="places">
         <CreatePlaces></CreatePlaces>
+      </div>
+
+      <div className="places">
+        <RenderPlaces></RenderPlaces>
       </div>
     </>
   );

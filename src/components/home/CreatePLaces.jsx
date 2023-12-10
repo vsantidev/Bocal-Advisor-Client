@@ -8,7 +8,6 @@ function CreatePlaces() {
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [file, setFile] = useState("");
-  let place = { title, street, postcode, city, category, description, file };
 
   const handlePlaces = async (e) => {
     e.preventDefault();
@@ -27,15 +26,6 @@ function CreatePlaces() {
       method: "POST",
       body: formData,
     };
-    // if (!response.ok) {
-    //   throw new Error(`HTTP error! Status: ${response.status}`);
-    // }
-
-    // await fetch("http://127.0.0.1:8000/api/post", options)
-
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log("data", data);
 
     try {
       const response = await fetch("http://127.0.0.1:8000/api/post", options);
