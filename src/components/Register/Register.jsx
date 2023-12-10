@@ -14,10 +14,10 @@ function Register() {
   const [birthday, setBirhday] = useState("");
   const [password, setPassword] = useState("");
   let user = { firstname, lastname, email, password, username, birthday, role };
-  let membre_btn = document.querySelector(".membre-btn");
-  let gerant_btn = document.querySelector(".gerant-btn");
+
 
   const handleRegister = async (e) => {
+    console.log("fonc: " , user);
     e.preventDefault();
 
     let options = {
@@ -28,9 +28,25 @@ function Register() {
       body: JSON.stringify(user),
     };
 
-    await fetch("http://127.0.0.1:8000/api/register", options)
-      .then((response) => response.json())
-      .then((data) => {
+      
+    fetch("http://127.0.0.1:8000/api/register", options)
+      .then(async response => {
+        response.json()
+        if (!response.ok){
+          throw new Error(`${response.status} ${response.statusText}`);
+        }
+        
+      })
+/*         const isJson = response.headers.get('content-type')?.includes('application/json');
+        const data = isJson && await response.json();
+
+        if (!response.ok) {
+          const error = (data && data.message) || response .status;
+          return Promise.reject(error);
+        }
+
+      }) */
+      .then(data => {
         console.log("data", data);
 
         if (data.token) {
@@ -38,30 +54,28 @@ function Register() {
         } else {
           alert("TRY AGAIN");
         }
+      })
+      .catch(error => {
+        console.error('There was an error : ', error);
       });
   };
 
-  console.log("ll ", membre_btn);
-
   function choiceInscription($choice) {
+    let membre_btn = document.querySelector(".membre-btn");
+    let gerant_btn = document.querySelector(".gerant-btn");
+    
     if ($choice == "gerant") {
       console.log("gerant");
       setRole("gerant");
 
-      gerant_btn.style.backgroundColor = "green";
-      gerant_btn.style.color = "white";
-
-      membre_btn.style.backgroundColor = "white";
-      membre_btn.style.color = "green";
+      gerant_btn.classList.add('active');
+      membre_btn.classList.remove('active');
     } else {
       console.log("membre");
       setRole("membre");
 
-      gerant_btn.style.backgroundColor = "white";
-      gerant_btn.style.color = "green";
-
-      membre_btn.style.backgroundColor = "green";
-      membre_btn.style.color = "white";
+      gerant_btn.classList.remove('active');
+      membre_btn.classList.add('active');
     }
   }
 
@@ -75,7 +89,7 @@ function Register() {
 
       <div className="formRegister">
         <div className="choice-btn">
-          <p className="membre-btn" onClick={() => choiceInscription("membre")}>
+          <p className="membre-btn active" onClick={() => choiceInscription("membre")}>
             membre
           </p>
           <p className="gerant-btn" onClick={() => choiceInscription("gerant")}>
@@ -83,7 +97,6 @@ function Register() {
           </p>
         </div>
 
-        {/* {console.log("hello : "+ role)} */}
         <form action="" method="POST">
           <input
             type="text"
