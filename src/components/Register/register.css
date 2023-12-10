@@ -16,6 +16,7 @@
     height: 15%;
     width: 100%;
 }
+
 .formRegister{
     position: relative;
     top: 5%;
@@ -46,6 +47,12 @@
     font-weight: 800;
     font-size: 20px;
 }
+.membre-btn.active,
+.gerant-btn.active{
+    background-color: green;
+    color: white;
+}
+
 .formRegister form {
     height: 80%;
     width: 90%;

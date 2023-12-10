@@ -4,6 +4,7 @@
 }
 .search,
 .search form {
+    position: relative;
     height: 100%;
     width: 100%;
     display: flex;
@@ -19,4 +20,16 @@
     box-sizing: border-box;
     padding-left: 20px;
     outline: none;
+}
+.search form button{
+    position: absolute;
+    right: 6%;
+    height: 60%;
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search form button:hover{
+    background-color: springgreen;
 }
