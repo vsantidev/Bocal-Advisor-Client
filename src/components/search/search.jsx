@@ -4,8 +4,8 @@ function Search() {
   return (
     <div className="search">
       <form action="" method="post">
-        <input type="text" name="search" placeholder="quelle destination ?" />
-        <button type="submit">rechercher</button>
+        <input type="text" name="search" placeholder="Des endroits à découvrir ?" />
+        <button type="submit" className="fa-solid fa-magnifying-glass"></button>
       </form>
     </div>
   );
