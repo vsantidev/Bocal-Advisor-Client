@@ -5,6 +5,7 @@ function Places(props) {
       <p>{props.street}</p>
       <p>{props.postcode}</p>
       <p>{props.city}</p>
+      {/* Image ne s'affiche pas :( */}
       <img src={props.file} alt="" />
       <p>{props.description}</p>
       <p>{props.category_id}</p>
