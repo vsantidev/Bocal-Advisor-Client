@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Places from "./Places";
+import './renderPlaces.css';
 
 function RenderPlaces(props) {
   const [places, setPlaces] = useState(null);

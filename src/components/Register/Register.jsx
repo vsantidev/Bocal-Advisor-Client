@@ -37,15 +37,6 @@ function Register() {
         }
         
       })
-/*         const isJson = response.headers.get('content-type')?.includes('application/json');
-        const data = isJson && await response.json();
-
-        if (!response.ok) {
-          const error = (data && data.message) || response .status;
-          return Promise.reject(error);
-        }
-
-      }) */
       .then(data => {
         console.log("data", data);
 
@@ -129,7 +120,7 @@ function Register() {
           <input
             type="text"
             name="birthday"
-            placeholder="date d'anniversaire"
+            placeholder="date d'anniversaire yyyy/mm/dd"
             required
             onChange={(e) => setBirhday(e.target.value)}
           />

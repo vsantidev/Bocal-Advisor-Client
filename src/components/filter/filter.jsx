@@ -32,15 +32,12 @@ function Filter() {
     let note = ["one", "two" , "three", "four", "five"] */
     
     const handleFilterButtonClick = (selectedCategory) => {
-/*         console.log("after : " , selectedFilters );
-        console.log("selectedCategory : ",selectedCategory); */
+
         if (selectedFilters.includes(selectedCategory)) {
-            
-           /*  console.log("if : ", selectedCategory); */
+
             let filters =  selectedFilters.filter((el) => el !== selectedCategory);
-            /* console.log("if 3 : ", filters); */
+
             setSelectedFilters(filters);
-            /* console.log('handle', selectedFilters); */
         } else {
             console.log("else : ", selectedCategory);
             setSelectedFilters([...selectedCategory, selectedCategory]);
