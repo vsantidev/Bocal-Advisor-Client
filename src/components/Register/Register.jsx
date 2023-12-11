@@ -15,9 +15,8 @@ function Register() {
   const [password, setPassword] = useState("");
   let user = { firstname, lastname, email, password, username, birthday, role };
 
-
   const handleRegister = async (e) => {
-    console.log("fonc: " , user);
+    console.log("fonc: ", user);
     e.preventDefault();
 
     let options = {
@@ -28,45 +27,65 @@ function Register() {
       body: JSON.stringify(user),
     };
 
-      
-    fetch("http://127.0.0.1:8000/api/register", options)
-      .then(async response => {
-        response.json()
-        if (!response.ok){
-          throw new Error(`${response.status} ${response.statusText}`);
-        }
-        
-      })
-      .then(data => {
-        console.log("data", data);
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/register",
+        options
+      );
 
-        if (data.token) {
-          alert(data.message);
-        } else {
-          alert("TRY AGAIN");
-        }
-      })
-      .catch(error => {
-        console.error('There was an error : ', error);
-      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("data", data);
+
+      if (data) {
+        alert(data.message);
+      } else {
+        alert("TRY AGAIN");
+      }
+    } catch (error) {
+      console.error("Fetch error:", error);
+    }
+
+    // fetch("http://127.0.0.1:8000/api/register", options)
+    //   .then(async (response) => {
+    //     response.json();
+    //     if (!response.ok) {
+    //       throw new Error(`${response.status} ${response.statusText}`);
+    //     }
+    //   })
+    //   .then((data) => {
+    //     console.log("data", data);
+
+    //     if (data.token) {
+    //       alert(data.message);
+    //     } else {
+    //       alert("TRY AGAIN");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error("There was an error : ", error);
+    //   });
   };
 
   function choiceInscription($choice) {
     let membre_btn = document.querySelector(".membre-btn");
     let gerant_btn = document.querySelector(".gerant-btn");
-    
+
     if ($choice == "gerant") {
       console.log("gerant");
       setRole("gerant");
 
-      gerant_btn.classList.add('active');
-      membre_btn.classList.remove('active');
+      gerant_btn.classList.add("active");
+      membre_btn.classList.remove("active");
     } else {
       console.log("membre");
       setRole("membre");
 
-      gerant_btn.classList.remove('active');
-      membre_btn.classList.add('active');
+      gerant_btn.classList.remove("active");
+      membre_btn.classList.add("active");
     }
   }
 
@@ -80,7 +99,10 @@ function Register() {
 
       <div className="formRegister">
         <div className="choice-btn">
-          <p className="membre-btn active" onClick={() => choiceInscription("membre")}>
+          <p
+            className="membre-btn active"
+            onClick={() => choiceInscription("membre")}
+          >
             membre
           </p>
           <p className="gerant-btn" onClick={() => choiceInscription("gerant")}>

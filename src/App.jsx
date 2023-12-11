@@ -4,7 +4,7 @@ import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./components/home/Home";
 import Login from "./components/login/login";
-import Register from "./components/Register/Register";
+import Register from "./components/register/register";
 import Footer from "./layouts/footer/Footer";
 import Page from "./components/page/Page";
 // ==================> IMPORT CSS <==================
@@ -27,7 +27,6 @@ function App() {
     {
       path: "/Page/:value",
       element: <Page />,
-
     },
   ]);
 
