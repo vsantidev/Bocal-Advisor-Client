@@ -9,6 +9,7 @@ function Login() {
   //   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -48,6 +49,7 @@ function Login() {
         localStorage.setItem("@TokenUser", data.token);
         setShowSuccessAlert(true);
         alert("Vous êtes connecté(e)");
+        navigate("/");
         setTimeout(() => {
           setShowSuccessAlert(false);
           //   navigate("/");

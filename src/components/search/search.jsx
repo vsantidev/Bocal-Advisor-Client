@@ -9,11 +9,10 @@ function Search() {
   console.log(value);
   return (
     <div className="search">
-      
+
         <input type="text" name="search" placeholder="quelle destination ?" onChange={(e) => setValue(e.target.value)} />
         <button type="submit" onClick={() => handleSearch()}>rechercher</button>
         <Link to={`/page/${value}`} state={value}>rechercher</Link>
-      
     </div>
   );
 }

@@ -17,12 +17,17 @@
     height: 100%;
     width: 25%;
 }
+
 .littleFilter a {
-    font-size: 20px;
+    font-size: 1.3rem;
 }
+
 .littleFilter .linkFilter:hover {
-    background-color: green;
+    /* background-color: #182A10; */
+    border-bottom: .2rem solid #426B1F;
+    padding-bottom: .2rem;
 }
-.littleFilter .linkFilter:hover a {
+
+/* .littleFilter .linkFilter:hover a {
     color: white;
-}
+} */
