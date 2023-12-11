@@ -40,7 +40,7 @@ function Register() {
       const data = await response.json();
       console.log("data", data);
 
-      if (data) {
+      if (data.token) {
         alert(data.message);
       } else {
         alert("TRY AGAIN");
