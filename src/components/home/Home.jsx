@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../../layouts/navbar/Navbar";
 import { Link } from "react-router-dom";
 import NavFilter from "../navFilter/navFilter";
@@ -7,6 +7,9 @@ import RenderPlaces from "./RenderPlaces";
 import "./home.css";
 
 export default function Home() {
+  const [value, setValue] = useState('');
+
+  console.log(value);
   return (
     <>
       <div className="homePage">
