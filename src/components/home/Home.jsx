@@ -31,6 +31,10 @@ export default function Home() {
       <div className="places">
         <RenderPlaces></RenderPlaces>
       </div>
+
+      <div className="review">
+        <RenderReview />
+      </div>
     </>
   );
 }
