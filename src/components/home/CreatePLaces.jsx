@@ -12,7 +12,9 @@ function CreatePlaces() {
   const handlePlaces = async (e) => {
     e.preventDefault();
 
+    // Créé un nouvel objet formData qui paire les champs du formulaire et leurs valeurs
     const formData = new FormData();
+    // Ajoute les paires suivantes dans formData
     formData.append("title", title);
     formData.append("street", street);
     formData.append("postcode", postcode);
@@ -29,14 +31,11 @@ function CreatePlaces() {
 
     try {
       const response = await fetch("http://127.0.0.1:8000/api/post", options);
-
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-
       const data = await response.json();
       console.log("data", data);
-
       if (data) {
         alert(data.message);
       } else {
@@ -47,6 +46,7 @@ function CreatePlaces() {
     }
   };
 
+  // Fonction qui récupère la catégorie
   function cat($category) {
     if ($category == "Hôtel") {
       console.log("Hôtel");
