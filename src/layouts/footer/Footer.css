@@ -4,16 +4,6 @@
 /* $dark: #272727 */
 /* $border: .1rem solid $dark */
 
-* {
-    font-family: 'Montserrat', sans-serif;
-    padding: 0;
-    margin: 0;
-    outline: none;
-    text-decoration: none;
-    text-transform: capitalize;
-    border: none;
-}
-
 section {
     padding: 2rem 9%;
 }

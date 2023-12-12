@@ -1,11 +1,13 @@
+import "./Review.css";
+
 export default function Review(props) {
-    return (
-      <div className="box">
-        <p>{props.comment}</p>
-        <h4>{props.rate}</h4>
-
-        {/* <img src={props.file} alt="" /> */}
-
-      </div>
-    );
+   return (
+      <ul>
+         <li>
+            <div className="commentContainer">
+               <p className="contentComment">{props.comment}</p>
+            </div>
+         </li>
+      </ul>
+   );
 };

@@ -1,6 +1,15 @@
+* {
+  font-family: 'Montserrat', sans-serif;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  text-decoration: none;
+  border: none;
+}
+
 #root {
   width: 100vw;
-  height: 100vh;
+  height: 70vh;
   text-align: center;
   box-sizing: border-box;
 }
@@ -17,6 +26,22 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
+
+/* ===========> PAGE HOME <=========== */
+
+.showcase {
+  background-color: #426B1F;
+  height: 9rem;
+  margin-top: 5rem;
+  color: white;
+  border-radius: 12px;
+  width: 100rem;
+  font-size: 1.5rem;
+  text-transform: initial;
+  padding-top: 5rem;
+}
+
+
 
 @keyframes logo-spin {
   from {
