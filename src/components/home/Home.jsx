@@ -5,6 +5,8 @@ import NavFilter from "../navFilter/navFilter";
 import CreatePlaces from "./CreatePlaces";
 import RenderPlaces from "./RenderPlaces";
 import "./home.css";
+import CreateReview from "../review/CreateReview";
+import RenderReview from "../review/RenderReview";
 
 export default function Home() {
   const [value, setValue] = useState('');
@@ -22,8 +24,8 @@ export default function Home() {
             <NavFilter />
           </div>
         </div>
-        <div className="content">
-          <h1>Avec nous vous ne ferez pas le tour du bocal!</h1>
+        <div className="showcase">
+          <h1>Avec nous vous ne ferez pas le tour du bocal !</h1>
         </div>
       </div>
 
@@ -33,6 +35,10 @@ export default function Home() {
 
       <div className="places">
         <RenderPlaces></RenderPlaces>
+      </div>
+
+      <div className="review">
+        <CreateReview />
       </div>
 
       <div className="review">
