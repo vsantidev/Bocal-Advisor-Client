@@ -33,6 +33,7 @@ function RenderPlaces(props) {
     getPlaces();
   }, []);
 
+    console.log('render place :', places);
   const renderPlaces = () => {
     // Renvoie tous les lieux présents dans la database
     return places?.map((element, index) => {
