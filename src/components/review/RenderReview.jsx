@@ -48,7 +48,7 @@ export default function RenderReview() {
   
     //  RENDRE LES DONNÉES VISIBLES PAR L'UTILISATEUR
     const renderMyReview = () => {
-        myReview.splice(6);
+        // myReview.splice(6);
         return myReview.map((element, index) => {
             return (
                 <div key={index}>
