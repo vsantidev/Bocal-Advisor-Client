@@ -34,7 +34,7 @@ export default function Home() {
         <CreatePlaces></CreatePlaces>
       </div>
 
-      <div className="places">
+      <div className="places placeContainer">
         <RenderPlaces></RenderPlaces>
       </div>
 

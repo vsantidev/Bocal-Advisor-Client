@@ -1,3 +1,5 @@
+import "./renderPlaces.css"
+
 function Places(props) {
   return (
     <div className="container">
