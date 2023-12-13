@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import Navbar from "../../layouts/navbar/Navbar";
 import { Link } from "react-router-dom";
 import NavFilter from "../navFilter/navFilter";
-import CreatePlaces from "./CreatePlaces";
-import RenderPlaces from "./RenderPlaces";
+import CreatePlaces from "../Places/CreatePLaces";
+import RenderPlaces from "../Places/RenderPlaces";
 import "./home.css";
 import CreateReview from "../review/CreateReview";
 import RenderReview from "../review/RenderReview";
 
 export default function Home() {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
 
   console.log(value);
   return (

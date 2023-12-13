@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Places from "./Places";
-import './renderPlaces.css';
+import "./renderPlaces.css";
 
 function RenderPlaces(props) {
   const [places, setPlaces] = useState(null);
@@ -33,7 +33,7 @@ function RenderPlaces(props) {
     getPlaces();
   }, []);
 
-    console.log('render place :', places);
+  console.log("render place :", places);
   const renderPlaces = () => {
     // Renvoie tous les lieux présents dans la database
     return places?.map((element, index) => {
