@@ -30,26 +30,26 @@ export default function Home() {
         </div>
       </div>
 
-      {/* <div className="places">
+      <div className="places">
         <CreatePlaces></CreatePlaces>
-      </div> */}
+      </div>
 
-      {/* <div className="places">
+      <div className="places">
         <RenderPlaces></RenderPlaces>
-      </div> */}
+      </div>
 
-      {/* <div className="review">
+      <div className="review">
         <CreateReview />
-      </div> */}
+      </div>
 
-      {/* <div className="review">
+      <div className="review">
         <RenderReview />
-      </div> */}
+      </div>
 
-      <div className="show">
+      {/* <div className="show">
         <h1>HELLO</h1>
         <Show />
-      </div>
+      </div> */}
     </>
   );
 }
