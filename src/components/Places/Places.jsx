@@ -8,7 +8,7 @@ function Places(props) {
       {/* Image ne s'affiche pas :( */}
       <img src={props.file} alt="" />
       <h4>{props.description}</h4>
-      <h4>{props.category_id}</h4>
+      <h4>{props.name_category}</h4>
     </div>
   );
 }
