@@ -43,10 +43,7 @@ function RenderPlaces(props) {
           <ul>
             <Places
               title={element.title}
-              street={element.street}
-              postcode={element.postcode}
               city={element.city}
-              description={element.description}
               category={element.category}
               file={element.file}
               name_category={element.name_category}

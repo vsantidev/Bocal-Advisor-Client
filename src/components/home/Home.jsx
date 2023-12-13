@@ -7,6 +7,7 @@ import RenderPlaces from "../Places/RenderPlaces";
 import "./home.css";
 import CreateReview from "../review/CreateReview";
 import RenderReview from "../review/RenderReview";
+import Show from "../Places/ShowPlaces";
 
 export default function Home() {
   const [value, setValue] = useState("");
@@ -44,6 +45,11 @@ export default function Home() {
       <div className="review">
         <RenderReview />
       </div>
+
+      {/* <div className="show">
+        <h1>HELLO</h1>
+        <Show />
+      </div> */}
     </>
   );
 }
