@@ -127,7 +127,7 @@ function CreatePlaces() {
           <span
             style={{ backgroundColor: "orange", padding: 2 }}
             value="Activités"
-            onClick={() => cat("ACtivités")}
+            onClick={() => cat("Activités")}
           >
             Activités
           </span>
