@@ -46,7 +46,7 @@ function Page(){
             console.log("value : ", valueSearch);
 
           if (Object.values(element).includes(valueSearch)) {
-            
+            console.log("test: ", element);
             return (
                 <div key={index}>
                   <ul>
