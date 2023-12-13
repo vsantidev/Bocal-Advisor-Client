@@ -37,15 +37,6 @@ function Page(){
       }
     };
 
-    const test = () => {
-        return places.filter(place => {
-/*             let t = place.toLowerCase().includes(valueSearch.toLowerCase()); */
-let t;
-            console.log('test : ', Object.values(place));
-            return t
-        })
-    }
-
     const renderPlaces = () => {
 
 
@@ -87,7 +78,6 @@ let t;
     console.log("page",value);
     return(
         <div>
-            {test()}
             <div></div>
 
             <div className="container">
