@@ -46,6 +46,7 @@ function RenderPlaces(props) {
               city={element.city}
               category={element.category}
               file={element.file}
+              name_category={element.name_category}
             />
           </ul>
         </div>

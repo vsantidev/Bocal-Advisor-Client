@@ -8,16 +8,16 @@ function NavFilter() {
   return (
     <div className="littleFilter">
       <div className="linkFilter">
-        <Link to={`/page/${value}`} state={'hotel'}>Hôtels</Link>
+        <Link to={`/page/${value}`} state={'Hotel'}>Hôtels</Link>
       </div>
       <div className="linkFilter">
-        <Link to={`/page/${value}`} state={'restaurant'}>Restaurant</Link>
+        <Link to={`/page/${value}`} state={'Restaurant'}>Restaurant</Link>
       </div>
       <div className="linkFilter">
-        <Link to={`/page/${value}`} state={'activite'}>Activités</Link>
+        <Link to={`/page/${value}`} state={'Activite'}>Activités</Link>
       </div>
       <div className="linkFilter">
-        <Link to={`/page/${value}`} state={2}>Lieux</Link>
+        <Link to={`/page/${value}`} state={'Lieux'}>Lieux</Link>
       </div>
     </div>
   );
