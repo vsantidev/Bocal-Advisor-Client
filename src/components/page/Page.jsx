@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 function Page(){
     const [places, setPlaces] = useState([]);
-    /* const [valueSearch, setValueSearch] = useState(2) */
+    const [valueSearch, setValueSearch] = useState('')
 
     let value  = useLocation().state;
 
@@ -37,25 +37,41 @@ function Page(){
       }
     };
 
+    const test = () => {
+        return places.filter(place => {
+/*             let t = place.toLowerCase().includes(valueSearch.toLowerCase()); */
+let t;
+            console.log('test : ', Object.values(place));
+            return t
+        })
+    }
+
     const renderPlaces = () => {
+
+
         // Renvoie tous les lieux présents dans la database
         return places?.map((element, index) => {
-/*           console.log(places);
-          console.log("element: ", element.category_id); */
-          if (element.category_id == value) {
+            
+
+          if (Object.values(element).includes(valueSearch)) {
+            
             return (
                 <div key={index}>
                   <ul>
-                    <Places
-                      title={"titre : " + element.title}
-                      street={element.street}
-                      postcode={element.postcode}
-                      city={element.city}
-                      description={element.description}
-                      category={"category : " + element.category}
-                      file={element.file}
-                    />
-                    
+                        <li>
+                            <h1>test</h1>
+                            <h2>{element.title}</h2>
+                            <h4>{element.street}</h4>
+                            <h4>{element.postcode}</h4>
+                            <h4>{element.city}</h4>
+                            {/* Image ne s'affiche pas :( */}
+                            <img src={element.file} alt="" />
+                            <h4>{element.description}</h4>
+                            <h4>{element.name_category}</h4>
+                        </li>
+                        
+  
+                        
                   </ul>
                 </div>
               );
@@ -63,11 +79,21 @@ function Page(){
 
         });
     }
-  
+    if(value != null && value != valueSearch){
+        console.log("fe: ", value);
+        setValueSearch(value);
+    }
+
     console.log("page",value);
     return(
         <div>
-            {renderPlaces()}
+            {test()}
+            <div></div>
+
+            <div className="container">
+                {renderPlaces()}
+            </div>
+            
         </div>
     )
 }
