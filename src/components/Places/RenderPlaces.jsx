@@ -35,9 +35,9 @@ function RenderPlaces(props) {
     getPlaces();
   }, []);
 
-  const handlePlaceClick = (placeId) => {
-    setSelectedPlaceId(placeId);
-  };
+  // const handlePlaceClick = (placeId) => {
+  //   setSelectedPlaceId(placeId);
+  // };
 
   console.log("render place :", places);
   const renderPlaces = () => {
