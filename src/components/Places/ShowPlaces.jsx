@@ -1,16 +1,23 @@
 import { useState, useEffect } from "react";
 import Places from "./Places";
+import { useLocation } from "react-router";
 
-function Show() {
-  const [place, setPlace] = useState([]);
-
+function Show({ placeId }) {
+  const [place, setPlace] = useState("null");
+  const value = useLocation().state;
+  console.log("loc", value);
   const handleShow = async () => {
     let options = {
       method: "GET",
     };
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/show/2", options);
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/show/${value}`,
+        options
+      );
       if (!response.ok) {
+        console.log(response);
+
         alert(`HTTP error! Status: ${response.status}`);
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -29,7 +36,7 @@ function Show() {
 
   useEffect(() => {
     handleShow();
-  }, []);
+  }, [placeId]);
 
   const renderPlace = () => {
     return (

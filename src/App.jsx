@@ -8,9 +8,9 @@ import Register from "./components/register/register";
 import Footer from "./layouts/footer/Footer";
 import Profil from "./components/dashboard/profil";
 import Page from "./components/page/Page";
+import Show from "./components/Places/ShowPlaces";
 // ==================> IMPORT CSS <==================
 import "./App.css";
-
 
 function App() {
   const router = createBrowserRouter([
@@ -32,8 +32,12 @@ function App() {
     },
     {
       path: "/dashboard",
-      element: <Profil/>
-    }
+      element: <Profil />,
+    },
+    {
+      path: "/show/:value",
+      element: <Show />,
+    },
   ]);
 
   return (
