@@ -49,7 +49,7 @@ function Login() {
         localStorage.setItem("@TokenUser", data.token);
         setShowSuccessAlert(true);
         alert("Vous êtes connecté(e)");
-        navigate("/");
+        navigate("/dashboard");
         setTimeout(() => {
           setShowSuccessAlert(false);
           //   navigate("/");
