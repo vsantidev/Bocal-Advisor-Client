@@ -6,9 +6,11 @@ import Home from "./components/home/Home";
 import Login from "./components/login/login";
 import Register from "./components/register/register";
 import Footer from "./layouts/footer/Footer";
+import Profil from "./components/dashboard/profil";
 import Page from "./components/page/Page";
 // ==================> IMPORT CSS <==================
 import "./App.css";
+
 
 function App() {
   const router = createBrowserRouter([
@@ -28,6 +30,10 @@ function App() {
       path: "/Page/:value",
       element: <Page />,
     },
+    {
+      path: "/dashboard",
+      element: <Profil/>
+    }
   ]);
 
   return (
