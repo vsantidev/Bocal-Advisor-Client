@@ -5,7 +5,6 @@ import "./renderPlaces.css";
 
 function RenderPlaces(props) {
   const [places, setPlaces] = useState(null);
-  const [selectedPlaceId, setSelectedPlaceId] = useState(null);
 
   const getPlaces = async () => {
     try {
@@ -35,15 +34,8 @@ function RenderPlaces(props) {
     getPlaces();
   }, []);
 
-  const handlePlaceClick = (placeId) => {
-    setSelectedPlaceId(placeId);
-  };
-
   console.log("render place :", places);
   const renderPlaces = () => {
-    if (!places) {
-      return <p>Loading...</p>; // or any other loading indicator
-    }
     // Renvoie tous les lieux présents dans la database
     return places?.map((element, index) => {
       console.log(places);

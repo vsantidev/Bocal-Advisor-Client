@@ -42,10 +42,8 @@ function App() {
 
   return (
     <>
-      {/* <Login></Login> */}
       <RouterProvider router={router} />
       <Footer />
-      {/* {Register()} */}
     </>
   );
 }

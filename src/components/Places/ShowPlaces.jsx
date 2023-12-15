@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Places from "./Places";
 import { useLocation } from "react-router";
 import Review from "../review/Review";
 import RenderReview from "../review/RenderReview";
@@ -27,15 +26,17 @@ function Show({ placeId }) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
-      console.log("data", data.place);
-      console.log("review : ",data.review);
+
+      // console.log("data", data.place);
+      // console.log("review : ",data.review);
       setPlace(data.place);
       setReview(data.review);
-      if (data) {
-        alert(data.message);
-      } else {
-        alert("TRY AGAIN");
-      }
+      // if (data) {
+      //  alert(data.message);
+      // } else {
+      //  alert("TRY AGAIN");
+      // }
+
     } catch (error) {
       console.error("Fetch error:", error);
     }
@@ -80,9 +81,7 @@ function Show({ placeId }) {
 
   return(
   <>
-            <div className="navbar">
-            <Navbar />
-          </div>
+    <div className="navbar"><Navbar /></div>
     <div>{renderPlace()}</div>
     <div><CreateReview /></div>
     <div>{renderMyReview()}</div>
