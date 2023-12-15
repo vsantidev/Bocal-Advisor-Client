@@ -45,21 +45,14 @@ function Login() {
     try {
       const response = await fetch("http://127.0.0.1:8000/api/login", options);
       const data = await response.json();
-      if (data) {
+      if (data.token) {
         localStorage.setItem("@TokenUser", data.token);
         setShowSuccessAlert(true);
         alert("Vous êtes connecté(e)");
         navigate("/dashboard");
-        setTimeout(() => {
-          setShowSuccessAlert(false);
-          //   navigate("/");
-        }, 2000);
       } else {
         setShowErrorAlert(true);
         alert("La connexion a échoué");
-        setTimeout(() => {
-          setShowErrorAlert(false);
-        }, 5000);
         setError(data.message || "Une erreur s'est produite.");
       }
     } catch (error) {
