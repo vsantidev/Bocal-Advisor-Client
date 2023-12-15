@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import CreatePlaces from "../Places/CreatePLaces";
 import './profile.css';
 
 function Dashboard() {
@@ -111,6 +112,10 @@ function Dashboard() {
             onChange={(e) => setUser({...user, password: e.target.value})} />
           </div>
 
+          <button onClick={handleSave} className="saveButton">
+            Sauvegarder
+          </button>
+
           <button onClick={() => setEditing(false)} className="cancelButton">
             Annuler
           </button>
@@ -193,11 +198,17 @@ function Dashboard() {
   };
 
   return (
-    <div>
-      
+    <>
+
+      <div>
       {renderContentBasedOnRole()}
-    
-    </div>
+      </div>
+
+      <div>
+      <CreatePlaces/>
+      </div>
+        
+    </>
   );
 };
 
