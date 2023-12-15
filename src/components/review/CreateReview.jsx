@@ -5,6 +5,7 @@ import { useLocation } from "react-router";
 export default function CreateReview({}) {
     const [comment, setComment] = useState("");
     const [rate, setRate] = useState("");
+    const [userId, setUserId] = useState(1);
 
     let review = { comment, rate};
 
@@ -24,7 +25,9 @@ export default function CreateReview({}) {
             body: JSON.stringify({
                 comment: comment,
                 rate: rate,
-                place_id: value
+                place_id: value,
+                user_id: userId
+
             }),
         };
 
