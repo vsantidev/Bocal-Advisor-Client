@@ -8,13 +8,12 @@ import "./Page.css";
 function Page(){
     const [places, setPlaces] = useState([]);
     const [valueSearch, setValueSearch] = useState('')
-
+    
     let value  = useLocation().state;
-
 
     useEffect(() => {
         getPlaces();
-      }, []);
+      }, [valueSearch]);
   
     const getPlaces = async () => {
       try {
@@ -24,6 +23,12 @@ function Page(){
             "Content-Type": "application/json",
           },
         };
+
+        /* a mettre dans creation de lieux */
+        const api = await fetch("https://api-adresse.data.gouv.fr/search/?q="+valueSearch, options)
+        const dataApi = await api.json();
+        /*  */
+
         const response = await fetch(`http://127.0.0.1:8000/api/post`, options);
         const data = await response.json();
   
@@ -45,8 +50,6 @@ function Page(){
         
         // Renvoie tous les lieux présents dans la database
         return places?.map((element, index) => {
-            console.log("element",element);
-            console.log("value : ", valueSearch);
 
             if (Object.values(element).includes(valueSearch)) {
             
@@ -93,9 +96,8 @@ function Page(){
                     {renderPlaces()}
                 </div>
                 
-                
             </div>
-            
+
         </div>
     )
 }
