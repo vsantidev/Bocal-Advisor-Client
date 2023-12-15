@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router";
+import Review from "../review/Review";
+import RenderReview from "../review/RenderReview";
+import CreateReview from "../review/CreateReview";
+import Navbar from "../../layouts/navbar/Navbar";
 
 function Show({ placeId }) {
   const [place, setPlace] = useState("null");
+  const [review, setReview] = useState ([]);
   const value = useLocation().state;
   console.log("loc", value);
   const handleShow = async () => {
@@ -21,13 +26,17 @@ function Show({ placeId }) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
-      // console.log("data", data[0]);
-      setPlace(data[0]);
+
+      // console.log("data", data.place);
+      // console.log("review : ",data.review);
+      setPlace(data.place);
+      setReview(data.review);
       // if (data) {
-      //   alert(data.message);
+      //  alert(data.message);
       // } else {
-      //   alert("TRY AGAIN");
+      //  alert("TRY AGAIN");
       // }
+
     } catch (error) {
       console.error("Fetch error:", error);
     }
@@ -54,8 +63,30 @@ function Show({ placeId }) {
       </div>
     );
   };
+    //  RENDRE LES DONNÉES VISIBLES PAR L'UTILISATEUR POUR LES REVIEWS
+    const renderMyReview = () => {
+      // myReview.splice(6);
+      return review.map((element, index) => {
+          return (
+              <div key={index}>
+                  <Review
+                     comment={element.comment}
+                     rate={element.rate}
+                  />
+              </div>
+          );
+      });
+  };
 
-  return <div>{renderPlace()}</div>;
+
+  return(
+  <>
+    <div className="navbar"><Navbar /></div>
+    <div>{renderPlace()}</div>
+    <div><CreateReview /></div>
+    <div>{renderMyReview()}</div>
+  </>
+  );
 }
 
 export default Show;
