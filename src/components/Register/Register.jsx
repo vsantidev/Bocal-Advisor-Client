@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import "./register.css";
-
+import { useNavigate } from "react-router-dom";
 import Navbar from "../../layouts/navbar/Navbar";
 import Login from "../login/login";
 
@@ -13,6 +13,7 @@ function Register() {
   const [username, setUsername] = useState("");
   const [birthday, setBirhday] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   let user = { firstname, lastname, email, password, username, birthday, role };
 
   const handleRegister = async (e) => {
@@ -42,6 +43,7 @@ function Register() {
 
       if (data) {
         alert(data.message);
+        navigate("/dashboard");
       } else {
         alert("TRY AGAIN");
       }

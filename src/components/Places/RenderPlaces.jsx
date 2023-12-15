@@ -40,6 +40,7 @@ function RenderPlaces(props) {
   };
 
   console.log("render place :", places);
+
   const renderPlaces = () => {
     if (!places) {
       return <p>Loading...</p>; // or any other loading indicator
@@ -51,7 +52,7 @@ function RenderPlaces(props) {
         <div key={index}>
           <ul>
             <Link to={`/show/${element.id}`} state={element.id}>
-              <Places
+              <Places             
                 title={element.title}
                 city={element.city}
                 category={element.category}
