@@ -99,7 +99,7 @@ function Dashboard() {
           <div className="getUsername">
             Pseudo: {" "}
             <input type="text"
-            value={user.username}
+            value={user.pseudo}
             className="changeProfil"
             onChange={(e) => setUser({...user, username: e.target.value})} />
           </div>
@@ -125,7 +125,7 @@ function Dashboard() {
             <p>{user.firstname}</p>
             <p>{user.lastname}</p>
             <p>{user.birthday}</p>
-            <p>{user.username}</p>
+            <p>{user.pseudo}</p>
             <p>Email:{user.email}</p>
             <p>password :{user.password}</p>
           <button onClick={() => setEditing(true)} className="editButton">
@@ -160,7 +160,7 @@ function Dashboard() {
             <div className="getUsername">
               Pseudo: {" "}
               <input type="text"
-              value={user.username}
+              value={user.pseudo}
               className="changeProfil"
               onChange={(e) => setUser({...user, username: e.target.value})} />
             </div>
@@ -182,7 +182,7 @@ function Dashboard() {
               <span>{user.firstname}</span><br />
               <span>{user.lastname}</span><br />
               <span>{user.birthday}</span><br />
-              <span>{user.username}</span><br />
+              <span>{user.pseudo}</span><br />
               <span>Email:{user.email}</span><br />
               <span>password :{user.password}</span><br />
             <button onClick={() => setEditing(true)} className="editButton">

@@ -16,6 +16,36 @@ function Login() {
   const [passwordError, setPasswordError] = useState("");
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
+  const [showForgotEmail, setShowForgotEmail] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState("");
+
+  const handleOublier = async () => {
+    try {
+        const response = await fetch(
+            `http://127.0.0.1:8000/api/send-reset-email`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: forgotEmail,
+                }),
+            }
+        );
+        if (response.ok) {
+            alert("Email envoyé avec succès");
+        } else {
+            const text = await response.text();
+            alert(text);
+        }
+    } catch (error) {
+        console.error(
+            "Erreur lors de l'envoi de l'email de réinitialisation : ",
+            error
+        );
+    }
+};
 
   const handleInputEmail = (e) => {
     setEmail(e.target.value);
@@ -104,6 +134,19 @@ function Login() {
               Connexion
             </button>
           </div>
+
+          <div>
+          <button className={"inputButton"} type="button" onClick={()=>setShowForgotEmail(true)} id="loginButton"> Mot de passe oublié ? </button>
+          </div>
+          {showForgotEmail && (
+            <div>
+            <input className="forgotEmail" type="email" placeholder="Entrez votre adresse email" value={forgotEmail} onChange={(e) => setForgotEmail(e.target.value)}/>
+
+            <button type="button" onClick={handleOublier} id="loginButton"> Envoyer </button>
+
+            <button className={"inputButton"} type="button" onClick={()=>setShowForgotEmail(false)} value={"Connexion"} id="loginButton"> Annuler </button>
+            </div>
+          )}
 
           <div className="noAccountContainer">
             <div>
