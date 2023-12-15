@@ -38,13 +38,13 @@ export default function Home() {
         <RenderPlaces></RenderPlaces>
       </div>
 
-      <div className="review">
+      {/* <div className="review">
         <CreateReview />
-      </div>
+      </div> */}
 
-      <div className="review">
+      {/* <div className="review">
         <RenderReview />
-      </div>
+      </div> */}
 
       {/* <div className="show">
         <h1>HELLO</h1>

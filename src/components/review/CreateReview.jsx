@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import "./Review.css"
+import { useLocation } from "react-router";
 
-export default function CreateReview(props) {
+export default function CreateReview({}) {
     const [comment, setComment] = useState("");
     const [rate, setRate] = useState("");
 
     let review = { comment, rate};
+
+    const value = useLocation().state;
+    console.log("loc", value);
 
     //  RÉCUPÉRATION DES DONNÉES DE L'API
     const handleReview = async (e) => {
@@ -20,12 +24,14 @@ export default function CreateReview(props) {
             body: JSON.stringify({
                 comment: comment,
                 rate: rate,
+                place_id: value
             }),
         };
 
+        console.log(`option :`, options);
         try {
             const response = await fetch(
-                `http://127.0.0.1:8000/api/review`,
+                `http://127.0.0.1:8000/api/show/${value}`,
                 options
             );
 
@@ -46,6 +52,10 @@ export default function CreateReview(props) {
             console.error("Erreur:", error);
           }
     };
+    // useEffect(() => {
+    //     handleReview();
+    //   }, [placeId]);
+
 
 
     return (
