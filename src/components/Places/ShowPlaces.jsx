@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
-import Places from "./Places";
 import { useLocation } from "react-router";
+
 import "./showPlacew.css";
 import Leaflet from "./leafletMap";
-
+import Review from "../review/Review";
+import RenderReview from "../review/RenderReview";
+import CreateReview from "../review/CreateReview";
+import Navbar from "../../layouts/navbar/Navbar";
 
 function Show({ placeId }) {
   const [place, setPlace] = useState("null");
+  const [review, setReview] = useState ([]);
   const [latitude, setLatitude] = useState(''); // Y
   const [longitude, setLongitude] = useState(''); // x
 
@@ -29,13 +33,17 @@ function Show({ placeId }) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
-      console.log("data", data[0]);
-      setPlace(data[0]);
-      if (data) {
-        alert(data.message);
-      } else {
-        alert("TRY AGAIN");
-      }
+
+      // console.log("data", data.place);
+      // console.log("review : ",data.review);
+      setPlace(data.place);
+      setReview(data.review);
+      // if (data) {
+      //  alert(data.message);
+      // } else {
+      //  alert("TRY AGAIN");
+      // }
+
     } catch (error) {
       console.error("Fetch error:", error);
     }
@@ -79,17 +87,32 @@ function Show({ placeId }) {
       </div>
     );
   };
-  
-  console.log('showPlace : ', place.x);
-/*   if(latitude == undefined){
-    setLatitude(43.704194)
-  }
-  if(place.x == undefined){
-    setLongitude(7.274215)
-  } */
-/*     setLongitude(place.x)
-   */
-  return <div>{renderPlace()}</div>;
+
+    //  RENDRE LES DONNÉES VISIBLES PAR L'UTILISATEUR POUR LES REVIEWS
+    const renderMyReview = () => {
+      // myReview.splice(6);
+      return review.map((element, index) => {
+          return (
+              <div key={index}>
+                  <Review
+                     comment={element.comment}
+                     rate={element.rate}
+                  />
+              </div>
+          );
+      });
+  };
+
+
+  return(
+  <>
+    <div className="navbar"><Navbar /></div>
+    <div>{renderPlace()}</div>
+    <div><CreateReview /></div>
+    <div>{renderMyReview()}</div>
+  </>
+  );
+
 }
 
 export default Show;

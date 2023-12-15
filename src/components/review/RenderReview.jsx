@@ -23,32 +23,33 @@ export default function RenderReview() {
            },
         };
   
-        try {
-           const response = await fetch(`http://127.0.0.1:8000/api/review`, options);
-           const data = await response.json();
-           console.log(data);
-           setMyReview(data.reviews);
-           if (data.success) {
-              getComment();
-           } else {
-              console.error("Échec de la requête HTTP");
-           }
+        // try {
+        //    const response = await fetch(`http://127.0.0.1:8000/api/review`, options);
+        //    const data = await response.json();
+        //    console.log(data);
+        //    setMyReview(data.reviews);
+        //    if (data.success) {
+        //       getComment();
+        //    } 
+        // //    else {
+        // //       console.error("Échec de la requête HTTP");
+        // //    }
 
-        // RÉCUPÉRATION DU PREMIER ÉLÉMENT DANS LE TABLEAU DE LA DATA AFIN D'AFFICHER LE COMMENTAIRE
-        if (Array.isArray(data["0"])) {
-            setMyReview(data["0"]);
-        } else {
-            console.error("Erreur lors de l'affichage du tableau :", data);
-        }
+        // // RÉCUPÉRATION DU PREMIER ÉLÉMENT DANS LE TABLEAU DE LA DATA AFIN D'AFFICHER LE COMMENTAIRE
+        // if (Array.isArray(data["0"])) {
+        //     setMyReview(data["0"]);
+        // } else {
+        //     console.error("Erreur lors de l'affichage du tableau :", data);
+        // }
 
-        } catch (error) {
-           console.error("Erreur lors de la requête : ", error);
-        }
+        // } catch (error) {
+        //    console.error("Erreur lors de la requête : ", error);
+        // }
     };
   
     //  RENDRE LES DONNÉES VISIBLES PAR L'UTILISATEUR
     const renderMyReview = () => {
-        myReview.splice(6);
+        // myReview.splice(6);
         return myReview.map((element, index) => {
             return (
                 <div key={index}>
