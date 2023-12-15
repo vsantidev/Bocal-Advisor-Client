@@ -21,13 +21,13 @@ function Show({ placeId }) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
-      console.log("data", data[0]);
+      // console.log("data", data[0]);
       setPlace(data[0]);
-      if (data) {
-        alert(data.message);
-      } else {
-        alert("TRY AGAIN");
-      }
+      // if (data) {
+      //   alert(data.message);
+      // } else {
+      //   alert("TRY AGAIN");
+      // }
     } catch (error) {
       console.error("Fetch error:", error);
     }
