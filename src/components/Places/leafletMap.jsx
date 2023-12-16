@@ -7,8 +7,6 @@ import "./showPlacew.css";
 
 function Leaflet(props){
 
-    console.log('latitude', props.latitude);
-    console.log('longitude', props.longitude);
 
     const markers = [
         {

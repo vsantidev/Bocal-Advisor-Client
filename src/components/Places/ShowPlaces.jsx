@@ -11,13 +11,18 @@ import Navbar from "../../layouts/navbar/Navbar";
 function Show({ placeId }) {
   const [place, setPlace] = useState("null");
   const [review, setReview] = useState ([]);
-  const [latitude, setLatitude] = useState(''); // Y
-  const [longitude, setLongitude] = useState(''); // x
-
+  const [longitude, setLongitude] = useState();
+  const [latitude, setLatitude] = useState();
   const value = useLocation().state;
   
+  useEffect(() => {
+    console.log("dedans", placeId);
+    handleShow();
+  }, [placeId]);
+
   // recuperation des data du lieu
   const handleShow = async () => {
+    
     let options = {
       method: "GET",
     };
@@ -34,10 +39,14 @@ function Show({ placeId }) {
       }
       const data = await response.json();
 
-      // console.log("data", data.place);
-      // console.log("review : ",data.review);
+/*       console.log("data", data.place);
+      console.log("review : ",data.review);
+ */
       setPlace(data.place);
       setReview(data.review);
+
+      setLatitude(place.y);
+      setLongitude(place.x);
       // if (data) {
       //  alert(data.message);
       // } else {
@@ -49,17 +58,7 @@ function Show({ placeId }) {
     }
   };
 
-  useEffect(() => {
-    handleShow();
-  }, [placeId]);
-
   const renderPlace = () => {   
-    if(latitude == undefined){
-      setLatitude(place.y)
-    }
-    if(longitude == undefined){
-      setLongitude(place.x)
-    }
 
     return (
       <div>
@@ -78,7 +77,12 @@ function Show({ placeId }) {
         </div>
 
         <div className="emplacement">
-          <Leaflet latitude={latitude} longitude={longitude} ></Leaflet>
+          {longitude != undefined || latitude != undefined ? 
+            <Leaflet latitude={latitude} longitude={longitude} ></Leaflet>
+          : 
+            <div>erreur recuperation des données de localisation</div>
+          }
+
         </div>
 
         <div className="reviews">
@@ -103,7 +107,7 @@ function Show({ placeId }) {
       });
   };
 
-
+  console.log("place", placeId);
   return(
   <>
     <div className="navbar"><Navbar /></div>
