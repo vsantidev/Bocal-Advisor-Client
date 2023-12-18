@@ -14,7 +14,7 @@ function Show({ placeId }) {
   const [longitude, setLongitude] = useState();
   const [latitude, setLatitude] = useState();
   const value = useLocation().state;
-  
+
   useEffect(() => {
     console.log("dedans", placeId);
     handleShow();
@@ -94,6 +94,7 @@ function Show({ placeId }) {
 
     //  RENDRE LES DONNÉES VISIBLES PAR L'UTILISATEUR POUR LES REVIEWS
     const renderMyReview = () => {
+         
       // myReview.splice(6);
       return review.map((element, index) => {
           return (
@@ -101,6 +102,9 @@ function Show({ placeId }) {
                   <Review
                      comment={element.comment}
                      rate={element.rate}
+                     reviewId={element.id}
+                     user_id={element.user_id}
+                     file_Review={element.file_Review}
                   />
               </div>
           );
