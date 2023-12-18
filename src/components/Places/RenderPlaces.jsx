@@ -35,6 +35,7 @@ function RenderPlaces(props) {
   }, []);
 
   console.log("render place :", places);
+
   const renderPlaces = () => {
     // Renvoie tous les lieux présents dans la database
     return places?.map((element, index) => {
@@ -43,7 +44,7 @@ function RenderPlaces(props) {
         <div key={index}>
           <ul>
             <Link to={`/show/${element.id}`} state={element.id}>
-              <Places
+              <Places             
                 title={element.title}
                 city={element.city}
                 category={element.category}
@@ -59,7 +60,7 @@ function RenderPlaces(props) {
 
   return (
     <>
-      <div id="test">{renderPlaces()}</div>
+      <div className="box-container">{renderPlaces()}</div>
     </>
   );
 }

@@ -1,13 +1,47 @@
-#test{
+/* #test{
     height: 100%;
     width: 80%;
     overflow-y: auto;
     display: flex;
     flex-wrap: wrap;
     gap: 2%;
+} */
+.boxPlaces{
+    height: 32rem;
+    width: 30rem;
+    border-radius: .5rem;
+    text-align: center;
+    overflow: hidden;
+    /* background-color: blueviolet; */
+    border: .1rem solid #426b1f;
+
 }
-.container{
-    height: 300px;
-    width: 270px;
-    background-color: blue;
+
+.image-place, img {
+    overflow: hidden;
+    height: 25rem;
+    width: 100%;
+    /* background-color: lightgray; */
+}
+
+img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    background-color: lightgray;
+}
+
+.content {
+    padding: 2rem;
+}
+
+.content, h2, p {
+    font-size: 2rem;
+    color: black;
+    line-height: 2rem;
+}
+
+p {
+    line-height: 2.5rem;
+    padding: 1rem 0;
 }

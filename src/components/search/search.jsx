@@ -9,10 +9,16 @@ function Search() {
   console.log(value);
   return (
     <div className="search">
-
-        <input type="text" name="search" placeholder="quelle destination ?" onChange={(e) => setValue(e.target.value)} />
+      <div>
+        <input type="text" name="search" placeholder="quelle destination ?" onChange={(e) => setValue(e.target.value)}></input>
+      </div>
+      <div>
         <button type="submit" onClick={() => handleSearch()}>rechercher</button>
+      </div>
+      <div>
         <Link to={`/page/${value}`} state={value}>rechercher</Link>
+      </div>
+      <div id="search-btn" className="fa-solid fa-magnifying-glass"></div>
     </div>
   );
 }

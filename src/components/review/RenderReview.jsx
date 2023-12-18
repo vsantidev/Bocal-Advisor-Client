@@ -64,8 +64,8 @@ export default function RenderReview() {
 
     return (
         <>
-            <section className="review">
-                <div className="reviewContainer">{renderMyReview()}</div>
+            <section className="renderReview">
+                <div className="renderMyReview">{renderMyReview()}</div>
             </section>
         </>
     );
