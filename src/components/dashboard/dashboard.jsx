@@ -28,7 +28,8 @@ function Dashboard() {
 
         if (response.ok) {
           const data = await response.json();
-          setUser(data.success); 
+          console.log('User data:', data.success);
+          setUser(data.success);
         } else {
           setError('Failed to fetch user data');
         }
@@ -36,6 +37,7 @@ function Dashboard() {
         console.error('Error fetching user data:', error);
         setError('Error fetching user data');
       }
+    
     };
 
     getUserProfile();
@@ -43,11 +45,18 @@ function Dashboard() {
 
   const ModifProfil = async () => {
     try {
+      const token = localStorage.getItem('@TokenUser'); 
+
+        if (!token) {
+          setError('Token not found');
+          return;
+        }
+
       const options = {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("@TokenUser"),
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(user),
       };
@@ -59,6 +68,7 @@ function Dashboard() {
 
       if (response.ok) {
         const data = await response.json();
+        console.log('User data modif:', data.success);
         setUser(data.success);
       } else {
         setError("Failed to update user data.");
@@ -74,6 +84,11 @@ function Dashboard() {
   }
 
   const renderContentBasedOnRole = () => {
+    if (!user) {
+      window.location.reload();
+      return <div>Chargement...</div>;
+    }
+
     if (user.role === 'gerant') {
       return (
           <>
@@ -121,17 +136,20 @@ function Dashboard() {
           </button>
         </div>
       ) : (
+        <>
         <div className="identity">
             <p>{user.firstname}</p>
             <p>{user.lastname}</p>
             <p>{user.birthday}</p>
             <p>{user.pseudo}</p>
             <p>Email:{user.email}</p>
-            <p><span>password : ••••••••••• </span></p>
+            <p><span>Mot de passe : ••••••••••• </span></p>
           <button onClick={() => setEditing(true)} className="editButton">
             Modifier
           </button>
         </div>
+        <CreatePlaces/>
+        </>
       )}
        </>
         );
@@ -188,7 +206,7 @@ function Dashboard() {
               <span>{user.birthday}</span><br />
               <span>{user.pseudo}</span><br />
               <span>Email:{user.email}</span><br />
-              <span>password :••••••••••• </span><br />
+              <span>Mot de passe :••••••••••• </span><br />
             <button onClick={() => setEditing(true)} className="editButton">
               Modifier
             </button>
@@ -206,10 +224,6 @@ function Dashboard() {
 
       <div>
       {renderContentBasedOnRole()}
-      </div>
-
-      <div>
-      {user.role === 'gerant' && <CreatePlaces/>}
       </div>
         
     </>
