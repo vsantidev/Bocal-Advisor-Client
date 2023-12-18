@@ -28,7 +28,8 @@ function Dashboard() {
 
         if (response.ok) {
           const data = await response.json();
-          setUser(data.success); 
+          console.log('User data:', data.success);
+          setUser(data.success);
         } else {
           setError('Failed to fetch user data');
         }
@@ -36,6 +37,7 @@ function Dashboard() {
         console.error('Error fetching user data:', error);
         setError('Error fetching user data');
       }
+    
     };
 
     getUserProfile();
@@ -43,11 +45,18 @@ function Dashboard() {
 
   const ModifProfil = async () => {
     try {
+      const token = localStorage.getItem('@TokenUser'); 
+
+        if (!token) {
+          setError('Token not found');
+          return;
+        }
+
       const options = {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("@TokenUser"),
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(user),
       };
@@ -59,9 +68,10 @@ function Dashboard() {
 
       if (response.ok) {
         const data = await response.json();
-        getUserProfile()
+        console.log('User data modif:', data.success);
+        setUser(data.success);
       } else {
-        console.error("Failed to update user data.");
+        setError("Failed to update user data.");
       }
     } catch (error) {
       console.error("Error updating user data:", error);
@@ -74,6 +84,11 @@ function Dashboard() {
   }
 
   const renderContentBasedOnRole = () => {
+    if (!user) {
+      window.location.reload();
+      return <div>Chargement...</div>;
+    }
+
     if (user.role === 'gerant') {
       return (
           <>
@@ -121,17 +136,20 @@ function Dashboard() {
           </button>
         </div>
       ) : (
+        <>
         <div className="identity">
-            <p>{user.firstname}</p>
-            <p>{user.lastname}</p>
-            <p>{user.birthday}</p>
-            <p>{user.pseudo}</p>
+            <p>Nom : {user.firstname}</p>
+            <p>Prénom : {user.lastname}</p>
+            <p>Date de naissance : {user.birthday}</p>
+            <p>Pseudo : {user.pseudo}</p>
             <p>Email:{user.email}</p>
-            <p>password :{user.password}</p>
+            <p><span>Mot de passe : ••••••••••• </span></p>
           <button onClick={() => setEditing(true)} className="editButton">
             Modifier
           </button>
         </div>
+        <CreatePlaces/>
+        </>
       )}
        </>
         );
@@ -172,6 +190,10 @@ function Dashboard() {
               className="changeProfil"
               onChange={(e) => setUser({...user, password: e.target.value})} />
             </div>
+
+            <button onClick={handleSave} className="saveButton">
+            Sauvegarder
+            </button>
   
             <button onClick={() => setEditing(false)} className="cancelButton">
               Annuler
@@ -179,12 +201,12 @@ function Dashboard() {
           </div>
         ) : (
           <div className="identity">
-              <span>{user.firstname}</span><br />
-              <span>{user.lastname}</span><br />
-              <span>{user.birthday}</span><br />
-              <span>{user.pseudo}</span><br />
-              <span>Email:{user.email}</span><br />
-              <span>password :{user.password}</span><br />
+              <span>Nom : {user.firstname}</span><br />
+              <span>Prénom : {user.lastname}</span><br />
+              <span>Date de naissance : {user.birthday}</span><br />
+              <span>Pseudo : {user.pseudo}</span><br />
+              <span>Email : {user.email}</span><br />
+              <span>Mot de passe :••••••••••• </span><br />
             <button onClick={() => setEditing(true)} className="editButton">
               Modifier
             </button>
@@ -202,10 +224,6 @@ function Dashboard() {
 
       <div>
       {renderContentBasedOnRole()}
-      </div>
-
-      <div>
-      <CreatePlaces/>
       </div>
         
     </>

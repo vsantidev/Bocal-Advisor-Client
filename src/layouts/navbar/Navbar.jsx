@@ -1,9 +1,29 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./navbar.css";
 import Search from "../../components/search/Search";
+import { useState, useEffect } from "react";
+
 
 export default function Navbar() {
+
+  const [authenticated, setAuthenticated] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('@TokenUser');
+    if (token) {
+      setAuthenticated(true);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('@TokenUser');
+    navigate("/");
+    alert("Vous êtes déconnecté")
+    setAuthenticated(false);
+  }
+
   return (
     <>
     {/* <section className="navbar">
@@ -17,6 +37,15 @@ export default function Navbar() {
         <Search />
       </div>
 
+      <div>
+        {authenticated ? (
+          <div>
+            <nav>
+              <Link to="/dashboard" className="login-title">Profil</Link>
+            </nav>
+            <button onClick={handleLogout}>Au revoir</button>
+          </div>
+        ) : (
       <div className="login">
         <nav>
           <Link to="/register" className="btn">Inscription</Link>
@@ -25,6 +54,11 @@ export default function Navbar() {
           <Link to="/login" className="btn">Connexion</Link>
         </nav>
       </div>
+
+        )}
+      </div>
+    </div>
+
 
     </section> */}
 
