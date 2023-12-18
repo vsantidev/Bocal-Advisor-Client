@@ -15,7 +15,8 @@ export default function Home() {
   console.log(value);
   return (
     <>
-      <div className="homePage">
+    {/* SECTION HEADER - START */}
+      <section className="homePage">
         <div className="navContainer">
           <div className="navbar">
             <Navbar />
@@ -28,15 +29,26 @@ export default function Home() {
         <div className="showcase">
           <h1>Avec nous vous ne ferez pas le tour du bocal !</h1>
         </div>
-      </div>
+      </section>
+    {/* SECTION HEADER - END */}
 
-      <div className="places">
+
+
+
+
+    {/* SECTION CREATION DE LIEUX - START */}
+      <section className="places">
         <CreatePlaces></CreatePlaces>
-      </div>
+      </section>
+    {/* SECTION CREATION DE LIEUX - END */}
 
-      <div className="places placeContainer">
-        <RenderPlaces></RenderPlaces>
-      </div>
+
+    {/* SECTION AFFICHAGE LIEUX - START */}
+      <section className="RenderPlaces">
+          <RenderPlaces />  
+      </section>
+    {/* SECTION AFFICHAGE LIEUX - END */}
+
 
       {/* <div className="review">
         <CreateReview />

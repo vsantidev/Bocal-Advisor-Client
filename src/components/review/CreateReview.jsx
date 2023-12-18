@@ -61,43 +61,60 @@ export default function CreateReview({}) {
   return (
     <>
       <section className="create-review">
-        <div className="boxcontainer">
+        <p>Laisser un commentaire et une note à l'établissement :</p>
+        <div className="box-create">
           <form action="" method="POST">
-            <textarea
-              name="comment"
-              cols="80"
-              rows="2"
-              placeholder="Décrivez içi vos impressions ..."
-              required
-              className="review-textarea"
-              onChange={(e) => setComment(e.target.value)}
-            />
+            <div>
+              <textarea
+                name="comment"
+                cols="80"
+                rows="2"
+                placeholder="Décrivez içi vos impressions ..."
+                required
+                className="review-textarea"
+                onChange={(e) => setComment(e.target.value)}
+              />
+            </div>
 
-            <input
-              type="number"
-              name="rate"
-              placeholder="Notez le lieu sur 5"
-              required
-              min="0"
-              max="5"
-              // className="box"
-              className="review-input"
-              onChange={(e) => setRate(e.target.value)}
-            />
+            <div className="box-number">
+              <div>
+                <input
+                  type="number"
+                  name="rate"
+                  placeholder="Notez le lieu sur 5"
+                  required
+                  min="0"
+                  max="5"
+                  // className="box"
+                  className="review-input"
+                  onChange={(e) => setRate(e.target.value)}
+                />
+              </div>
+              <div>
+              <button
+                type="submit"
+                className="login-title"
+                onClick={handleReview}
+              >
+                Valider
+              </button>
+              </div>
 
-            <button
-              type="submit"
-              className="login-title"
-              onClick={handleReview}
-            >
-              Valider
-            </button>
+              {/* <div>
+                <label htmlFor="">Postez une photo de type : png, jpg, jpeg</label>
+              <input
+                  type="file"
+                  name="picture_id"
+                  className="review-input"
+                  onChange={(e) => setRate(e.target.value)}
+                />
+              </div> */}
+            </div>
+
+
           </form>
         </div>
 
-        <div className="sublikes">
-          <i class="fa-solid fa-heart heart-like"> J'aime !</i>
-        </div>
       </section>
     </>
   );
