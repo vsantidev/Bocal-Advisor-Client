@@ -138,10 +138,10 @@ function Dashboard() {
       ) : (
         <>
         <div className="identity">
-            <p>{user.firstname}</p>
-            <p>{user.lastname}</p>
-            <p>{user.birthday}</p>
-            <p>{user.pseudo}</p>
+            <p>Nom : {user.firstname}</p>
+            <p>Prénom : {user.lastname}</p>
+            <p>Date de naissance : {user.birthday}</p>
+            <p>Pseudo : {user.pseudo}</p>
             <p>Email:{user.email}</p>
             <p><span>Mot de passe : ••••••••••• </span></p>
           <button onClick={() => setEditing(true)} className="editButton">
@@ -201,11 +201,11 @@ function Dashboard() {
           </div>
         ) : (
           <div className="identity">
-              <span>{user.firstname}</span><br />
-              <span>{user.lastname}</span><br />
-              <span>{user.birthday}</span><br />
-              <span>{user.pseudo}</span><br />
-              <span>Email:{user.email}</span><br />
+              <span>Nom : {user.firstname}</span><br />
+              <span>Prénom : {user.lastname}</span><br />
+              <span>Date de naissance : {user.birthday}</span><br />
+              <span>Pseudo : {user.pseudo}</span><br />
+              <span>Email : {user.email}</span><br />
               <span>Mot de passe :••••••••••• </span><br />
             <button onClick={() => setEditing(true)} className="editButton">
               Modifier
