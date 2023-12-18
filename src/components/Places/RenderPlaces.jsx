@@ -60,7 +60,7 @@ function RenderPlaces(props) {
 
   return (
     <>
-      <div id="test">{renderPlaces()}</div>
+      <div className="box-container">{renderPlaces()}</div>
     </>
   );
 }
