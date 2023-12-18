@@ -59,9 +59,9 @@ function Dashboard() {
 
       if (response.ok) {
         const data = await response.json();
-        getUserProfile()
+        setUser(data.success);
       } else {
-        console.error("Failed to update user data.");
+        setError("Failed to update user data.");
       }
     } catch (error) {
       console.error("Error updating user data:", error);
@@ -127,7 +127,7 @@ function Dashboard() {
             <p>{user.birthday}</p>
             <p>{user.pseudo}</p>
             <p>Email:{user.email}</p>
-            <p>password :{user.password}</p>
+            <p><span>password : ••••••••••• </span></p>
           <button onClick={() => setEditing(true)} className="editButton">
             Modifier
           </button>
@@ -172,6 +172,10 @@ function Dashboard() {
               className="changeProfil"
               onChange={(e) => setUser({...user, password: e.target.value})} />
             </div>
+
+            <button onClick={handleSave} className="saveButton">
+            Sauvegarder
+            </button>
   
             <button onClick={() => setEditing(false)} className="cancelButton">
               Annuler
@@ -184,7 +188,7 @@ function Dashboard() {
               <span>{user.birthday}</span><br />
               <span>{user.pseudo}</span><br />
               <span>Email:{user.email}</span><br />
-              <span>password :{user.password}</span><br />
+              <span>password :••••••••••• </span><br />
             <button onClick={() => setEditing(true)} className="editButton">
               Modifier
             </button>
@@ -205,7 +209,7 @@ function Dashboard() {
       </div>
 
       <div>
-      <CreatePlaces/>
+      {user.role === 'gerant' && <CreatePlaces/>}
       </div>
         
     </>

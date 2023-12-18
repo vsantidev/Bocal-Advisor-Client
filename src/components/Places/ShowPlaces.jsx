@@ -6,8 +6,10 @@ import CreateReview from "../review/CreateReview";
 import Navbar from "../../layouts/navbar/Navbar";
 
 function Show({ placeId }) {
+  const [user, setUser] = useState({});
   const [place, setPlace] = useState("null");
   const [review, setReview] = useState ([]);
+  const [error, setError] = useState(null);
   const value = useLocation().state;
   console.log("loc", value);
   const handleShow = async () => {
@@ -42,7 +44,38 @@ function Show({ placeId }) {
     }
   };
 
+
   useEffect(() => {
+    const getUserProfile = async () => {
+      try {
+        const token = localStorage.getItem('@TokenUser'); 
+
+        if (!token) {
+          setError('Token not found');
+          return;
+        }
+
+        const response = await fetch('http://127.0.0.1:8000/api/dashboard', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setUser(data.success); 
+        } else {
+          setError('Failed to fetch user data');
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+        setError('Error fetching user data');
+      }
+    };
+
+    getUserProfile();
     handleShow();
   }, [placeId]);
 
@@ -83,7 +116,7 @@ function Show({ placeId }) {
   <>
     <div className="navbar"><Navbar /></div>
     <div>{renderPlace()}</div>
-    <div><CreateReview /></div>
+    {user.role === 'membre' && <div><CreateReview /></div>}
     <div>{renderMyReview()}</div>
   </>
   );
