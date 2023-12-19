@@ -6,6 +6,7 @@ export default function CreateReview({}) {
   const [comment, setComment] = useState("");
   const [rate, setRate] = useState("");
   const [userId, setUserId] = useState(1);
+  const [fileReview, setFileReview] = useState("");
 
   let review = { comment, rate };
 
@@ -27,6 +28,7 @@ export default function CreateReview({}) {
         rate: rate,
         place_id: value,
         user_id: userId,
+        file_review: fileReview,
       }),
     };
 
@@ -91,6 +93,15 @@ export default function CreateReview({}) {
                 />
               </div>
               <div>
+                <label htmlFor="">Postez une photo de type : png, jpg, jpeg</label>
+              <input
+                  type="text"
+                  name="picture_id"
+                  className="review-input"
+                  onChange={(e) => setFileReview(e.target.value)}
+                />
+              </div>
+              <div>
               <button
                 type="submit"
                 className="login-title"
@@ -100,15 +111,7 @@ export default function CreateReview({}) {
               </button>
               </div>
 
-              {/* <div>
-                <label htmlFor="">Postez une photo de type : png, jpg, jpeg</label>
-              <input
-                  type="file"
-                  name="picture_id"
-                  className="review-input"
-                  onChange={(e) => setRate(e.target.value)}
-                />
-              </div> */}
+
             </div>
 
 
