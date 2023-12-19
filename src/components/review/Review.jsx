@@ -54,7 +54,7 @@ export default function Review(props) {
                <p className="review-comment">{props.comment}</p>
                <p className="rate-comment">{props.rate}</p>
                {/* <p className="rate-comment">{props.reviewId}</p> */}
-               <img src={props.file_Review} />
+               <img src={props.file_review} alt="image non fournie"/>
                <p><button type="submit" onClick={()=>DeleteReview(props.reviewId)}>SUPPRIMER</button></p>
             </div>
             <div className="sublikes">

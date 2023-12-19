@@ -15,22 +15,51 @@ export default function CreateReview({}) {
 
   //  RÉCUPÉRATION DES DONNÉES DE L'API
   const handleReview = async (e) => {
-    console.log("review: ", review);
+    console.log("filereview: ", fileReview);
     e.preventDefault();
+
+    // Créé un nouvel objet formData qui paire les champs du formulaire et leurs valeurs
+    const formData = new FormData();
+    // Ajoute les paires suivantes dans formData
+    formData.append("comment", comment);
+    formData.append("rate", rate);
+    formData.append("place_id", value);
+    formData.append("user_id", userId);
+    formData.append("file_review", fileReview);
+    
+
+
+
+
+    // let options = {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     comment: comment,
+    //     rate: rate,
+    //     place_id: value,
+    //     user_id: userId,
+    //     file_review: fileReview,
+    //   }),
+    // };
 
     let options = {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        comment: comment,
-        rate: rate,
-        place_id: value,
-        user_id: userId,
-        file_review: fileReview,
-      }),
+      /* headers: {'Content-Type': 'application/json'}, */
+/*       body: JSON.stringify([{
+        title: title,
+        street: street,
+        postcode: postcode,
+        city: city,
+        category: userChoice,
+        description: description,
+      }]), */
+      body : formData,
+
     };
+
 
     console.log(`option :`, options);
     try {
@@ -95,10 +124,10 @@ export default function CreateReview({}) {
               <div>
                 <label htmlFor="">Postez une photo de type : png, jpg, jpeg</label>
               <input
-                  type="text"
-                  name="picture_id"
+                  type="file"
+                  name="file_review"
                   className="review-input"
-                  onChange={(e) => setFileReview(e.target.value)}
+                  onChange={(e) => setFileReview(e.target.files[0])}
                 />
               </div>
               <div>
