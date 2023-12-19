@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Select from 'react-select';
+import "./renderPlaces.css"
 
 function CreatePlaces() {
   const [title, setTitle] = useState("membre");
@@ -172,94 +173,121 @@ function CreatePlaces() {
   
   return (
     <>
-      <div className="form">
-        <form action="" method="POST">
-          <input
-            type="text"
-            name="title"
-            placeholder="title"
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <input
-            type="text"
-            name="street"
-            placeholder="street"
-            onChange={(e) => setStreet(e.target.value)}
-          />
-          <input
-            type="text"
-            name="postcode"
-            placeholder="postcode"
-            onChange={(e) => setPostcode(e.target.value)}
-          />
-          <input
-            type="text"
-            name="city"
-            placeholder="city"
-            onChange={(e) => setCity(e.target.value)}
-          />
-          {selectOptions.length == 0 ? opt() : console.log('deja plein')}
-          {MyComponent()}
+      <section className="formCreatePlace">
+        <div className="createPlaceDashboard">
+          <form action="" method="POST">
+                <input
+                  type="text"
+                  name="title"
+                  placeholder="Titre du lieu"
+                  className="inputRegister"
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+                <input
+                  type="text"
+                  name="street"
+                  placeholder="Adresse du lieu"
+                  className="inputRegister"
+                  onChange={(e) => setStreet(e.target.value)}
+                />
+              {/* </div> */}
+            {/* </div> */}
+            {/* <div>
+              <input
+                type="text"
+                name="street"
+                placeholder="Adresse du lieu"
+                className="inputRegister"
+                onChange={(e) => setStreet(e.target.value)}
+              />
+            </div> */}
+            <div className="createCity">
+              <input
+                type="text"
+                name="postcode"
+                placeholder="Code postal"
+                className="inputRegister"
+                onChange={(e) => setPostcode(e.target.value)}
+              />
+              <input
+                type="text"
+                name="city"
+                placeholder="Ville"
+                className="inputRegister"
+                onChange={(e) => setCity(e.target.value)}
+              />
+            </div>
 
-{/*           <span
-            style={{ backgroundColor: "aqua", padding: 2 }}
-            value="Hotel"
-            onClick={() => cat("Hôtel")}
-          >
-            Hôtel
-          </span>
-          <span
-            style={{ backgroundColor: "purple", padding: 2 }}
-            value=">Restaurant"
-            onClick={() => cat("Restaurant")}
-          >
-            Restaurant
-          </span>
-          <span
-            style={{ backgroundColor: "brown", padding: 2 }}
-            value="Bar"
-            onClick={() => cat("Bar")}
-          >
-            Bar
-          </span>
-          <span
-            style={{ backgroundColor: "grey", padding: 2 }}
-            value="Musées"
-            onClick={() => cat("Musées")}
-          >
-            Musées
-          </span>
-          <span
-            style={{ backgroundColor: "orange", padding: 2 }}
-            value="Activités"
-            onClick={() => cat("Activités")}
-          >
-            Activités
-          </span>
- */}
-          <input
-            type="text"
-            name="description"
-            placeholder="description"
-            onChange={(e) => setDescription(e.target.value)}
-          />
 
-{/*           <input 
-            type="text" 
-            name="adresse"
-            placeholder="adresse du lieux"
-            onChange={(e) => setAdresse(e.target.value)}
-          />   */}
-          <input
-            type="file"
-            name="file"
-            onChange={(e) => setFile(e.target.files[0])}
-          />
-          <button type="submit" onClick={handlePlaces}>
-            Créer
-          </button>
-        </form>
-      </div>
+
+  {/*           <span
+              style={{ backgroundColor: "aqua", padding: 2 }}
+              value="Hotel"
+              onClick={() => cat("Hôtel")}
+            >
+              Hôtel
+            </span>
+            <span
+              style={{ backgroundColor: "purple", padding: 2 }}
+              value=">Restaurant"
+              onClick={() => cat("Restaurant")}
+            >
+              Restaurant
+            </span>
+            <span
+              style={{ backgroundColor: "brown", padding: 2 }}
+              value="Bar"
+              onClick={() => cat("Bar")}
+            >
+              Bar
+            </span>
+            <span
+              style={{ backgroundColor: "grey", padding: 2 }}
+              value="Musées"
+              onClick={() => cat("Musées")}
+            >
+              Musées
+            </span>
+            <span
+              style={{ backgroundColor: "orange", padding: 2 }}
+              value="Activités"
+              onClick={() => cat("Activités")}
+            >
+              Activités
+            </span>
+  */}  
+
+              <input
+              type="text"
+              name="description"
+              placeholder="Petite description"
+              className="inputRegister"
+              onChange={(e) => setDescription(e.target.value)}
+              />
+              <input
+              type="file"
+              name="file"
+              className="inputFileCreate"
+              onChange={(e) => setFile(e.target.files[0])}
+              />
+
+            {selectOptions.length == 0 ? opt() : console.log('deja plein')}
+            {MyComponent()}
+
+  {/*           <input 
+              type="text" 
+              name="adresse"
+              placeholder="adresse du lieux"
+              onChange={(e) => setAdresse(e.target.value)}
+            />   */}
+
+            <button type="submit" onClick={handlePlaces}>
+              Créer
+            </button> 
+          </form>
+        </div>
+        
+      </section>
     </>
   );
 }

@@ -107,11 +107,11 @@
 }
 
 .inputRegister:focus{
-    border: .1rem solid rgb(35, 134, 168);
+    border: .15rem solid #2684FE;
 }
 
 .inputLogin:focus {
-    border: .1rem solid rgb(35, 134, 168);
+    border: .15rem solid #2684FE;
 }
 
 .checkbox {
