@@ -24,11 +24,6 @@ function Page(){
           },
         };
 
-        /* a mettre dans creation de lieux */
-        const api = await fetch("https://api-adresse.data.gouv.fr/search/?q="+valueSearch, options)
-        const dataApi = await api.json();
-        /*  */
-
         const response = await fetch(`http://127.0.0.1:8000/api/post`, options);
         const data = await response.json();
   
