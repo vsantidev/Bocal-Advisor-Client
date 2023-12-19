@@ -22,7 +22,7 @@ function Login() {
   const handleOublier = async () => {
     try {
         const response = await fetch(
-            `http://127.0.0.1:8000/api/send-reset-email`,
+            `${import.meta.env.VITE_API_URL}/send-reset-email`,
             {
                 method: "POST",
                 headers: {
@@ -35,16 +35,17 @@ function Login() {
         );
         if (response.ok) {
             alert("Email envoyé avec succès");
+            setShowSuccessAlert(true);
         } else {
             const text = await response.text();
-            alert(text);
-        }
-    } catch (error) {
-        console.error(
-            "Erreur lors de l'envoi de l'email de réinitialisation : ",
-            error
-        );
-    }
+            setShowErrorAlert(true);
+            setError(text);
+            }
+          } catch (error) {
+            setShowErrorAlert(true);
+            setError("Une erreur s'est produite lors de l'envoi de l'e-mail de réinitialisation.");
+            console.error("Erreur lors de l'envoi de l'e-mail de réinitialisation : ", error);
+          }
 };
 
   const handleInputEmail = (e) => {
@@ -73,7 +74,7 @@ function Login() {
     };
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/login", options);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/login`, options);
       const data = await response.json();
       if (data.token) {
         localStorage.setItem("@TokenUser", data.token);
