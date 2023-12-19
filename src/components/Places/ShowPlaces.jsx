@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
-import { useNavigate } from "react-router";
 
 import "./showPlacew.css";
 import Leaflet from "./leafletMap";
@@ -12,6 +11,7 @@ import Navbar from "../../layouts/navbar/Navbar";
 function Show({ placeId }) {
   const [user, setUser] = useState({});
   const [place, setPlace] = useState("null");
+  const navigate = useNavigate();
   const [review, setReview] = useState([]);
   const [error, setError] = useState(null);
   const [longitude, setLongitude] = useState();
