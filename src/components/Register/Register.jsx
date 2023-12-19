@@ -43,7 +43,7 @@ function Register() {
 
       if (data) {
         alert(data.message);
-        navigate("/dashboard");
+        navigate("/login");
       } else {
         alert("TRY AGAIN");
       }
