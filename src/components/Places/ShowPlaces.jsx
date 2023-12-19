@@ -18,12 +18,7 @@ function Show({ placeId }) {
   const [latitude, setLatitude] = useState();
   const value = useLocation().state;
 
-  useEffect(() => {
-    console.log("dedans", placeId);
-    handleShow();
-  }, [placeId]);
-
-  // recuperation des data du lieu
+  // ------------- RECUPERE LES DETAILS DU LIEU A AFFICHER -------------- //
   const handleShow = async () => {
     let options = {
       method: "GET",
@@ -41,19 +36,11 @@ function Show({ placeId }) {
       }
       const data = await response.json();
 
-      /*       console.log("data", data.place);
-      console.log("review : ",data.review);
- */
       setPlace(data.place);
       setReview(data.review);
 
       setLatitude(place.y);
       setLongitude(place.x);
-      // if (data) {
-      //  alert(data.message);
-      // } else {
-      //  alert("TRY AGAIN");
-      // }
     } catch (error) {
       console.error("Fetch error:", error);
     }
@@ -86,12 +73,13 @@ function Show({ placeId }) {
   };
 
   useEffect(() => {
+    // ------------- VERIFIE SI L'UTILISATEUR EST BIEN CONNECTE POUR POUVOIR COMMENTER -------------- //
     const getUserProfile = async () => {
       try {
         const token = localStorage.getItem("@TokenUser");
 
         if (!token) {
-          setError("Token not found");
+          setError("Connectez-vous pour pouvoir commenter");
           return;
         }
 
@@ -107,11 +95,11 @@ function Show({ placeId }) {
           const data = await response.json();
           setUser(data.success);
         } else {
-          setError("Failed to fetch user data");
+          setError("Connectez-vous pour pouvoir commenter.");
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
-        setError("Error fetching user data");
+        setError("Connectez-vous pour pouvoir commenter.");
       }
     };
 
@@ -119,6 +107,7 @@ function Show({ placeId }) {
     handleShow();
   }, [placeId]);
 
+  // ------------- AFFICHE LE LIEU -------------- //
   const renderPlace = () => {
     return (
       <div>
