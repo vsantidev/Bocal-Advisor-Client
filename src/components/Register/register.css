@@ -1,7 +1,5 @@
-*{
-    margin: 0;
-    padding: 0;
-}
+/* ===========> PAGE REGISTER & LOGIN <=========== */
+
 .auth{
     position: relative;
     height: 100%;
@@ -10,12 +8,13 @@
     justify-content: center;
     align-items: center;
 }
-.navContainer{
+
+/* .navContainer{
     position: absolute;
     top: 0;
     height: 15%;
     width: 100%;
-}
+} */
 
 .formRegister{
     position: relative;
@@ -27,29 +26,33 @@
     justify-content: center;
     align-items: center;
 }
+
 .choice-btn {
     height: 10%;
-    width: 90%;
+    width: 80%;
     display: flex;
     flex-direction: row;
-    border-radius: 15px;
+    border-radius: 1rem;
     overflow: hidden;
+    margin-bottom: 2rem;
 }
+
 .choice-btn p{
     height: 100%;
     width: 50%;
     text-transform: uppercase;
     background-color: white;
-    color: green;
+    color: #426b1f;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: baseline;
     font-weight: 800;
-    font-size: 20px;
+    font-size: 1.8rem;
 }
+
 .membre-btn.active,
 .gerant-btn.active{
-    background-color: green;
+    background-color: #426b1f;
     color: white;
 }
 
@@ -61,35 +64,56 @@
     justify-content: space-around;
     align-items: center;
 }
+
 .formRegister form input{
-    height: 30px;
+    height: 4rem;
     width: 90%;
     background-color: rgba(240, 248, 255, 0);
-    border: none;
-    border-bottom: 2px solid black;
-    padding-left: 20px;
+    /* border: none; */
+    border: .1rem solid rgba(51, 113, 34, 0.688);
+    padding: 2rem 2rem;
+    box-shadow: .1rem .1rem .1rem rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
+    border-radius: .3rem;
+    /* margin-bottom: .2rem; */
 }
 .formRegister form input:focus{
     outline: none;
 }
-.formRegister form button:hover{
-    background-color: green;
+/* .formRegister form button:hover{
+    background-color: rgba(51, 113, 34, 0.688);
     border: none;
-}
+} */
 .formRegister label{
     display: flex;
     flex-direction: row;
     width: 90%;
     height: 30px;
-    gap: 2%;
+    align-items: center;
+    font-style: italic;
 }
 .formRegister label input{
     width: 10%;
     height: 75%;
 }
-.navbar,
+/* .navbar,
 .filterContainer{
     height: 50%;
     width: 100%;
+} */
+
+.inputRegister, .inputLogin {
+    font-size: 1.3rem;
+}
+
+.inputRegister:focus{
+    border: .1rem solid rgb(35, 134, 168);
+}
+
+.inputLogin:focus {
+    border: .1rem solid rgb(35, 134, 168);
+}
+
+.checkbox {
+    margin-right: .1rem;
 }

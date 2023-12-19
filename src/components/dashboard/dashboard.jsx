@@ -201,12 +201,12 @@ function Dashboard() {
           </div>
         ) : (
           <div className="identity">
-              <span>Nom : {user.firstname}</span><br />
-              <span>Prénom : {user.lastname}</span><br />
-              <span>Date de naissance : {user.birthday}</span><br />
-              <span>Pseudo : {user.pseudo}</span><br />
-              <span>Email : {user.email}</span><br />
-              <span>Mot de passe :••••••••••• </span><br />
+              <p>Nom : {user.firstname}</p><br />
+              <p>Prénom : {user.lastname}</p><br />
+              <p>Date de naissance : {user.birthday}</p><br />
+              <p>Pseudo : {user.pseudo}</p><br />
+              <p>Email : {user.email}</p><br />
+              <p>Mot de passe :••••••••••• </p><br />
             <button onClick={() => setEditing(true)} className="editButton">
               Modifier
             </button>

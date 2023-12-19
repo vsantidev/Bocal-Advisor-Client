@@ -3,7 +3,7 @@ import App from "../../App";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../layouts/navbar/Navbar";
 import "../register/Register.css";
-import Register from "../register/register";
+// import Register from "../register/register";
 
 function Login() {
   //   const navigate = useNavigate();
@@ -104,13 +104,15 @@ function Login() {
             type="text"
             value={email}
             onChange={handleInputEmail}
-            placeholder="Email"
+            className="inputLogin"
+            placeholder="Adresse email"
           />
           <label>{emailError}</label>
           <input
             value={password}
             type={showPassword ? "text" : "password"}
             onChange={handleInputPassword}
+            className="inputLogin"
             placeholder="Mot de Passe"
           />
           <label>

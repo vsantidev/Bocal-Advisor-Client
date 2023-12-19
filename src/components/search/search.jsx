@@ -10,11 +10,11 @@ function Search() {
   return (
     <div className="search">
       <div>
-        <input type="text" name="search" placeholder="quelle destination ?" onChange={(e) => setValue(e.target.value)}></input>
+        <input type="text" name="search" placeholder="Quelle destination ?" onChange={(e) => setValue(e.target.value)}></input>
       </div>
-      <div>
+      {/* <div>
         <button type="submit" onClick={() => handleSearch()}>rechercher</button>
-      </div>
+      </div> */}
       <div>
         <Link to={`/page/${value}`} state={value}>rechercher</Link>
       </div>
