@@ -11,7 +11,7 @@ import Navbar from "../../layouts/navbar/Navbar";
 function Show({ placeId }) {
   const [user, setUser] = useState({});
   const [place, setPlace] = useState("null");
-  const [review, setReview] = useState ([]);
+  const [review, setReview] = useState([]);
   const [error, setError] = useState(null);
   const [longitude, setLongitude] = useState();
   const [latitude, setLatitude] = useState();
@@ -24,7 +24,6 @@ function Show({ placeId }) {
 
   // recuperation des data du lieu
   const handleShow = async () => {
-    
     let options = {
       method: "GET",
     };
@@ -41,7 +40,7 @@ function Show({ placeId }) {
       }
       const data = await response.json();
 
-/*       console.log("data", data.place);
+      /*       console.log("data", data.place);
       console.log("review : ",data.review);
  */
       setPlace(data.place);
@@ -54,41 +53,64 @@ function Show({ placeId }) {
       // } else {
       //  alert("TRY AGAIN");
       // }
-
     } catch (error) {
       console.error("Fetch error:", error);
     }
   };
 
+  // ------------- SUPPRIMER -------------- //
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/delete/${value}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
+      if (!response.ok) {
+        console.error(`HTTP error! Status: ${response.status}`);
+      } else {
+        const data = await response.json();
+        console.log(data.message);
+        navigate("/");
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error("Fetch error:", error);
+    }
+  };
 
   useEffect(() => {
     const getUserProfile = async () => {
       try {
-        const token = localStorage.getItem('@TokenUser'); 
+        const token = localStorage.getItem("@TokenUser");
 
         if (!token) {
-          setError('Token not found');
+          setError("Token not found");
           return;
         }
 
-        const response = await fetch('http://127.0.0.1:8000/api/dashboard', {
-          method: 'GET',
+        const response = await fetch("http://127.0.0.1:8000/api/dashboard", {
+          method: "GET",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         });
 
         if (response.ok) {
           const data = await response.json();
-          setUser(data.success); 
+          setUser(data.success);
         } else {
-          setError('Failed to fetch user data');
+          setError("Failed to fetch user data");
         }
       } catch (error) {
-        console.error('Error fetching user data:', error);
-        setError('Error fetching user data');
+        console.error("Error fetching user data:", error);
+        setError("Error fetching user data");
       }
     };
 
@@ -96,8 +118,7 @@ function Show({ placeId }) {
     handleShow();
   }, [placeId]);
 
-  const renderPlace = () => {   
-
+  const renderPlace = () => {
     return (
       <div>
         <div className="info">
@@ -110,55 +131,57 @@ function Show({ placeId }) {
               <img src={place.file}></img>
               <h2>{place.description}</h2>
               <h2>{place.name_category}</h2>
+              <button onClick={handleDelete}>Supprimer</button>
             </li>
           </ul>
         </div>
 
         <div className="emplacement">
-          {longitude != undefined || latitude != undefined ? 
-            <Leaflet latitude={latitude} longitude={longitude} ></Leaflet>
-          : 
+          {longitude != undefined || latitude != undefined ? (
+            <Leaflet latitude={latitude} longitude={longitude}></Leaflet>
+          ) : (
             <div>erreur recuperation des données de localisation</div>
-          }
-
+          )}
         </div>
 
-        <div className="reviews">
-
-        </div>
+        <div className="reviews"></div>
       </div>
     );
   };
 
-    //  RENDRE LES DONNÉES VISIBLES PAR L'UTILISATEUR POUR LES REVIEWS
-    const renderMyReview = () => {
-         
-      // myReview.splice(6);
-      return review.map((element, index) => {
-          return (
-              <div key={index}>
-                  <Review
-                     comment={element.comment}
-                     rate={element.rate}
-                     reviewId={element.id}
-                     user_id={element.user_id}
-                     file_Review={element.file_Review}
-                  />
-              </div>
-          );
-      });
+  //  RENDRE LES DONNÉES VISIBLES PAR L'UTILISATEUR POUR LES REVIEWS
+  const renderMyReview = () => {
+    // myReview.splice(6);
+    return review.map((element, index) => {
+      return (
+        <div key={index}>
+          <Review
+            comment={element.comment}
+            rate={element.rate}
+            reviewId={element.id}
+            user_id={element.user_id}
+            file_Review={element.file_Review}
+          />
+        </div>
+      );
+    });
   };
 
   console.log("place", placeId);
-  return(
-  <>
-    <div className="navbar"><Navbar /></div>
-    <div>{renderPlace()}</div>
-    {user.role === 'membre' && <div><CreateReview /></div>}
-    <div>{renderMyReview()}</div>
-  </>
+  return (
+    <>
+      <div className="navbar">
+        <Navbar />
+      </div>
+      <div>{renderPlace()}</div>
+      {user.role === "membre" && (
+        <div>
+          <CreateReview />
+        </div>
+      )}
+      <div>{renderMyReview()}</div>
+    </>
   );
-
 }
 
 export default Show;
