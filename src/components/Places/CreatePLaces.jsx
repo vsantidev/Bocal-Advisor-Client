@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Select from 'react-select';
 
 function CreatePlaces() {
   const [title, setTitle] = useState("membre");
@@ -8,9 +9,66 @@ function CreatePlaces() {
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [file, setFile] = useState("");
+  const [adresse, setAdresse] = useState("");
 
+  const[x, setX] = useState();
+  const[y, setY] = useState();
+
+  // récupere les catégorie de la bdd
+  const[categories, setCategories] = useState([]);
+  // les categories choisie
+  const[selectOptions, setselectOptions] = useState([]);
+
+  //all categories choisi
+  const[userChoice, setUserChoice] = useState([])
+ 
+  // restructure le tableau pour le select
+  const opt = () => {
+      categories.forEach(element => {
+
+        element.forEach(item => {
+        
+          setselectOptions(selectOptions =>[...selectOptions, {'value': item.id, 'label': item.name_category} ])
+
+        });
+        
+      });
+
+
+  }
+  // select
+  const MyComponent = () => (
+    <Select 
+      defaultValue={[selectOptions[0]]}
+      isMulti
+      name="colors"
+      options={selectOptions}
+      className="basic-multi-select"
+      classNamePrefix="select"
+      onChange={(choices) => setUserChoice(choices.map(choice => (choice.value)))}
+    />
+  )
+
+    
+
+
+  // creation des places
   const handlePlaces = async (e) => {
     e.preventDefault();
+
+    
+    // let optionsAdresse = {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // };
+
+    // const api = await fetch("https://api-adresse.data.gouv.fr/search/?q="+adresse, optionsAdresse);
+    // const dataApi = await api.json();
+    // console.log("data api", dataApi.features[0].geometry.coordinates[1]);
+    // setX(dataApi.features[0].geometry.coordinates[0]);
+    // setY(dataApi.features[0].geometry.coordinates[1])
 
     // Créé un nouvel objet formData qui paire les champs du formulaire et leurs valeurs
     const formData = new FormData();
@@ -19,17 +77,32 @@ function CreatePlaces() {
     formData.append("street", street);
     formData.append("postcode", postcode);
     formData.append("city", city);
-    formData.append("category", category);
+    formData.append("category", userChoice);
     formData.append("description", description);
     formData.append("file", file);
+    formData.append("x", x);
+    formData.append("y", y);
 
-    console.log(title);
+
+
+    
     let options = {
       method: "POST",
-      body: formData,
+      /* headers: {'Content-Type': 'application/json'}, */
+/*       body: JSON.stringify([{
+        title: title,
+        street: street,
+        postcode: postcode,
+        city: city,
+        category: userChoice,
+        description: description,
+      }]), */
+      body : formData,
+
     };
 
     try {
+      
       const response = await fetch("http://127.0.0.1:8000/api/place", options);
       if (!response.ok) {
         alert(`HTTP error! Status: ${response.status}`);
@@ -46,6 +119,36 @@ function CreatePlaces() {
       console.error("Fetch error:", error);
     }
   };
+
+  // recuperation des categories
+  const getCategories = async () => {
+    try {
+      const options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const response = await fetch(`http://127.0.0.1:8000/api/index`, options);
+      const data = await response.json();
+
+      // Vérifions si le premier élément de data est bien un tableau
+      if (Array.isArray(data/* ["0"] */)) {
+        // Si oui, places prend la valeur de celui-ci
+        setCategories(data);
+      } else {
+        // Si non, erreur
+        console.error("Pas un tableau:", data);
+      }
+    } catch (error) {
+      console.error("Erreur:", error);
+    }
+  };
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
 
   // Fonction qui récupère la catégorie
   function cat($category) {
@@ -66,7 +169,7 @@ function CreatePlaces() {
       setCategory("5");
     }
   }
-
+  
   return (
     <>
       <div className="form">
@@ -95,8 +198,10 @@ function CreatePlaces() {
             placeholder="city"
             onChange={(e) => setCity(e.target.value)}
           />
+          {selectOptions.length == 0 ? opt() : console.log('deja plein')}
+          {MyComponent()}
 
-          <span
+{/*           <span
             style={{ backgroundColor: "aqua", padding: 2 }}
             value="Hotel"
             onClick={() => cat("Hôtel")}
@@ -131,13 +236,20 @@ function CreatePlaces() {
           >
             Activités
           </span>
-
+ */}
           <input
             type="text"
             name="description"
             placeholder="description"
             onChange={(e) => setDescription(e.target.value)}
           />
+
+{/*           <input 
+            type="text" 
+            name="adresse"
+            placeholder="adresse du lieux"
+            onChange={(e) => setAdresse(e.target.value)}
+          />   */}
           <input
             type="file"
             name="file"
