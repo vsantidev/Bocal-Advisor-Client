@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router";
+import { useNavigate } from "react-router-dom";
 import Review from "../review/Review";
 import RenderReview from "../review/RenderReview";
 import CreateReview from "../review/CreateReview";
@@ -38,23 +39,33 @@ function Show({ placeId }) {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
+    console.log("Selected File:", file);
     setPlace((prevPlace) => ({
       ...prevPlace,
       file: file,
     }));
   };
 
-  const editPlace = async () => {
+  const editPlace = async (placeId) => {
+    const formData = new FormData();
+    formData.append("title", place.title);
+    formData.append("street", place.street);
+    formData.append("postcode", place.postcode);
+    formData.append("description", place.description);
+    formData.append("city", place.city);
+    formData.append("description", place.street);
+    formData.append("file", place.file);
+
     let options = {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(place),
+      body: formData,
     };
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/edit/${value}`,
+        `http://127.0.0.1:8000/api/edit/${placeId}`,
         options
       );
       if (!response.ok) {
@@ -71,7 +82,7 @@ function Show({ placeId }) {
   };
 
   const handleSave = () => {
-    editPlace();
+    editPlace(value);
     setIsEditing(false);
   };
 
@@ -121,7 +132,7 @@ function Show({ placeId }) {
             />
 
             <button onClick={handleSave}>Save</button>
-            <button onClick={() => setIsEditing(false)}>Annule</button>
+            <button onClick={() => setIsEditing(false)}>Annuler</button>
           </div>
         ) : (
           <ul>
