@@ -164,12 +164,15 @@ function Show({ placeId }) {
         <Navbar />
       </div>
       <div>{renderPlace()}</div>
+      <div>{renderMyReview()}</div>
       {user.role === "membre" && (
         <div>
           <CreateReview />
         </div>
       )}
-      <div>{renderMyReview()}</div>
+        {/* <div>
+          <CreateReview />
+        </div> */}
     </>
   );
 }
