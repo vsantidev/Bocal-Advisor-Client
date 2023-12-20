@@ -147,6 +147,8 @@ function Show({ placeId }) {
         <div key={index}>
           <Review
             comment={element.comment}
+            // created_at={element.created_at}
+            created_at={new Date(element.created_at).toLocaleDateString("fr", { day: "numeric", month: "long", year: "numeric" }) + " | " + new Date(element.created_at).toLocaleTimeString("fr", { hour: "numeric", minute: "numeric" })}
             rate={element.rate}
             reviewId={element.id}
             user_id={element.user_id}
@@ -160,18 +162,33 @@ function Show({ placeId }) {
   console.log("place", placeId);
   return (
     <>
-      <div className="navbar">
-        <Navbar />
-      </div>
-      <div>{renderPlace()}</div>
-
-      {user.role === "membre" && (
-        <div>
-          <CreateReview />
+      {/* SECTION HEADER - START */}
+        <div className="navbar">
+          <Navbar />
         </div>
-      )}
+      {/* SECTION HEADER - END */}
 
-      <div>{renderMyReview()}</div>
+
+      {/* SECTION SHOWPLACE - START */}
+        <div>{renderPlace()}</div>
+      {/* SECTION SHOWPLACE - END */}
+
+
+      {/* SECTION RENDERREVIEW - START */}
+        {user.role === "membre" && (
+          <div>
+            <CreateReview />
+          </div>
+        )}
+      {/* SECTION RENDERREVIEW - END */}
+
+
+      {/* SECTION SHOWPLACE - START */}
+        <section className="renderReview">       
+          {renderMyReview()}
+        </section>
+      {/* SECTION SHOWPLACE - END */}
+
     </>
   );
 }
