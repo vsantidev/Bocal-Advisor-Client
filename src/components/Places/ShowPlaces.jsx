@@ -18,7 +18,9 @@ function Show({ placeId }) {
   const [latitude, setLatitude] = useState();
   const value = useLocation().state;
 
+
   // ------------- RECUPERE LES DETAILS DU LIEU A AFFICHER -------------- //
+
   const handleShow = async () => {
     let options = {
       method: "GET",
@@ -28,9 +30,8 @@ function Show({ placeId }) {
         `http://127.0.0.1:8000/api/show/${value}`,
         options
       );
+     
       if (!response.ok) {
-        console.log(response);
-
         alert(`HTTP error! Status: ${response.status}`);
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -39,8 +40,15 @@ function Show({ placeId }) {
       setPlace(data.place);
       setReview(data.review);
 
-      setLatitude(place.y);
-      setLongitude(place.x);
+
+      setLatitude(data.place.y);
+      setLongitude(data.place.x);
+      // if (data) {
+      //  alert(data.message);
+      // } else {
+      //  alert("TRY AGAIN");
+      // }
+
     } catch (error) {
       console.error("Fetch error:", error);
     }
@@ -73,7 +81,11 @@ function Show({ placeId }) {
   };
 
   useEffect(() => {
+
+    handleShow();
+
     // ------------- VERIFIE SI L'UTILISATEUR EST BIEN CONNECTE POUR POUVOIR COMMENTER -------------- //
+
     const getUserProfile = async () => {
       try {
         const token = localStorage.getItem("@TokenUser");
@@ -104,8 +116,8 @@ function Show({ placeId }) {
     };
 
     getUserProfile();
-    handleShow();
-  }, [placeId]);
+
+  }, [placeId ]);
 
   // ------------- AFFICHE LE LIEU -------------- //
   const renderPlace = () => {
@@ -125,7 +137,7 @@ function Show({ placeId }) {
             </li>
           </ul>
         </div>
-
+        {console.log("long" , longitude)}
         <div className="emplacement">
           {longitude != undefined || latitude != undefined ? (
             <Leaflet latitude={latitude} longitude={longitude}></Leaflet>
@@ -160,6 +172,7 @@ function Show({ placeId }) {
   };
 
   console.log("place", placeId);
+
   return (
     <>
       {/* SECTION HEADER - START */}
@@ -172,6 +185,7 @@ function Show({ placeId }) {
       {/* SECTION SHOWPLACE - START */}
         <div>{renderPlace()}</div>
       {/* SECTION SHOWPLACE - END */}
+
 
 
       {/* SECTION RENDERREVIEW - START */}
