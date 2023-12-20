@@ -2,7 +2,16 @@ import { useEffect, useState } from "react";
 import "./Review.css";
 import { useLocation } from "react-router";
 
+let id_review;
+let comment;
+let rate;
+let file;
+
 export default function Review(props) {
+  console.log("debut review");
+
+  const [editing ,setEditing] = useState(false);
+  const [newReview, setNewReview] = useState({});
 
    const value = useLocation().state;
 
@@ -42,6 +51,64 @@ export default function Review(props) {
         }
 
   };
+
+  const EditReview = (reviewId, paramComment, paramRate, paramFile) => {
+
+    id_review = reviewId;
+
+    setEditing(true);
+    setNewReview({
+      "comment": paramComment,
+      "rate": paramRate,
+      "file": paramFile,
+      "reviewId": reviewId,
+    });
+
+  }
+
+  const EditClose = () => {
+    setEditing(false);
+  }
+
+  const sendEdit = async() => {
+
+    console.log('file', file);
+    try {
+
+
+    let options = {
+      method: "PUT",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body : JSON.stringify({
+        'comment': comment != undefined ? comment : props.comment,
+        'rate': rate != undefined ? rate : props.rate,
+        'file_review': file != undefined ? file : props.file,
+        'review_id': id_review,
+      }),
+
+    };
+    console.log('file', options);
+      const response = await fetch("http://127.0.0.1:8000/api/update", options);
+
+      if (!response.ok) {
+        alert(`HTTP error! Status: ${response.status}`);
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log("data", data);
+      if (data) {
+        alert(data.message);
+      } else {
+        alert("TRY AGAIN");
+      }
+    } catch (error) {
+      console.error("Fetch error:", error);
+    }
+
+  } 
 
    return (
 
