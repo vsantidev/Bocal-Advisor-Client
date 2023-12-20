@@ -50,9 +50,9 @@ export default function Home() {
     {/* SECTION AFFICHAGE LIEUX - END */}
 
 
-      {/* <div className="review">
+      <div className="review">
         <CreateReview />
-      </div> */}
+      </div>
 
       {/* <div className="review">
         <RenderReview />

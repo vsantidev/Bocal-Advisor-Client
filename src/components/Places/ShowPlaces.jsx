@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 import "./showPlacew.css";
 import Leaflet from "./leafletMap";
@@ -11,15 +11,17 @@ import Navbar from "../../layouts/navbar/Navbar";
 function Show({ placeId }) {
   const [user, setUser] = useState({});
   const [place, setPlace] = useState("null");
-  const [review, setReview] = useState ([]);
+  const navigate = useNavigate();
+  const [review, setReview] = useState([]);
   const [error, setError] = useState(null);
   const [longitude, setLongitude] = useState();
   const [latitude, setLatitude] = useState();
   const value = useLocation().state;
 
-  // recuperation des data du lieu
+
+  // ------------- RECUPERE LES DETAILS DU LIEU A AFFICHER -------------- //
+
   const handleShow = async () => {
-    
     let options = {
       method: "GET",
     };
@@ -38,6 +40,7 @@ function Show({ placeId }) {
       setPlace(data.place);
       setReview(data.review);
 
+
       setLatitude(data.place.y);
       setLongitude(data.place.x);
       // if (data) {
@@ -51,36 +54,64 @@ function Show({ placeId }) {
     }
   };
 
+  // ------------- SUPPRIMER -------------- //
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/delete/${value}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
+      if (!response.ok) {
+        console.error(`HTTP error! Status: ${response.status}`);
+      } else {
+        const data = await response.json();
+        console.log(data.message);
+        navigate("/");
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error("Fetch error:", error);
+    }
+  };
 
   useEffect(() => {
+
     handleShow();
+
+    // ------------- VERIFIE SI L'UTILISATEUR EST BIEN CONNECTE POUR POUVOIR COMMENTER -------------- //
+
     const getUserProfile = async () => {
       try {
-        const token = localStorage.getItem('@TokenUser'); 
+        const token = localStorage.getItem("@TokenUser");
 
         if (!token) {
-          setError('Token not found');
+          setError("Connectez-vous pour pouvoir commenter");
           return;
         }
 
-        const response = await fetch('http://127.0.0.1:8000/api/dashboard', {
-          method: 'GET',
+        const response = await fetch("http://127.0.0.1:8000/api/dashboard", {
+          method: "GET",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         });
 
         if (response.ok) {
           const data = await response.json();
-          setUser(data.success); 
+          setUser(data.success);
         } else {
-          setError('Failed to fetch user data');
+          setError("Connectez-vous pour pouvoir commenter.");
         }
       } catch (error) {
-        console.error('Error fetching user data:', error);
-        setError('Error fetching user data');
+        console.error("Error fetching user data:", error);
+        setError("Connectez-vous pour pouvoir commenter.");
       }
     };
 
@@ -88,8 +119,8 @@ function Show({ placeId }) {
 
   }, [placeId ]);
 
-  const renderPlace = () => {   
-
+  // ------------- AFFICHE LE LIEU -------------- //
+  const renderPlace = () => {
     return (
       <div>
         <div className="info">
@@ -102,57 +133,78 @@ function Show({ placeId }) {
               <img src={place.file}></img>
               <h2>{place.description}</h2>
               <h2>{place.name_category}</h2>
+              <button onClick={handleDelete}>Supprimer</button>
             </li>
           </ul>
         </div>
         {console.log("long" , longitude)}
         <div className="emplacement">
-          {longitude != undefined || latitude != undefined ? 
-            <Leaflet latitude={latitude} longitude={longitude} ></Leaflet>
-          : 
+          {longitude != undefined || latitude != undefined ? (
+            <Leaflet latitude={latitude} longitude={longitude}></Leaflet>
+          ) : (
             <div>erreur recuperation des données de localisation</div>
-          }
-
+          )}
         </div>
 
-        <div className="reviews">
-
-        </div>
+        <div className="reviews"></div>
       </div>
     );
   };
 
-    //  RENDRE LES DONNÉES VISIBLES PAR L'UTILISATEUR POUR LES REVIEWS
-    const renderMyReview = () => {
-         
-      // myReview.splice(6);
-      return review.map((element, index) => {
-          return (
-              <div key={index}>
-                  <Review
-                     comment={element.comment}
-                     rate={element.rate}
-                     reviewId={element.id}
-                     user_id={element.user_id}
-                     file_Review={element.file_Review}
-                  />
-              </div>
-          );
-      });
+  //  RENDRE LES DONNÉES VISIBLES PAR L'UTILISATEUR POUR LES REVIEWS
+  const renderMyReview = () => {
+    // myReview.splice(6);
+    return review.map((element, index) => {
+      return (
+        <div key={index}>
+          <Review
+            comment={element.comment}
+            // created_at={element.created_at}
+            created_at={new Date(element.created_at).toLocaleDateString("fr", { day: "numeric", month: "long", year: "numeric" }) + " | " + new Date(element.created_at).toLocaleTimeString("fr", { hour: "numeric", minute: "numeric" })}
+            rate={element.rate}
+            reviewId={element.id}
+            user_id={element.user_id}
+            file_review={element.file_review}
+          />
+        </div>
+      );
+    });
   };
 
   console.log("place", placeId);
-  return(
-  <>
-    <div className="navbar"><Navbar /></div>
-    <div className="carte">{renderPlace()}</div>
-    {user.role === 'membre' && <div><CreateReview /></div>}
-    <div className="avis">
-      {renderMyReview()}
-    </div>
-  </>
-  );
 
+  return (
+    <>
+      {/* SECTION HEADER - START */}
+        <div className="navbar">
+          <Navbar />
+        </div>
+      {/* SECTION HEADER - END */}
+
+
+      {/* SECTION SHOWPLACE - START */}
+        <div>{renderPlace()}</div>
+      {/* SECTION SHOWPLACE - END */}
+
+
+
+      {/* SECTION RENDERREVIEW - START */}
+        {user.role === "membre" && (
+          <div>
+            <CreateReview />
+          </div>
+        )}
+      {/* SECTION RENDERREVIEW - END */}
+
+
+      {/* SECTION SHOWPLACE - START */}
+        <section className="renderReview">       
+          {renderMyReview()}
+        </section>
+      {/* SECTION SHOWPLACE - END */}
+
+    </>
+  );
 }
 
 export default Show;

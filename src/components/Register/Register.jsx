@@ -43,7 +43,7 @@ function Register() {
 
       if (data) {
         alert(data.message);
-        navigate("/dashboard");
+        navigate("/login");
       } else {
         alert("TRY AGAIN");
       }
@@ -116,48 +116,54 @@ function Register() {
           <input
             type="text"
             name="lastname"
-            placeholder="nom"
+            placeholder="Nom"
+            className="inputRegister"
             required
             onChange={(e) => setLastname(e.target.value)}
           />
           <input
             type="text"
             name="firstname"
-            placeholder="prenom"
+            placeholder="Prénom"
+            className="inputRegister"
             required
             onChange={(e) => setFirstname(e.target.value)}
           />
           <input
             type="email"
             name="email"
-            placeholder="email"
+            placeholder="Adresse email"
+            className="inputRegister"
             required
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="text"
             name="username"
-            placeholder="pseudo"
+            placeholder="Nom d'utilisateur"
+            className="inputRegister"
             required
             onChange={(e) => setUsername(e.target.value)}
           />
           <input
             type="text"
             name="birthday"
-            placeholder="date d'anniversaire yyyy/mm/dd"
+            className="inputRegister"
+            placeholder="Votre date d'anniversaire (format : yyyy/mm/dd)"
             required
             onChange={(e) => setBirhday(e.target.value)}
           />
           <input
             type="password"
             name="password"
-            placeholder="mot de passe"
+            className="inputRegister"
+            placeholder="Mot de passe"
             required
             onChange={(e) => setPassword(e.target.value)}
           />
 
           <button type="submit" onClick={handleRegister}>
-            valider
+            Inscription
           </button>
         </form>
         <a href="Login">Déja un compte ?</a>

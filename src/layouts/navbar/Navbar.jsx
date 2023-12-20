@@ -86,7 +86,7 @@ export default function Navbar() {
           <div className="fa-solid fa-bars icons" id="icon-menu"></div>
         {/* </div> */}
         {/* <div id="icons" className="fa-solid fa-bars"></div> */}
-          <nav>
+          {/* <nav>
             <div className="navbar">
               <div className="navbarLink">
                 <Link to="/dashboard" className="Link">Mon profil</Link>
@@ -98,7 +98,33 @@ export default function Navbar() {
                 <Link to="/login" className="Link">Connexion</Link>
               </div>
             </div>
-          </nav>
+          </nav> */}
+
+      
+        {authenticated ? (
+        <nav>
+        <div className="navbar">      
+          <div className="navbarLink">
+              <Link to="/dashboard" className="Link">Profil</Link>
+          </div>
+          <div className="navbarLink">
+            <Link className="btnLogOut" onClick={handleLogout}>Déconnexion</Link>
+          </div>
+       </div>
+        </nav>
+        ) : (
+        <nav>
+        <div className="navbar">
+            <div className="navbarLink">
+              <Link to="/register" className="Link">Inscription</Link> 
+            </div>
+            <div className="navbarLink">
+                <Link to="/login" className="Link">Connexion</Link>
+            </div>
+        </div>
+        </nav>
+        )}
+      
 
       </section>
       </>

@@ -85,21 +85,19 @@
     font-size: 2rem;
     font-weight: 700;
     text-transform: initial;
-    /* margin-right: auto; */
+    margin-left: .8rem;
     color: white;
-    /* margin-right: 10rem; */
 }
 
 
 .navbar {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
     right: 0;
-    /* margin-right: 2rem; */
+    margin-right: 4rem;
 }
 
-.Link {
+.Link, .btnLogOut {
     font-size: 1.4rem;
     color: white;
     font-weight: 500;
@@ -121,13 +119,17 @@
 #check {
     display: none;
 }
+
 .icons {
     cursor: pointer;
     font-size: 2.5rem;
     display: none;
     position: absolute;
     right: 5%;
-
+}
+.btnLogOut{
+    color: #AD1F1B;
+    font-weight: 700;
 }
 
 /* BREAKPOINTS */
@@ -176,4 +178,6 @@
         margin: 1rem 0;
         text-align: center;
     }
+
+
   }

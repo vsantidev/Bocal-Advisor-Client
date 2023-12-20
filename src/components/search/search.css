@@ -25,8 +25,9 @@
     box-sizing: border-box;
     padding-left: 20px;
     outline: none;
-    text-transform: initial;
+    /* text-transform: initial; */
     font-size: 1.3rem;
+    color: aliceblue;
 }
 .search form button{
     position: absolute;
