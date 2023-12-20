@@ -195,14 +195,14 @@ function CreatePlaces() {
             <input
               type="text"
               name="title"
-              placeholder="Titre du lieu"
+              placeholder="Titre"
               className="inputRegister"
               onChange={(e) => setTitle(e.target.value)}
             />
             <input
               type="text"
               name="street"
-              placeholder="Adresse du lieu"
+              placeholder="Adresse"
               className="inputRegister"
               onChange={(e) => setStreet(e.target.value)}
             />
@@ -274,7 +274,7 @@ function CreatePlaces() {
             <input
               type="text"
               name="description"
-              placeholder="Petite description"
+              placeholder="Description"
               className="inputRegister"
               onChange={(e) => setDescription(e.target.value)}
             />
