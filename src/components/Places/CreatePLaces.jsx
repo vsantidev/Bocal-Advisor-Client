@@ -48,20 +48,18 @@ function CreatePlaces() {
   const [file, setFile] = useState("");
   // const [adresse, setAdresse] = useState("");
 
-
   // const[x, setX] = useState();
   // const[y, setY] = useState();
 
-
-  // récupere les catégorie de la bdd
+  // Récupere les catégorie de la bdd
   const [categories, setCategories] = useState([]);
-  // les categories choisie
+  // Catégories choisie
   const [selectOptions, setselectOptions] = useState([]);
 
-  //all categories choisi
+  //All catégories choisies
   const [userChoice, setUserChoice] = useState([]);
 
-  // restructure le tableau pour le select
+  // Restructure le tableau pour le select
   const opt = () => {
     categories.forEach((element) => {
       element.forEach((item) => {
@@ -73,7 +71,7 @@ function CreatePlaces() {
     });
   };
 
-  // select
+  // Select
   const MyComponent = () => (
     <Select
       defaultValue={[selectOptions[0]]}
@@ -88,7 +86,7 @@ function CreatePlaces() {
     />
   );
 
-  // creation des places
+  // ------------- CREATION DU LIEU -------------- //
   const handlePlaces = async (e) => {
     e.preventDefault();
 
@@ -119,7 +117,6 @@ function CreatePlaces() {
     // formData.append("x", x);
     // formData.append("y", y);
 
-
     let options = {
       method: "POST",
       body: formData,
@@ -132,7 +129,7 @@ function CreatePlaces() {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
-     
+
       if (data) {
         alert(data.message);
       } else {
@@ -143,7 +140,7 @@ function CreatePlaces() {
     }
   };
 
-  // recuperation des categories
+  // Récuperation des catégories
   const getCategories = async () => {
     try {
       const options = {
@@ -155,9 +152,9 @@ function CreatePlaces() {
       const response = await fetch(`http://127.0.0.1:8000/api/index`, options);
       const data = await response.json();
 
-      // Vérifions si le premier élément de data est bien un tableau
+      // Vérifie si data est bien un tableau
       if (Array.isArray(data /* ["0"] */)) {
-        // Si oui, places prend la valeur de celui-ci
+        // Si oui, categories prend la valeur de celui-ci
         setCategories(data);
       } else {
         // Si non, erreur
@@ -173,7 +170,7 @@ function CreatePlaces() {
   }, []);
 
   // Fonction qui récupère la catégorie
-/*   function cat($category) {
+  /*   function cat($category) {
     if ($category == "Hôtel") {
       console.log("Hôtel");
       setCategory("1");
@@ -211,17 +208,6 @@ function CreatePlaces() {
               className="inputRegister"
               onChange={(e) => setStreet(e.target.value)}
             />
-            {/* </div> */}
-            {/* </div> */}
-            {/* <div>
-              <input
-                type="text"
-                name="street"
-                placeholder="Adresse du lieu"
-                className="inputRegister"
-                onChange={(e) => setStreet(e.target.value)}
-              />
-            </div> */}
             <div className="createCity">
               <input
                 type="text"
@@ -238,44 +224,6 @@ function CreatePlaces() {
                 onChange={(e) => setCity(e.target.value)}
               />
             </div>
-
-            {/*           <span
-              style={{ backgroundColor: "aqua", padding: 2 }}
-              value="Hotel"
-              onClick={() => cat("Hôtel")}
-            >
-              Hôtel
-            </span>
-            <span
-              style={{ backgroundColor: "purple", padding: 2 }}
-              value=">Restaurant"
-              onClick={() => cat("Restaurant")}
-            >
-              Restaurant
-            </span>
-            <span
-              style={{ backgroundColor: "brown", padding: 2 }}
-              value="Bar"
-              onClick={() => cat("Bar")}
-            >
-              Bar
-            </span>
-            <span
-              style={{ backgroundColor: "grey", padding: 2 }}
-              value="Musées"
-              onClick={() => cat("Musées")}
-            >
-              Musées
-            </span>
-            <span
-              style={{ backgroundColor: "orange", padding: 2 }}
-              value="Activités"
-              onClick={() => cat("Activités")}
-            >
-              Activités
-            </span>
-  */}
-
             <input
               type="text"
               name="description"
@@ -292,13 +240,6 @@ function CreatePlaces() {
 
             {selectOptions.length == 0 ? opt() : console.log("deja plein")}
             {MyComponent()}
-
-            {/*           <input 
-              type="text" 
-              name="adresse"
-              placeholder="adresse du lieux"
-              onChange={(e) => setAdresse(e.target.value)}
-            />   */}
 
             <button type="submit" onClick={handlePlaces}>
               Créer

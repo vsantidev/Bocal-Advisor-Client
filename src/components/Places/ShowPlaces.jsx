@@ -24,7 +24,6 @@ function Show({ placeId }) {
   // ------------- RECUPERE LES DETAILS DU LIEU A AFFICHER -------------- //
 
   const handleShow = async () => {
-
     let options = {
       method: "GET",
       headers: {
@@ -32,12 +31,11 @@ function Show({ placeId }) {
       },
     };
     try {
-
       const response = await fetch(
         `http://127.0.0.1:8000/api/show/${value}`,
         options
       );
-     
+
       if (!response.ok) {
         alert(`HTTP error! Status: ${response.status}`);
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -47,15 +45,8 @@ function Show({ placeId }) {
       setPlace(data.place);
       setReviewVariable(data.review);
 
-
       setLatitude(data.place.y);
       setLongitude(data.place.x);
-      // if (data) {
-      //  alert(data.message);
-      // } else {
-      //  alert("TRY AGAIN");
-      // }
-
     } catch (error) {
       console.error("Fetch error:", error);
     }
@@ -88,7 +79,6 @@ function Show({ placeId }) {
   };
 
   useEffect(() => {
-
     handleShow();
 
     // ------------- VERIFIE SI L'UTILISATEUR EST BIEN CONNECTE POUR POUVOIR COMMENTER -------------- //
@@ -123,8 +113,7 @@ function Show({ placeId }) {
     };
 
     getUserProfile();
-
-  }, [placeId ]);
+  }, [placeId]);
 
   // ------------- AFFICHE LE LIEU -------------- //
   const renderPlace = () => {
@@ -162,17 +151,26 @@ function Show({ placeId }) {
   //  RENDRE LES DONNÉES VISIBLES PAR L'UTILISATEUR POUR LES REVIEWS
   const renderMyReview = () => {
     // myReview.splice(6);
-    
+
     return reviewVariable.map((element, index) => {
-      
       return (
-        
         <div key={index}>
-          { console.log('review 2')}
+          {console.log("review 2")}
           <Review
             comment={element.comment}
             // created_at={element.created_at}
-            created_at={new Date(element.created_at).toLocaleDateString("fr", { day: "numeric", month: "long", year: "numeric" }) + " | " + new Date(element.created_at).toLocaleTimeString("fr", { hour: "numeric", minute: "numeric" })}
+            created_at={
+              new Date(element.created_at).toLocaleDateString("fr", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              }) +
+              " | " +
+              new Date(element.created_at).toLocaleTimeString("fr", {
+                hour: "numeric",
+                minute: "numeric",
+              })
+            }
             rate={element.rate}
             reviewId={element.id}
             user_id={element.user_id}
@@ -183,37 +181,29 @@ function Show({ placeId }) {
     });
   };
 
-
   return (
     <>
       {/* SECTION HEADER - START */}
-        <div className="navbar">
-          <Navbar />
-        </div>
+      <div className="navbar">
+        <Navbar />
+      </div>
       {/* SECTION HEADER - END */}
 
-
       {/* SECTION SHOWPLACE - START */}
-        <div>{renderPlace()}</div>
+      <div>{renderPlace()}</div>
       {/* SECTION SHOWPLACE - END */}
-
-
 
       {/* SECTION RENDERREVIEW - START */}
-        {user.role === "membre" && (
-          <div>
-            <CreateReview />
-          </div>
-        )}
+      {user.role === "membre" && (
+        <div>
+          <CreateReview />
+        </div>
+      )}
       {/* SECTION RENDERREVIEW - END */}
 
-
       {/* SECTION SHOWPLACE - START */}
-        <section className="renderReview">       
-          {renderMyReview()}
-        </section>
+      <section className="renderReview">{renderMyReview()}</section>
       {/* SECTION SHOWPLACE - END */}
-
     </>
   );
 }

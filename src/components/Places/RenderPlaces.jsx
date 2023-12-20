@@ -6,7 +6,7 @@ import "./renderPlaces.css";
 function RenderPlaces(props) {
   const [places, setPlaces] = useState(null);
 
-  /* ---- recupere tous les lieux ------- */
+  /* ---- Récupère tous les lieux présents dans la bdd ------- */
   const getPlaces = async () => {
     try {
       const options = {
@@ -18,8 +18,8 @@ function RenderPlaces(props) {
       const response = await fetch(`http://127.0.0.1:8000/api/post`, options);
       const data = await response.json();
 
-      console.log('getPlaces', data);
-      // Vérifions si le premier élément de data est bien un tableau
+      console.log("getPlaces", data);
+      // Vérifie si le premier élément de data est bien un tableau
       if (Array.isArray(data["0"])) {
         // Si oui, places prend la valeur de celui-ci
         setPlaces(data["0"]);
@@ -37,7 +37,6 @@ function RenderPlaces(props) {
   }, []);
   /* -----------  Renvoie tous les lieux présents dans la database --------- */
   const renderPlaces = () => {
-   
     return places?.map((element, index) => {
       return (
         <div key={index}>
