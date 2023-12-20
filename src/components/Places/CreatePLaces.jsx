@@ -117,15 +117,6 @@ function CreatePlaces() {
 
     let options = {
       method: "POST",
-      /* headers: {'Content-Type': 'application/json'}, */
-      /*       body: JSON.stringify([{
-        title: title,
-        street: street,
-        postcode: postcode,
-        city: city,
-        category: userChoice,
-        description: description,
-      }]), */
       body: formData,
     };
 
