@@ -132,7 +132,7 @@ function CreatePlaces() {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
-      console.log("data", data);
+     
       if (data) {
         alert(data.message);
       } else {
@@ -173,7 +173,7 @@ function CreatePlaces() {
   }, []);
 
   // Fonction qui récupère la catégorie
-  function cat($category) {
+/*   function cat($category) {
     if ($category == "Hôtel") {
       console.log("Hôtel");
       setCategory("1");
@@ -191,7 +191,7 @@ function CreatePlaces() {
       setCategory("5");
     }
   }
-
+ */
   return (
     <>
       <section className="formCreatePlace">

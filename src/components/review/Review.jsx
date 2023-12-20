@@ -2,20 +2,22 @@ import { useEffect, useState } from "react";
 import "./Review.css";
 import { useLocation } from "react-router";
 
+// data des modification
 let id_review;
 let comment;
 let rate;
 let file;
 
 export default function Review(props) {
-  console.log("debut review");
 
+  // condition si affiche commentaire ou modifie
   const [editing ,setEditing] = useState(false);
+  // data des commentaires
   const [newReview, setNewReview] = useState({});
 
-   const value = useLocation().state;
+  const value = useLocation().state;
 
-      const DeleteReview = async (MyId) =>{
+  const DeleteReview = async (MyId) =>{
  
       let options = {
           method: "DELETE",
@@ -52,6 +54,7 @@ export default function Review(props) {
 
   };
 
+  /*  ---- stock les data dans des variables ------ */
   const EditReview = (reviewId, paramComment, paramRate, paramFile) => {
 
     id_review = reviewId;
@@ -65,17 +68,14 @@ export default function Review(props) {
     });
 
   }
-
+  /* ------ croix du formulaire pour fermer ------- */
   const EditClose = () => {
     setEditing(false);
   }
-
+  /* ------- envoie les nouvelles data dans le back-end ---------- */
   const sendEdit = async() => {
 
-    console.log('file', file);
     try {
-
-
     let options = {
       method: "PUT",
       headers: {
@@ -90,7 +90,7 @@ export default function Review(props) {
       }),
 
     };
-    console.log('file', options);
+
       const response = await fetch("http://127.0.0.1:8000/api/update", options);
 
       if (!response.ok) {
@@ -98,7 +98,7 @@ export default function Review(props) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
-      console.log("data", data);
+
       if (data) {
         alert(data.message);
       } else {

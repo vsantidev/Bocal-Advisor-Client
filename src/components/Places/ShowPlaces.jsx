@@ -11,18 +11,19 @@ import Navbar from "../../layouts/navbar/Navbar";
 function Show({ placeId }) {
   const [user, setUser] = useState({});
   const [place, setPlace] = useState("null");
-  const navigate = useNavigate();
+  // tableau de tous les commentaire en lien avec le lieu
   const [reviewVariable, setReviewVariable] = useState([]);
   const [error, setError] = useState(null);
+
+  /* ---- VALEUR POUR LA CARTE -------- */
   const [longitude, setLongitude] = useState();
   const [latitude, setLatitude] = useState();
   const value = useLocation().state;
-
+  const navigate = useNavigate();
 
   // ------------- RECUPERE LES DETAILS DU LIEU A AFFICHER -------------- //
 
   const handleShow = async () => {
-    console.log('avant return');
 
     let options = {
       method: "GET",
@@ -87,7 +88,7 @@ function Show({ placeId }) {
   };
 
   useEffect(() => {
-    console.log("useEffect");
+
     handleShow();
 
     // ------------- VERIFIE SI L'UTILISATEUR EST BIEN CONNECTE POUR POUVOIR COMMENTER -------------- //
@@ -143,7 +144,7 @@ function Show({ placeId }) {
             </li>
           </ul>
         </div>
-
+        {/* ------- DEBUT DE LA CARTE  */}
         <div className="emplacement">
           {longitude != undefined || latitude != undefined ? (
             <Leaflet latitude={latitude} longitude={longitude}></Leaflet>
@@ -151,6 +152,7 @@ function Show({ placeId }) {
             <div>erreur recuperation des données de localisation</div>
           )}
         </div>
+        {/* ------- FIN DE LA CARTE  */}
 
         <div className="reviews"></div>
       </div>
@@ -160,9 +162,9 @@ function Show({ placeId }) {
   //  RENDRE LES DONNÉES VISIBLES PAR L'UTILISATEUR POUR LES REVIEWS
   const renderMyReview = () => {
     // myReview.splice(6);
-    console.log('review', reviewVariable);
+    
     return reviewVariable.map((element, index) => {
-      {console.log("review 1", reviewVariable);}
+      
       return (
         
         <div key={index}>

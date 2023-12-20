@@ -7,16 +7,13 @@ import "./showPlacew.css";
 
 function Leaflet(props){
 
-
+    /* ----- montre l'emplacement exact du lieu ---- */
     const markers = [
         {
             geocode:[props.latitude,props.longitude],
-            popUp: "hello, I am pop up"
+            popUp: "hello, I am here"
         }
     ]
-
-    console.log("leaf lat",props.latitude);
-    console.log("leaf lon",props.longitude);
 
     return(
         <div>
