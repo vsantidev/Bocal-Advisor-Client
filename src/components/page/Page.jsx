@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import Navbar from "../../layouts/navbar/Navbar";
 import NavFilter from "../navFilter/navFilter";
 import "./Page.css";
+import { Link } from "react-router-dom";
 
 function Page(){
     const [places, setPlaces] = useState([]);
@@ -51,15 +52,15 @@ function Page(){
                 console.log("test: ", element);
                 return (
                 
-                
-                    <div key={index} className="card">
-                        <h2>{element.title}</h2>
-                        <h4>{element.city}</h4>
-                        {/* Image ne s'affiche pas :( */}
-                        <img src={element.file} alt="" />
-                        <h4>{element.name_category}</h4>
-                    </div>
-    
+                  <Link to={`/show/${element.id}`} state={element.id}>
+                    <Places             
+                      title={element.title}
+                      city={element.city}
+                      category={element.category}
+                      file={element.file}
+                      name_category={element.name_category}
+                    />
+                  </Link>
                 
             
               );
@@ -87,10 +88,15 @@ function Page(){
             </div>
 
             <div className="container">
-                <div className="cardContainer">
-                    {renderPlaces()}
-                </div>
-                
+                {value != null || value != undefined ? 
+                  <div className="cardContainer">
+                      {renderPlaces()}
+                  </div>
+                : 
+                  <div>
+                    <h2>rechercher introuvable</h2>
+                  </div>
+                }
             </div>
 
         </div>

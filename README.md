@@ -8,3 +8,6 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 - Commande install : npm install react-router-dom
+
+- commande install select : npm i --save react-select 
+- commande install carte : npm install leaflet

@@ -17,11 +17,6 @@ function Show({ placeId }) {
   const [latitude, setLatitude] = useState();
   const value = useLocation().state;
 
-  useEffect(() => {
-    console.log("dedans", placeId);
-    handleShow();
-  }, [placeId]);
-
   // recuperation des data du lieu
   const handleShow = async () => {
     
@@ -33,22 +28,18 @@ function Show({ placeId }) {
         `http://127.0.0.1:8000/api/show/${value}`,
         options
       );
+     
       if (!response.ok) {
-        console.log(response);
-
         alert(`HTTP error! Status: ${response.status}`);
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
 
-/*       console.log("data", data.place);
-      console.log("review : ",data.review);
- */
       setPlace(data.place);
       setReview(data.review);
 
-      setLatitude(place.y);
-      setLongitude(place.x);
+      setLatitude(data.place.y);
+      setLongitude(data.place.x);
       // if (data) {
       //  alert(data.message);
       // } else {
@@ -63,6 +54,7 @@ function Show({ placeId }) {
 
 
   useEffect(() => {
+    handleShow();
     const getUserProfile = async () => {
       try {
         const token = localStorage.getItem('@TokenUser'); 
@@ -93,8 +85,8 @@ function Show({ placeId }) {
     };
 
     getUserProfile();
-    handleShow();
-  }, [placeId]);
+
+  }, [placeId ]);
 
   const renderPlace = () => {   
 
@@ -113,7 +105,7 @@ function Show({ placeId }) {
             </li>
           </ul>
         </div>
-
+        {console.log("long" , longitude)}
         <div className="emplacement">
           {longitude != undefined || latitude != undefined ? 
             <Leaflet latitude={latitude} longitude={longitude} ></Leaflet>
@@ -153,9 +145,11 @@ function Show({ placeId }) {
   return(
   <>
     <div className="navbar"><Navbar /></div>
-    <div>{renderPlace()}</div>
+    <div className="carte">{renderPlace()}</div>
     {user.role === 'membre' && <div><CreateReview /></div>}
-    <div>{renderMyReview()}</div>
+    <div className="avis">
+      {renderMyReview()}
+    </div>
   </>
   );
 
