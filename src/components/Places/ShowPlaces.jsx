@@ -12,7 +12,7 @@ function Show({ placeId }) {
   const [user, setUser] = useState({});
   const [place, setPlace] = useState("null");
   const navigate = useNavigate();
-  const [review, setReview] = useState([]);
+  const [reviewVariable, setReviewVariable] = useState([]);
   const [error, setError] = useState(null);
   const [longitude, setLongitude] = useState();
   const [latitude, setLatitude] = useState();
@@ -22,10 +22,16 @@ function Show({ placeId }) {
   // ------------- RECUPERE LES DETAILS DU LIEU A AFFICHER -------------- //
 
   const handleShow = async () => {
+    console.log('avant return');
+
     let options = {
       method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     };
     try {
+
       const response = await fetch(
         `http://127.0.0.1:8000/api/show/${value}`,
         options
@@ -36,9 +42,9 @@ function Show({ placeId }) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
-
+      console.log("handleshow");
       setPlace(data.place);
-      setReview(data.review);
+      setReviewVariable(data.review);
 
 
       setLatitude(data.place.y);
@@ -81,7 +87,7 @@ function Show({ placeId }) {
   };
 
   useEffect(() => {
-
+    console.log("useEffect");
     handleShow();
 
     // ------------- VERIFIE SI L'UTILISATEUR EST BIEN CONNECTE POUR POUVOIR COMMENTER -------------- //
@@ -137,7 +143,7 @@ function Show({ placeId }) {
             </li>
           </ul>
         </div>
-        {console.log("long" , longitude)}
+
         <div className="emplacement">
           {longitude != undefined || latitude != undefined ? (
             <Leaflet latitude={latitude} longitude={longitude}></Leaflet>
@@ -154,9 +160,13 @@ function Show({ placeId }) {
   //  RENDRE LES DONNÉES VISIBLES PAR L'UTILISATEUR POUR LES REVIEWS
   const renderMyReview = () => {
     // myReview.splice(6);
-    return review.map((element, index) => {
+    console.log('review', reviewVariable);
+    return reviewVariable.map((element, index) => {
+      {console.log("review 1", reviewVariable);}
       return (
+        
         <div key={index}>
+          { console.log('review 2')}
           <Review
             comment={element.comment}
             // created_at={element.created_at}
@@ -171,7 +181,6 @@ function Show({ placeId }) {
     });
   };
 
-  console.log("place", placeId);
 
   return (
     <>

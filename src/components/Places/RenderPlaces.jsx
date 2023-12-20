@@ -17,6 +17,7 @@ function RenderPlaces(props) {
       const response = await fetch(`http://127.0.0.1:8000/api/post`, options);
       const data = await response.json();
 
+      console.log('getPlaces', data);
       // Vérifions si le premier élément de data est bien un tableau
       if (Array.isArray(data["0"])) {
         // Si oui, places prend la valeur de celui-ci
