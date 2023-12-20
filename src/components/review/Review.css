@@ -97,6 +97,56 @@ label {
     font-weight: 600;
 }
 
+
+/* modif comment */
+
+/* .edit_review{
+    display: none;
+} */
+.edit_review{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 100px;
+    position: absolute;
+    height: 80%;
+    width: 100%;
+    z-index: 10;
+}
+.edit_review .form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 80%;
+    width: 80%;
+    background-color: white;
+    border-radius: 20px;
+    border: 2px solid black;
+}
+.edit_review input,
+.edit_review button{
+    width: 80%;
+}
+.edit_review input{
+    border-bottom: 2px solid black;
+}
+.x-btn{
+    position: relative;
+    top: -39%;
+    right: 3%;
+    font-size: 30px;
+    font-weight: 900;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    background-color: white;
+    color: black;
+
 .spanRate {
     font-size: 1.2rem;
     letter-spacing: .2rem;
@@ -177,4 +227,5 @@ label {
     justify-content: start;
     align-items: center;
     padding-left: 2rem;
+
 }

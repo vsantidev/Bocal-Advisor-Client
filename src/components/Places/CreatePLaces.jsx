@@ -46,10 +46,12 @@ function CreatePlaces() {
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [file, setFile] = useState("");
-  const [adresse, setAdresse] = useState("");
+  // const [adresse, setAdresse] = useState("");
 
-  const [x, setX] = useState();
-  const [y, setY] = useState();
+
+  // const[x, setX] = useState();
+  // const[y, setY] = useState();
+
 
   // récupere les catégorie de la bdd
   const [categories, setCategories] = useState([]);
@@ -70,6 +72,7 @@ function CreatePlaces() {
       });
     });
   };
+
   // select
   const MyComponent = () => (
     <Select
@@ -112,8 +115,10 @@ function CreatePlaces() {
     formData.append("category", userChoice);
     formData.append("description", description);
     formData.append("file", file);
+
     // formData.append("x", x);
     // formData.append("y", y);
+
 
     let options = {
       method: "POST",
