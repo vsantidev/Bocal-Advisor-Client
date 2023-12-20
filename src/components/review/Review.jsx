@@ -134,7 +134,7 @@ export default function Review(props) {
       </>
 
       ) : (
-
+      <>
       <div className="reviewContentFirst">
         <div className="reviewContentUser">
           <div className="reviewContentAvatar">
@@ -192,6 +192,7 @@ export default function Review(props) {
       {/* <div className="reviewContentButton">
           <p><button type="submit" onClick={()=>DeleteReview(props.reviewId)}>SUPPRIMER</button></p>
         </div> */}
+      </>
      )};
 
     </div>
