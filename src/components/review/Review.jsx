@@ -50,7 +50,6 @@ export default function Review(props) {
       <div className="reviewContentFirst">
         <div className="reviewContentUser">
           <div className="reviewContentAvatar">
-            {/* <div> */}
             <i className="fa-solid fa-circle-user avatar"></i> 
           </div>
 
@@ -58,7 +57,6 @@ export default function Review(props) {
             <p className="review-user"> Username : {props.user_id}</p>
             <p className="review-date">{props.created_at}</p>
           </div>
-          {/* </div> */}
         </div>
 
         <div className="reviewContentRate">
@@ -91,8 +89,8 @@ export default function Review(props) {
             <img className="review-file" src={props.file_review} alt="image non fournie"/>
           </div>
           <div className="reviewDivEdit">
-          <button className="buttonReviewEdit" type="submit" onClick={()=>DeleteReview(props.reviewId)}>SUPPRIMER</button>
-          <button  className="buttonReviewDelete" type="submit" onClick={()=>DeleteReview(props.reviewId)}>MODIFIER</button>
+          <button className="buttonReviewEdit" type="submit" onClick={()=>DeleteReview(props.reviewId)}>MODIFIER</button>
+          <button  className="buttonReviewDelete" type="submit" onClick={()=>DeleteReview(props.reviewId)}>SUPPRIMER</button>
 
           </div>
 
