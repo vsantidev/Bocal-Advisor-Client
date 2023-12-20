@@ -95,20 +95,25 @@ export default function CreateReview({}) {
         <p>Laisser un commentaire et une note à l'établissement :</p>
         <div className="box-create">
           <form action="" method="POST">
-            <div>
-              <textarea
-                name="comment"
-                cols="80"
-                rows="2"
-                placeholder="Décrivez içi vos impressions ..."
-                required
-                className="review-textarea"
-                onChange={(e) => setComment(e.target.value)}
-              />
-            </div>
-
-            <div className="box-number">
+            <div className="reviewContentCreate">
               <div>
+                <i class="fa-solid fa-pen-to-square image-logo"></i>
+              </div>
+              <div>
+                <textarea
+                  name="comment"
+                  cols="80"
+                  rows="2"
+                  placeholder="Décrivez içi vos impressions ..."
+                  required
+                  className="review-textarea"
+                  onChange={(e) => setComment(e.target.value)}
+                />
+              </div>
+              <div>
+                <i class="fa-solid fa-arrow-up-9-1 image-logo"></i>    
+              </div>
+              <div className="reviewContentCreateRate">
                 <input
                   type="number"
                   name="rate"
@@ -121,29 +126,31 @@ export default function CreateReview({}) {
                   onChange={(e) => setRate(e.target.value)}
                 />
               </div>
-              <div>
-                <label htmlFor="">Postez une photo de type : png, jpg, jpeg</label>
-              <input
-                  type="file"
-                  name="file_review"
-                  className="review-input"
-                  onChange={(e) => setFileReview(e.target.files[0])}
-                />
-              </div>
-              <div>
-              <button
-                type="submit"
-                className="login-title"
-                onClick={handleReview}
-              >
-                Valider
-              </button>
-              </div>
-
 
             </div>
 
+            <div className="reviewContentCreate">
 
+              <div>
+                <label htmlFor=""><i class="fa-solid fa-image image-logo"></i>Postez une photo de type : png, jpg, jpeg</label>
+                <input
+                    type="file"
+                    name="file_review"
+                    className="review-inputFile"
+                    onChange={(e) => setFileReview(e.target.files[0])}
+                  />
+              </div>
+              <div>
+                <button
+                  type="submit"
+                  className="login-title createValidate"
+                  onClick={handleReview}
+                >
+                  Poster
+                </button>
+              </div>
+            </div>
+    
           </form>
         </div>
 
