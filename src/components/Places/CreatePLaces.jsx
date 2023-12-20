@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import Select from 'react-select';
+import Select from "react-select";
 // import chroma from 'chroma-js';
 // import { ColourOption, colourOptions } from './docs/data';
 // import Select, { StylesConfig } from 'react-select';
-import "./renderPlaces.css"
+import "./renderPlaces.css";
 
 // const colourStyles: StylesConfig<ColourOption, true> = {
 //   control: (styles) => ({ ...styles, backgroundColor: 'white' }),
@@ -48,52 +48,47 @@ function CreatePlaces() {
   const [file, setFile] = useState("");
   const [adresse, setAdresse] = useState("");
 
-  const[x, setX] = useState();
-  const[y, setY] = useState();
+  const [x, setX] = useState();
+  const [y, setY] = useState();
 
   // récupere les catégorie de la bdd
-  const[categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
   // les categories choisie
-  const[selectOptions, setselectOptions] = useState([]);
+  const [selectOptions, setselectOptions] = useState([]);
 
   //all categories choisi
-  const[userChoice, setUserChoice] = useState([])
- 
+  const [userChoice, setUserChoice] = useState([]);
+
   // restructure le tableau pour le select
   const opt = () => {
-      categories.forEach(element => {
-
-        element.forEach(item => {
-        
-          setselectOptions(selectOptions =>[...selectOptions, {'value': item.id, 'label': item.name_category} ])
-
-        });
-        
+    categories.forEach((element) => {
+      element.forEach((item) => {
+        setselectOptions((selectOptions) => [
+          ...selectOptions,
+          { value: item.id, label: item.name_category },
+        ]);
       });
-
-
-  }
+    });
+  };
   // select
   const MyComponent = () => (
-    <Select 
+    <Select
       defaultValue={[selectOptions[0]]}
       isMulti
       name="colors"
       options={selectOptions}
       className="basic-multi-select "
       classNamePrefix="select"
-      onChange={(choices) => setUserChoice(choices.map(choice => (choice.value)))}
+      onChange={(choices) =>
+        setUserChoice(choices.map((choice) => choice.value))
+      }
     />
-  )
-
-    
-
+  );
 
   // creation des places
   const handlePlaces = async (e) => {
     e.preventDefault();
 
-    
     // let optionsAdresse = {
     //   method: "GET",
     //   headers: {
@@ -117,16 +112,13 @@ function CreatePlaces() {
     formData.append("category", userChoice);
     formData.append("description", description);
     formData.append("file", file);
-    formData.append("x", x);
-    formData.append("y", y);
+    // formData.append("x", x);
+    // formData.append("y", y);
 
-
-
-    
     let options = {
       method: "POST",
       /* headers: {'Content-Type': 'application/json'}, */
-/*       body: JSON.stringify([{
+      /*       body: JSON.stringify([{
         title: title,
         street: street,
         postcode: postcode,
@@ -134,12 +126,10 @@ function CreatePlaces() {
         category: userChoice,
         description: description,
       }]), */
-      body : formData,
-
+      body: formData,
     };
 
     try {
-      
       const response = await fetch("http://127.0.0.1:8000/api/place", options);
       if (!response.ok) {
         alert(`HTTP error! Status: ${response.status}`);
@@ -170,7 +160,7 @@ function CreatePlaces() {
       const data = await response.json();
 
       // Vérifions si le premier élément de data est bien un tableau
-      if (Array.isArray(data/* ["0"] */)) {
+      if (Array.isArray(data /* ["0"] */)) {
         // Si oui, places prend la valeur de celui-ci
         setCategories(data);
       } else {
@@ -185,7 +175,6 @@ function CreatePlaces() {
   useEffect(() => {
     getCategories();
   }, []);
-
 
   // Fonction qui récupère la catégorie
   function cat($category) {
@@ -206,27 +195,27 @@ function CreatePlaces() {
       setCategory("5");
     }
   }
-  
+
   return (
     <>
       <section className="formCreatePlace">
         <div className="createPlaceDashboard">
           <form action="" method="POST">
-                <input
-                  type="text"
-                  name="title"
-                  placeholder="Titre du lieu"
-                  className="inputRegister"
-                  onChange={(e) => setTitle(e.target.value)}
-                />
-                <input
-                  type="text"
-                  name="street"
-                  placeholder="Adresse du lieu"
-                  className="inputRegister"
-                  onChange={(e) => setStreet(e.target.value)}
-                />
-              {/* </div> */}
+            <input
+              type="text"
+              name="title"
+              placeholder="Titre du lieu"
+              className="inputRegister"
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <input
+              type="text"
+              name="street"
+              placeholder="Adresse du lieu"
+              className="inputRegister"
+              onChange={(e) => setStreet(e.target.value)}
+            />
+            {/* </div> */}
             {/* </div> */}
             {/* <div>
               <input
@@ -254,9 +243,7 @@ function CreatePlaces() {
               />
             </div>
 
-
-
-  {/*           <span
+            {/*           <span
               style={{ backgroundColor: "aqua", padding: 2 }}
               value="Hotel"
               onClick={() => cat("Hôtel")}
@@ -291,26 +278,26 @@ function CreatePlaces() {
             >
               Activités
             </span>
-  */}  
+  */}
 
-              <input
+            <input
               type="text"
               name="description"
               placeholder="Petite description"
               className="inputRegister"
               onChange={(e) => setDescription(e.target.value)}
-              />
-              <input
+            />
+            <input
               type="file"
               name="file"
               className="inputFileCreate"
               onChange={(e) => setFile(e.target.files[0])}
-              />
+            />
 
-            {selectOptions.length == 0 ? opt() : console.log('deja plein')}
+            {selectOptions.length == 0 ? opt() : console.log("deja plein")}
             {MyComponent()}
 
-  {/*           <input 
+            {/*           <input 
               type="text" 
               name="adresse"
               placeholder="adresse du lieux"
@@ -319,10 +306,9 @@ function CreatePlaces() {
 
             <button type="submit" onClick={handlePlaces}>
               Créer
-            </button> 
+            </button>
           </form>
         </div>
-        
       </section>
     </>
   );
