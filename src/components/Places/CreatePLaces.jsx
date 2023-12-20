@@ -56,6 +56,7 @@ function CreatePlaces() {
   const handlePlaces = async (e) => {
     e.preventDefault();
 
+    const token = localStorage.getItem("@TokenUser");
     
     // let optionsAdresse = {
     //   method: "GET",
@@ -97,6 +98,10 @@ function CreatePlaces() {
         category: userChoice,
         description: description,
       }]), */
+      headers:{
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body : formData,
 
     };
