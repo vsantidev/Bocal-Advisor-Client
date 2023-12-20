@@ -12,6 +12,7 @@ function Show({ placeId }) {
   const [user, setUser] = useState({});
   const [place, setPlace] = useState("null");
   const navigate = useNavigate();
+  const [isEditing, setIsEditing] = useState(false);
   const [review, setReview] = useState([]);
   const [error, setError] = useState(null);
   const [longitude, setLongitude] = useState();
@@ -107,6 +108,15 @@ function Show({ placeId }) {
     handleShow();
   }, [placeId]);
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    console.log("Selected File:", file);
+    setPlace((prevPlace) => ({
+      ...prevPlace,
+      file: file,
+    }));
+  };
+
   const editPlace = async (placeId) => {
     const formData = new FormData();
     formData.append("title", place.title);
@@ -184,13 +194,6 @@ function Show({ placeId }) {
                 setPlace({ ...place, description: e.target.value })
               }
             />
-            <input
-              type="number"
-              value={place.name_category}
-              onChange={(e) =>
-                setPlace({ ...place, name_category: e.target.value })
-              }
-            />
 
             <button onClick={handleSave}>Save</button>
             <button onClick={() => setIsEditing(false)}>Annuler</button>
@@ -262,7 +265,6 @@ function Show({ placeId }) {
     });
   };
 
-  console.log("place", placeId);
   return (
     <>
       <div className="navbar">
