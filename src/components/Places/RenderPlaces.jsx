@@ -6,6 +6,7 @@ import "./renderPlaces.css";
 function RenderPlaces(props) {
   const [places, setPlaces] = useState(null);
 
+  /* ---- recupere tous les lieux ------- */
   const getPlaces = async () => {
     try {
       const options = {
@@ -34,9 +35,9 @@ function RenderPlaces(props) {
   useEffect(() => {
     getPlaces();
   }, []);
-
+  /* -----------  Renvoie tous les lieux présents dans la database --------- */
   const renderPlaces = () => {
-    // Renvoie tous les lieux présents dans la database
+   
     return places?.map((element, index) => {
       return (
         <div key={index}>

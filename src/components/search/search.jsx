@@ -15,6 +15,7 @@ function Search() {
         <button type="submit" onClick={() => handleSearch()}>rechercher</button>
       </div> */}
       <div>
+        {/* state = utilisée pour définir une valeur avec état pour le nouvel emplacement qui est stocké dans l'historique state . */}
         <Link to={`/page/${value}`} state={value}>rechercher</Link>
       </div>
       <div id="search-btn" className="fa-solid fa-magnifying-glass"></div>
