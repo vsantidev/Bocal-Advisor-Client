@@ -122,14 +122,27 @@ function Show({ placeId }) {
         <div className="info">
           <ul>
             <li>
-              <h1>{place.title}</h1>
-              <h2>{place.street}</h2>
-              <h2>{place.postcode}</h2>
-              <h2>{place.city}</h2>
-              <img src={place.file}></img>
-              <h2>{place.description}</h2>
-              <h2>{place.name_category}</h2>
-              <button onClick={handleDelete}>Supprimer</button>
+              <div className="showTitle">
+                <h1>{place.title}</h1>
+                <h2>{place.name_category}</h2>
+              </div>
+              <div className="showContent">
+                <div className="about">
+                  <h2>A Propos</h2>
+                  <p>{place.description}</p>
+                </div>
+                <div className="showFile">
+                  <img src={place.file}></img>
+                </div>
+              </div>
+              <div className="showLocation">
+                <h2>{place.street}</h2>
+                <h2>{place.postcode}</h2>
+                <h2>{place.city}</h2>
+              </div>
+              <button className="button" onClick={handleDelete}>
+                Supprimer
+              </button>
             </li>
           </ul>
         </div>

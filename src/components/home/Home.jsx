@@ -37,21 +37,15 @@ export default function Home() {
       </section>
       {/* SECTION HEADER - END */}
 
-      {/* SECTION CREATION DE LIEUX - START */}
-      <section className="places">
-        <CreatePlaces></CreatePlaces>
-      </section>
-      {/* SECTION CREATION DE LIEUX - END */}
-
       {/* SECTION AFFICHAGE LIEUX - START */}
       <section className="RenderPlaces">
         <RenderPlaces />
       </section>
       {/* SECTION AFFICHAGE LIEUX - END */}
 
-      <div className="review">
+      {/* <div className="review">
         <CreateReview />
-      </div>
+      </div> */}
 
       {/* <div className="review">
         <RenderReview />

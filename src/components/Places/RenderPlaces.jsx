@@ -45,7 +45,7 @@ function RenderPlaces(props) {
               <Places
                 title={element.title}
                 city={element.city}
-                category={element.category}
+                // category={element.category}
                 file={element.file}
                 name_category={element.name_category}
               />
