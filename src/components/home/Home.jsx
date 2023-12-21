@@ -31,7 +31,7 @@ export default function Home() {
             <source src="src\nicefishes.mp4" type="video/mp4" />
           </video>
           <div className="caption">
-            <h1>Avec nous vous ne ferez pas le tour du bocal !</h1>
+            <h1 className="captionTitle">Avec nous vous ne ferez pas le tour du bocal !</h1>
           </div>
         </div>
       </section>
@@ -42,19 +42,6 @@ export default function Home() {
         <RenderPlaces />
       </section>
       {/* SECTION AFFICHAGE LIEUX - END */}
-
-      {/* <div className="review">
-        <CreateReview />
-      </div> */}
-
-      {/* <div className="review">
-        <RenderReview />
-      </div> */}
-
-      {/* <div className="show">
-        <h1>HELLO</h1>
-        <Show />
-      </div> */}
     </>
   );
 }

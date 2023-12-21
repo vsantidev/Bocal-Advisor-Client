@@ -11,14 +11,11 @@ function Search() {
       <div>
         <input type="text" name="search" placeholder="Quelle destination ?" onChange={(e) => setValue(e.target.value)}></input>
       </div>
-      {/* <div>
-        <button type="submit" onClick={() => handleSearch()}>rechercher</button>
-      </div> */}
-      <div>
+      <div className="search-btn">
         {/* state = utilisée pour définir une valeur avec état pour le nouvel emplacement qui est stocké dans l'historique state . */}
-        <Link to={`/page/${value}`} state={value}>rechercher</Link>
+        <i className="fa-solid fa-magnifying-glass search-icon"></i>
+        <Link to={`/page/${value}`} state={value}><span  className="searchTitle">rechercher</span></Link>
       </div>
-      <div id="search-btn" className="fa-solid fa-magnifying-glass"></div>
     </div>
   );
 }

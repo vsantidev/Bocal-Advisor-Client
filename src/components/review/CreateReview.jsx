@@ -110,36 +110,34 @@ export default function CreateReview({}) {
                   onChange={(e) => setComment(e.target.value)}
                 />
               </div>
-              <div>
-                <i class="fa-solid fa-arrow-up-9-1 image-logo"></i>    
-              </div>
               <div className="reviewContentCreateRate">
                 <input
                   type="number"
                   name="rate"
-                  placeholder="Notez le lieu sur 5"
+                  placeholder="Note"
                   required
                   min="0"
                   max="5"
-                  // className="box"
-                  className="review-input"
+                  className="review-inputRate"
                   onChange={(e) => setRate(e.target.value)}
                 />
               </div>
-
             </div>
 
             <div className="reviewContentCreate">
-
               <div>
-                <label htmlFor=""><i class="fa-solid fa-image image-logo"></i>Postez une photo de type : png, jpg, jpeg</label>
+                <i class="fa-solid fa-image image-logo"></i>
+              </div>
+              <div>
                 <input
                     type="file"
                     name="file_review"
-                    className="review-inputFile"
+                    className="reviewContentInputFile"
+                    placeholder="Postez une photo de type : png, jpg, jpeg"
                     onChange={(e) => setFileReview(e.target.files[0])}
                   />
               </div>
+        
               <div>
                 <button
                   type="submit"
@@ -150,10 +148,8 @@ export default function CreateReview({}) {
                 </button>
               </div>
             </div>
-    
           </form>
         </div>
-
       </section>
     </>
   );
