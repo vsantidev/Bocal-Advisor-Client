@@ -118,60 +118,65 @@ function Show({ placeId }) {
   // ------------- AFFICHE LE LIEU -------------- //
   const renderPlace = () => {
     return (
-      <div>
-        <div className="info">
-          <ul>
-            <li>
-              <div className="showTitle">
-                <h1>{place.title}</h1>
+      <>
+        <div className="showPlaceContainer">
+          <div>
+            <h1 className="showTitle">{place.title}</h1>
+          </div>
+          <div>
+            <div className="showLocation">
+              <div className="adresse">
+                  <i class="fa-solid fa-location-dot locationIcon"></i>
+                  <p className="adresseInformation">{place.street}, </p>
+                  <p className="adresseInformation">{place.postcode}</p>
+                  <p className="adresseInformation">{place.city}</p>
+              </div>
+              <div>
                 <h2>{place.name_category}</h2>
               </div>
-              <div className="showContent">
-                <div className="about">
-                  <h2>A Propos</h2>
-                  <p>{place.description}</p>
-                </div>
-                <div className="showFile">
-                  <img src={place.file}></img>
-                </div>
-              </div>
-              <div className="showLocation">
-                <h2>{place.street}</h2>
-                <h2>{place.postcode}</h2>
-                <h2>{place.city}</h2>
-              </div>
-              <button className="button" onClick={handleDelete}>
-                Supprimer
-              </button>
-            </li>
-          </ul>
+            </div>
+          </div>
+          <div className="showContent">
+            <div className="showFile">
+              <img src={place.file}></img>
+            </div>
+            <div className="about">
+              <h2 className="aboutTitle">À Propos</h2>
+              <p className="aboutParagraphe">{place.description}</p>
+            </div>
+          </div>
         </div>
-        {/* ------- DEBUT DE LA CARTE  */}
-        <div className="emplacement">
+
+        <div>
+          <button className="buttonShow" onClick={handleDelete}>Modifier</button>
+          <button className="buttonShow" onClick={handleDelete}>Supprimer</button>
+        </div>
+
+
+        {/* SECTION MAP - START */}
+        <div className="showMap">
+          <h1 className="showMapTitle">Emplacement</h1>
           {longitude != undefined || latitude != undefined ? (
             <Leaflet latitude={latitude} longitude={longitude}></Leaflet>
           ) : (
             <div>erreur recuperation des données de localisation</div>
           )}
         </div>
-        {/* ------- FIN DE LA CARTE  */}
+        {/* SECTION MAP - END  */}
 
         <div className="reviews"></div>
-      </div>
+      </>
     );
   };
 
   //  RENDRE LES DONNÉES VISIBLES PAR L'UTILISATEUR POUR LES REVIEWS
   const renderMyReview = () => {
-    // myReview.splice(6);
-
     return reviewVariable.map((element, index) => {
       return (
         <div key={index}>
           {console.log("review 2")}
           <Review
             comment={element.comment}
-            // created_at={element.created_at}
             created_at={
               new Date(element.created_at).toLocaleDateString("fr", {
                 day: "numeric",
@@ -203,7 +208,7 @@ function Show({ placeId }) {
       {/* SECTION HEADER - END */}
 
       {/* SECTION SHOWPLACE - START */}
-      <div>{renderPlace()}</div>
+      <div className="renderPlaceParent">{renderPlace()}</div>
       {/* SECTION SHOWPLACE - END */}
 
       {/* SECTION RENDERREVIEW - START */}
