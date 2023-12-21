@@ -124,16 +124,19 @@ function Show({ placeId }) {
     formData.append("postcode", place.postcode);
     formData.append("description", place.description);
     formData.append("city", place.city);
-    formData.append("description", place.street);
     formData.append("file", place.file);
 
     let options = {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer" + localStorage.getItem("@TokenUser"),
       },
       body: formData,
     };
+
+    console.log(options);
+    console.log(placeId);
     try {
       const response = await fetch(
         `http://127.0.0.1:8000/api/edit/${placeId}`,
