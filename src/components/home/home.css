@@ -1,24 +1,24 @@
-.homePage{
-    position: relative;
-    /* height: 100%;
+.homePage {
+  position: relative;
+  /* height: 100%;
     width: 100%; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.navContainer{
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 9rem;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+.navContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 9rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .navbar,
-.filterNavContainer{
-    height: 50%;
-    width: 100%;
+.filterNavContainer {
+  height: 30%;
+  width: 100%;
 }
 /* .placeContainer{
     height: 100vh;
@@ -31,28 +31,46 @@
 /* ===========> PAGE HOME : VITRINE <=========== */
 
 .home {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .showcase {
-    background-image: url(https://images.ctfassets.net/b85ozb2q358o/57f8b76cd8a00c9a41cc1b63eb8cbb9ba36cc2a3412a1a6a9a568b3b7d951737/16b231464ba13e9388a77202ca7bd8eb/image.png);
-    background-size: 100rem 55rem !important;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 18rem;
-    margin-top: 11rem;
-    color: white;
-    border-radius: 12px;
-    width: 100rem;
-    font-size: 2rem;
-    text-transform: initial;
-    padding-top: 3rem;
-  }
+  background-size: cover !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 18rem;
+  margin-top: 11rem;
+  color: white;
+  border-radius: 12px;
+  width: 100rem;
+  font-size: 2rem;
+  text-transform: initial;
+  padding-top: 3rem;
+  overflow: hidden;
+  position: relative;
+}
 
+.showcase video {
+  background-size: cover !important;
+  min-width: 100%;
+  min-height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
 
+.showcase .caption {
+  z-index: 1;
+  position: relative;
+  text-align: center;
+  color: #e5eee7;
+  font-size: 25px;
+  padding: 100px;
+}
 
 /* .slide {
     background: blueviolet;

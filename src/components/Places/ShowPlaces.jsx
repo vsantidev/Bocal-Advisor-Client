@@ -11,36 +11,42 @@ import Navbar from "../../layouts/navbar/Navbar";
 function Show({ placeId }) {
   const [user, setUser] = useState({});
   const [place, setPlace] = useState("null");
-  const navigate = useNavigate();
-  const [review, setReview] = useState([]);
+  // tableau de tous les commentaire en lien avec le lieu
+  const [reviewVariable, setReviewVariable] = useState([]);
   const [error, setError] = useState(null);
+
+  /* ---- VALEUR POUR LA CARTE -------- */
   const [longitude, setLongitude] = useState();
   const [latitude, setLatitude] = useState();
   const value = useLocation().state;
+  const navigate = useNavigate();
 
   // ------------- RECUPERE LES DETAILS DU LIEU A AFFICHER -------------- //
+
   const handleShow = async () => {
     let options = {
       method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     };
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/show/${value}`,
         options
       );
-      if (!response.ok) {
-        console.log(response);
 
+      if (!response.ok) {
         alert(`HTTP error! Status: ${response.status}`);
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
-
+      console.log("handleshow");
       setPlace(data.place);
-      setReview(data.review);
+      setReviewVariable(data.review);
 
-      setLatitude(place.y);
-      setLongitude(place.x);
+      setLatitude(data.place.y);
+      setLongitude(data.place.x);
     } catch (error) {
       console.error("Fetch error:", error);
     }
@@ -73,7 +79,10 @@ function Show({ placeId }) {
   };
 
   useEffect(() => {
+    handleShow();
+
     // ------------- VERIFIE SI L'UTILISATEUR EST BIEN CONNECTE POUR POUVOIR COMMENTER -------------- //
+
     const getUserProfile = async () => {
       try {
         const token = localStorage.getItem("@TokenUser");
@@ -104,7 +113,6 @@ function Show({ placeId }) {
     };
 
     getUserProfile();
-    handleShow();
   }, [placeId]);
 
   // ------------- AFFICHE LE LIEU -------------- //
@@ -114,18 +122,31 @@ function Show({ placeId }) {
         <div className="info">
           <ul>
             <li>
-              <h1>{place.title}</h1>
-              <h2>{place.street}</h2>
-              <h2>{place.postcode}</h2>
-              <h2>{place.city}</h2>
-              <img src={place.file}></img>
-              <h2>{place.description}</h2>
-              <h2>{place.name_category}</h2>
-              <button onClick={handleDelete}>Supprimer</button>
+              <div className="showTitle">
+                <h1>{place.title}</h1>
+                <h2>{place.name_category}</h2>
+              </div>
+              <div className="showContent">
+                <div className="about">
+                  <h2>A Propos</h2>
+                  <p>{place.description}</p>
+                </div>
+                <div className="showFile">
+                  <img src={place.file}></img>
+                </div>
+              </div>
+              <div className="showLocation">
+                <h2>{place.street}</h2>
+                <h2>{place.postcode}</h2>
+                <h2>{place.city}</h2>
+              </div>
+              <button className="button" onClick={handleDelete}>
+                Supprimer
+              </button>
             </li>
           </ul>
         </div>
-
+        {/* ------- DEBUT DE LA CARTE  */}
         <div className="emplacement">
           {longitude != undefined || latitude != undefined ? (
             <Leaflet latitude={latitude} longitude={longitude}></Leaflet>
@@ -133,6 +154,7 @@ function Show({ placeId }) {
             <div>erreur recuperation des données de localisation</div>
           )}
         </div>
+        {/* ------- FIN DE LA CARTE  */}
 
         <div className="reviews"></div>
       </div>
@@ -142,11 +164,26 @@ function Show({ placeId }) {
   //  RENDRE LES DONNÉES VISIBLES PAR L'UTILISATEUR POUR LES REVIEWS
   const renderMyReview = () => {
     // myReview.splice(6);
-    return review.map((element, index) => {
+
+    return reviewVariable.map((element, index) => {
       return (
         <div key={index}>
+          {console.log("review 2")}
           <Review
             comment={element.comment}
+            // created_at={element.created_at}
+            created_at={
+              new Date(element.created_at).toLocaleDateString("fr", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              }) +
+              " | " +
+              new Date(element.created_at).toLocaleTimeString("fr", {
+                hour: "numeric",
+                minute: "numeric",
+              })
+            }
             rate={element.rate}
             reviewId={element.id}
             user_id={element.user_id}
@@ -157,21 +194,29 @@ function Show({ placeId }) {
     });
   };
 
-  console.log("place", placeId);
   return (
     <>
+      {/* SECTION HEADER - START */}
       <div className="navbar">
         <Navbar />
       </div>
-      <div>{renderPlace()}</div>
+      {/* SECTION HEADER - END */}
 
+      {/* SECTION SHOWPLACE - START */}
+      <div>{renderPlace()}</div>
+      {/* SECTION SHOWPLACE - END */}
+
+      {/* SECTION RENDERREVIEW - START */}
       {user.role === "membre" && (
         <div>
           <CreateReview />
         </div>
       )}
+      {/* SECTION RENDERREVIEW - END */}
 
-      <div>{renderMyReview()}</div>
+      {/* SECTION SHOWPLACE - START */}
+      <section className="renderReview">{renderMyReview()}</section>
+      {/* SECTION SHOWPLACE - END */}
     </>
   );
 }

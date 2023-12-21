@@ -7,11 +7,6 @@
   border: none;
 }
 
-img {
-  width: 100px;
-  height: 100px;
-}
-
 #root {
   width: 100vw;
   height: 100vh;
@@ -57,6 +52,3 @@ img {
 .read-the-docs {
   color: #888;
 } */
-
-
-

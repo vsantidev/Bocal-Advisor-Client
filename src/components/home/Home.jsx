@@ -15,7 +15,7 @@ export default function Home() {
   console.log(value);
   return (
     <>
-    {/* SECTION HEADER - START */}
+      {/* SECTION HEADER - START */}
       <section className="homePage">
         <div className="navContainer">
           <div className="navbar">
@@ -27,32 +27,25 @@ export default function Home() {
           </div>
         </div>
         <div className="showcase">
-          <h1>Avec nous vous ne ferez pas le tour du bocal !</h1>
+          <video autoPlay muted playsInline loop>
+            <source src="src\nicefishes.mp4" type="video/mp4" />
+          </video>
+          <div className="caption">
+            <h1>Avec nous vous ne ferez pas le tour du bocal !</h1>
+          </div>
         </div>
       </section>
-    {/* SECTION HEADER - END */}
+      {/* SECTION HEADER - END */}
 
-
-
-
-
-    {/* SECTION CREATION DE LIEUX - START */}
-      <section className="places">
-        <CreatePlaces></CreatePlaces>
-      </section>
-    {/* SECTION CREATION DE LIEUX - END */}
-
-
-    {/* SECTION AFFICHAGE LIEUX - START */}
+      {/* SECTION AFFICHAGE LIEUX - START */}
       <section className="RenderPlaces">
-          <RenderPlaces />  
+        <RenderPlaces />
       </section>
-    {/* SECTION AFFICHAGE LIEUX - END */}
+      {/* SECTION AFFICHAGE LIEUX - END */}
 
-
-      <div className="review">
+      {/* <div className="review">
         <CreateReview />
-      </div>
+      </div> */}
 
       {/* <div className="review">
         <RenderReview />

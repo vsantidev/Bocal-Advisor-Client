@@ -4,17 +4,21 @@ import { useLocation } from "react-router-dom";
 import Navbar from "../../layouts/navbar/Navbar";
 import NavFilter from "../navFilter/navFilter";
 import "./Page.css";
+import { Link } from "react-router-dom";
 
 function Page(){
     const [places, setPlaces] = useState([]);
+    // valeur de search ou filtre
     const [valueSearch, setValueSearch] = useState('')
     
+    // recupere la valeur dans state
     let value  = useLocation().state;
 
     useEffect(() => {
         getPlaces();
       }, [valueSearch]);
   
+    /* --- recupere toute les lieux --- */
     const getPlaces = async () => {
       try {
         const options = {
@@ -39,27 +43,27 @@ function Page(){
         console.error("Erreur:", error);
       }
     };
-
+    /* ---  affiche les lieux qui correspondes a valuesearch --- */
     const renderPlaces = () => {
 
         
         // Renvoie tous les lieux présents dans la database
         return places?.map((element, index) => {
-
+          
+          // cherche si une valeur existe dans le tableau
             if (Object.values(element).includes(valueSearch)) {
             
-                console.log("test: ", element);
                 return (
                 
-                
-                    <div key={index} className="card">
-                        <h2>{element.title}</h2>
-                        <h4>{element.city}</h4>
-                        {/* Image ne s'affiche pas :( */}
-                        <img src={element.file} alt="" />
-                        <h4>{element.name_category}</h4>
-                    </div>
-    
+                  <Link to={`/show/${element.id}`} state={element.id}>
+                    <Places             
+                      title={element.title}
+                      city={element.city}
+                      category={element.category}
+                      file={element.file}
+                      name_category={element.name_category}
+                    />
+                  </Link>
                 
             
               );
@@ -68,12 +72,12 @@ function Page(){
         });
         
     }
+
+    /* --- recup la valeur de searchBar ou filtre et stock si pas vide --- */
     if(value != null && value != valueSearch){
-        console.log("fe: ", value);
         setValueSearch(value);
     }
 
-    console.log("page",value);
     return(
         <div className="page">
             <div className="navContainer">
@@ -87,10 +91,15 @@ function Page(){
             </div>
 
             <div className="container">
-                <div className="cardContainer">
-                    {renderPlaces()}
-                </div>
-                
+                {value != null || value != undefined ? 
+                  <div className="cardContainer">
+                      {renderPlaces()}
+                  </div>
+                : 
+                  <div>
+                    <h2>rechercher introuvable</h2>
+                  </div>
+                }
             </div>
 
         </div>

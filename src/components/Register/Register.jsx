@@ -17,7 +17,7 @@ function Register() {
   let user = { firstname, lastname, email, password, username, birthday, role };
 
   const handleRegister = async (e) => {
-    console.log("fonc: ", user);
+    
     e.preventDefault();
 
     let options = {
@@ -72,18 +72,19 @@ function Register() {
     //   });
   };
 
+  // bouton choix membre / gerant
   function choiceInscription($choice) {
     let membre_btn = document.querySelector(".membre-btn");
     let gerant_btn = document.querySelector(".gerant-btn");
 
     if ($choice == "gerant") {
-      console.log("gerant");
+      
       setRole("gerant");
 
       gerant_btn.classList.add("active");
       membre_btn.classList.remove("active");
     } else {
-      console.log("membre");
+      
       setRole("membre");
 
       gerant_btn.classList.remove("active");

@@ -6,6 +6,7 @@ import "./renderPlaces.css";
 function RenderPlaces(props) {
   const [places, setPlaces] = useState(null);
 
+  /* ---- Récupère tous les lieux présents dans la bdd ------- */
   const getPlaces = async () => {
     try {
       const options = {
@@ -17,7 +18,8 @@ function RenderPlaces(props) {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/post`, options);
       const data = await response.json();
 
-      // Vérifions si le premier élément de data est bien un tableau
+      console.log("getPlaces", data);
+      // Vérifie si le premier élément de data est bien un tableau
       if (Array.isArray(data["0"])) {
         // Si oui, places prend la valeur de celui-ci
         setPlaces(data["0"]);
@@ -33,9 +35,8 @@ function RenderPlaces(props) {
   useEffect(() => {
     getPlaces();
   }, []);
-
+  /* -----------  Renvoie tous les lieux présents dans la database --------- */
   const renderPlaces = () => {
-    // Renvoie tous les lieux présents dans la database
     return places?.map((element, index) => {
       return (
         <div key={index}>
@@ -44,7 +45,7 @@ function RenderPlaces(props) {
               <Places
                 title={element.title}
                 city={element.city}
-                category={element.category}
+                // category={element.category}
                 file={element.file}
                 name_category={element.name_category}
               />
