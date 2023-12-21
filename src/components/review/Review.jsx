@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import "./Review.css";
 import { useLocation } from "react-router";
-
+import RenderReview from "./RenderReview";
 // data des modification
 let id_review;
 let comment;
 let rate;
 let file;
+let user_Id;
 
 export default function Review(props) {
 
@@ -15,7 +16,13 @@ export default function Review(props) {
   // data des commentaires
   const [newReview, setNewReview] = useState({});
 
+  const [review, setReview] = useState('null');
+
   const value = useLocation().state;
+
+  const [userId, setUserId] = useState();
+
+  const [user, setUser] = useState({});
 
   const DeleteReview = async (MyId) =>{
  
@@ -91,7 +98,7 @@ export default function Review(props) {
 
     };
 
-      const response = await fetch("http://127.0.0.1:8000/api/update", options);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/update`, options);
 
       if (!response.ok) {
         alert(`HTTP error! Status: ${response.status}`);
@@ -109,6 +116,44 @@ export default function Review(props) {
     }
 
   } 
+
+  useEffect(() => {
+
+    // ------------- VERIFIE SI L'UTILISATEUR EST BIEN CONNECTE POUR POUVOIR COMMENTER -------------- //
+
+    const getUserProfile = async () => {
+      try {
+        const token = localStorage.getItem("@TokenUser");
+
+        if (!token) {
+          setError("Connectez-vous pour pouvoir commenter");
+          return;
+        }
+
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/dashboard`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setUser(data.success);
+          user_Id = data.success.id;
+          setUserId(data.success.id);
+        } else {
+          setError("Connectez-vous pour pouvoir commenter.");
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        setError("Connectez-vous pour pouvoir commenter.");
+      }
+    };
+
+    getUserProfile();
+  }, []);
 
    return (
 
@@ -176,9 +221,15 @@ export default function Review(props) {
             <img className="review-file" src={props.file_review} alt="image non fournie"/>
           </div>
           <div className="reviewDivEdit">
-
+        {console.log("reviw", props.reviewId)}
+          { props.user_id === user.id && 
+          <>
           <button  className="buttonReviewDelete" type="submit" onClick={()=>DeleteReview(props.reviewId)}>SUPPRIMER</button>
-          <button className="buttonReviewEdit" type="submit" onClick={()=>EditReview(props.reviewId, props.comment, props.rate, props.file_Review)}>MODIFIER</button>
+          <button className="buttonReviewEdit" type="submit" onClick={()=>EditReview(props.reviewId, props.comment, props.rate, props.file_Review)}>MODIFIER</button> 
+          </>}
+          
+          
+          
 
           </div>
 

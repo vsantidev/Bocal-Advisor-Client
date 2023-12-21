@@ -8,6 +8,8 @@ import RenderReview from "../review/RenderReview";
 import CreateReview from "../review/CreateReview";
 import Navbar from "../../layouts/navbar/Navbar";
 
+let user_Id;
+
 function Show({ placeId }) {
   const [user, setUser] = useState({});
   const [place, setPlace] = useState("null");
@@ -23,6 +25,8 @@ function Show({ placeId }) {
 
   // ------------- RECUPERE LES DETAILS DU LIEU A AFFICHER -------------- //
 
+  const [userId, setUserId] = useState();
+  
   const handleShow = async () => {
     let options = {
       method: "GET",
@@ -41,7 +45,6 @@ function Show({ placeId }) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
-      console.log("handleshow");
       setPlace(data.place);
       setReviewVariable(data.review);
 
@@ -103,6 +106,8 @@ function Show({ placeId }) {
         if (response.ok) {
           const data = await response.json();
           setUser(data.success);
+          user_Id = data.success.id;
+          setUserId(data.success.id);
         } else {
           setError("Connectez-vous pour pouvoir commenter.");
         }
@@ -140,9 +145,9 @@ function Show({ placeId }) {
                 <h2>{place.postcode}</h2>
                 <h2>{place.city}</h2>
               </div>
-              <button className="button" onClick={handleDelete}>
-                Supprimer
-              </button>
+              
+              {place.user_id === user.id && <button className="button" onClick={handleDelete}>Supprimer</button>}
+            
             </li>
           </ul>
         </div>
