@@ -3,10 +3,17 @@ import Navbar from "../../layouts/navbar/Navbar";
 
 function Profil(){
     return(
-        <div>
+        <>
+        {/* SECTION HEADER - START */}
             <Navbar/>
+        {/* SECTION HEADER - END */}
+
+        {/* SECTION DASHBOARD - START */}
+        <section className="sectionDashboard">
             <Dashboard/>
-        </div>
+        </section> 
+        {/* SECTION DASHBOARD - START */}  
+        </>
     );
 }
 

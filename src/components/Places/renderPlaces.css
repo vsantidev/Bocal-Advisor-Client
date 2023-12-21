@@ -70,6 +70,13 @@ img {
 
 /* ============> SECTION CRÉATION DE LIEUX */
 
+.createPlaceTitle {
+  text-align: start;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  padding-left: 2.3rem;
+}
+
 .formCreatePlace form {
   height: 80%;
   width: 60%;
@@ -99,6 +106,7 @@ img {
   flex-direction: column;
   position: relative;
   left: 20%;
+  margin-bottom: 5rem;
 }
 
 .createPlace {
@@ -118,14 +126,18 @@ img {
   width: 65.2%;
 }
 
-/* .createDescription {
-    width: 80%;
-} */
-
 .inputFileCreate {
   background-color: #426b1f;
 }
 
 .createSelect {
   color: #426b1f;
+}
+
+.inputSelectCategory {
+  width: 43.7rem;
+  margin-top: .5rem;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: black;
 }

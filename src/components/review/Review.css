@@ -24,14 +24,9 @@
     padding: 2rem;
     background: rgba(51, 113, 34, 0.688);
     color: #272727;
+    width: 40rem;
+    text-align: justify;
 } 
-
-.review-inputFile {
-    padding: 1rem 5rem;
-    border-radius: 6px;
-    width: 50rem;
-    background: rgba(51, 113, 34, 0.688);
-}
 
 .image-logo {
     font-size: 2rem;
@@ -44,20 +39,44 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 2rem;
+    flex-grow: 3;
+}
+
+.review-inputRate{
+    border-radius: 6px;
+    padding: 2.8rem 2.4rem;
+    background: rgba(51, 113, 34, 0.688);
+    color: #272727;
+    width: 5rem;
+    font-size: 1.2rem;
+    margin-left: .8rem;
 }
 
 .reviewContentCreateRate {
-    /* flex-grow: 3; */
+    flex-grow: 1;
     width: 5rem;
+    margin-left: .1rem;
+}
+
+.reviewContentInputFile {
+    padding: 1rem 5rem;
+    border-radius: 6px;
+    width: 34rem;
+    background: rgba(51, 113, 34, 0.688);
+    font-size: 1.2rem;
+    text-align: start;
+    flex-grow: 4;
 }
 
 .createValidate {
-    margin-left: 2rem;
+    margin-left: 1rem;
     background-color: #426B1F;
+    width: 10rem;
+    padding: 1.1rem 1rem;
 }
 
 .createValidate:hover {
-    margin-left: 2rem;
+    margin-left: 1rem;
     background-color: #2684FE;
 }
 

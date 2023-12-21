@@ -251,6 +251,7 @@ function CreatePlaces() {
     <>
       <section className="formCreatePlace">
         <div className="createPlaceDashboard">
+          <h1 className="createPlaceTitle">Création d'un lieu</h1>
           <form action="" method="POST">
             <input
               type="text"
@@ -295,9 +296,10 @@ function CreatePlaces() {
               className="inputFileCreate"
               onChange={(e) => setFile(e.target.files[0])}
             />
-
-            {selectOptions.length == 0 ? opt() : console.log("deja plein")}
-            {MyComponent()}
+            <div className="inputSelectCategory">
+              {selectOptions.length == 0 ? opt() : console.log("Catégorie déjà renseignée")}
+              {MyComponent()}
+            </div>
 
             <button type="submit" onClick={handlePlaces}>
               Créer

@@ -92,7 +92,7 @@ function Dashboard() {
     if (user.role === 'gerant') {
       return (
           <>
-      <h1>"{user.role}" Profil</h1>
+      <h1 className="titleStatut">Profil : {user.role}</h1>
       {editing ? (
         <div className="identity">
           <div className="getFirstName">
@@ -156,7 +156,7 @@ function Dashboard() {
     } else if (user.role === 'membre') {
       return (
         <>
-        <h1>"{user.role}" Profil</h1>
+        <h1 className="titleStatut">Profil : {user.role}</h1>
         {editing ? (
           <div className="identity">
             <div className="getFirstName">
