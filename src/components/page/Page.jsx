@@ -28,7 +28,7 @@ function Page(){
           },
         };
 
-        const response = await fetch(`http://127.0.0.1:8000/api/post`, options);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/post`, options);
         const data = await response.json();
   
         // Vérifions si le premier élément de data est bien un tableau

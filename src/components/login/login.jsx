@@ -22,7 +22,7 @@ function Login() {
   const handleOublier = async () => {
     try {
         const response = await fetch(
-            `http://127.0.0.1:8000/api/send-reset-email`,
+            `${import.meta.env.VITE_API_URL}/send-reset-email`,
             {
                 method: "POST",
                 headers: {
@@ -73,7 +73,7 @@ function Login() {
     };
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/login", options);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/login`, options);
       const data = await response.json();
       if (data.token) {
         localStorage.setItem("@TokenUser", data.token);

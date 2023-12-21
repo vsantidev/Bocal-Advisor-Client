@@ -32,7 +32,7 @@ function Show({ placeId }) {
     };
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/show/${value}`,
+        `${import.meta.env.VITE_API_URL}/show/${value}`,
         options
       );
 
@@ -56,7 +56,7 @@ function Show({ placeId }) {
   const handleDelete = async () => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/delete/${value}`,
+        `${import.meta.env.VITE_API_URL}/delete/${value}`,
         {
           method: "DELETE",
           headers: {
@@ -92,7 +92,7 @@ function Show({ placeId }) {
           return;
         }
 
-        const response = await fetch("http://127.0.0.1:8000/api/dashboard", {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/dashboard`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

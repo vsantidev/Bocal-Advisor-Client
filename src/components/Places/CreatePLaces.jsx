@@ -38,6 +38,9 @@ import "./renderPlaces.css";
 //     };
 //   },
 // }
+
+let user_Id;
+
 function CreatePlaces() {
   const [title, setTitle] = useState("membre");
   const [street, setStreet] = useState("");
@@ -46,7 +49,12 @@ function CreatePlaces() {
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [file, setFile] = useState("");
+
+  const [adresse, setAdresse] = useState("");
+  const [userId, setUserId] = useState();
+
   // const [adresse, setAdresse] = useState("");
+
 
   // const[x, setX] = useState();
   // const[y, setY] = useState();
@@ -59,7 +67,45 @@ function CreatePlaces() {
   //All catégories choisies
   const [userChoice, setUserChoice] = useState([]);
 
+
+
+    const getUserProfile = async () => {
+      console.log('userProfil');
+      try {
+        const token = localStorage.getItem('@TokenUser'); 
+
+        if (!token) {
+          setError('Token not found');
+          return;
+        }
+
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/dashboard`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.ok) {
+        const data = await response.json();
+
+        user_Id = data.success.id;
+        setUserId(data.success.id);
+        
+        } else {
+          setError('Failed to fetch user data');
+        } 
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+        setError('Error fetching user data');
+      }
+    
+    };
+
+
   // Restructure le tableau pour le select
+
   const opt = () => {
     categories.forEach((element) => {
       element.forEach((item) => {
@@ -90,6 +136,7 @@ function CreatePlaces() {
   const handlePlaces = async (e) => {
     e.preventDefault();
 
+    const authToken = localStorage.getItem('@TokenUser'); 
     // let optionsAdresse = {
     //   method: "GET",
     //   headers: {
@@ -103,6 +150,7 @@ function CreatePlaces() {
     // setX(dataApi.features[0].geometry.coordinates[0]);
     // setY(dataApi.features[0].geometry.coordinates[1])
 
+    console.log("user_id", userId);
     // Créé un nouvel objet formData qui paire les champs du formulaire et leurs valeurs
     const formData = new FormData();
     // Ajoute les paires suivantes dans formData
@@ -114,16 +162,24 @@ function CreatePlaces() {
     formData.append("description", description);
     formData.append("file", file);
 
+    formData.append("user_id", user_Id);
+
     // formData.append("x", x);
     // formData.append("y", y);
 
+    console.log("user", userId);
     let options = {
       method: "POST",
+
+      headers: {
+        'Authorization': `Bearer ${authToken}`,
+      },
       body: formData,
     };
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/place", options);
+      console.log('option', options);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/place`, options);
       if (!response.ok) {
         alert(`HTTP error! Status: ${response.status}`);
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -166,6 +222,8 @@ function CreatePlaces() {
   };
 
   useEffect(() => {
+    console.log('useEffect');
+    getUserProfile();
     getCategories();
   }, []);
 
