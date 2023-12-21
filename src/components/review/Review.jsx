@@ -20,7 +20,7 @@ export default function Review(props) {
   
       try {
           const response = await fetch(
-            `http://127.0.0.1:8000/api/show/${value}`,
+            `${import.meta.env.VITE_API_URL}/show/${value}`,
             options
           );
          console.log(options);
