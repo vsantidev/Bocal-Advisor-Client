@@ -46,7 +46,7 @@ function Page(){
     /* ---  affiche les lieux qui correspondes a valuesearch --- */
     const renderPlaces = () => {
 
-        
+        console.log('valuesearch ', valueSearch);
         // Renvoie tous les lieux présents dans la database
         return places?.map((element, index) => {
           
@@ -75,6 +75,7 @@ function Page(){
 
     /* --- recup la valeur de searchBar ou filtre et stock si pas vide --- */
     if(value != null && value != valueSearch){
+        console.log("value" , value);
         setValueSearch(value);
     }
 
