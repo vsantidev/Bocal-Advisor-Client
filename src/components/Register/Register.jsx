@@ -50,26 +50,6 @@ function Register() {
     } catch (error) {
       console.error("Fetch error:", error);
     }
-
-    // fetch("http://127.0.0.1:8000/api/register", options)
-    //   .then(async (response) => {
-    //     response.json();
-    //     if (!response.ok) {
-    //       throw new Error(`${response.status} ${response.statusText}`);
-    //     }
-    //   })
-    //   .then((data) => {
-    //     console.log("data", data);
-
-    //     if (data.token) {
-    //       alert(data.message);
-    //     } else {
-    //       alert("TRY AGAIN");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("There was an error : ", error);
-    //   });
   };
 
   // bouton choix membre / gerant
