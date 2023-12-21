@@ -154,7 +154,7 @@ function Show({ placeId }) {
         </div>
 
         <div>
-          <button className="buttonShow" onClick={handleDelete}>Modifier</button>
+          
           {place.user_id === user.id && <button className="button" onClick={handleDelete}>Supprimer</button>}
 
         </div>

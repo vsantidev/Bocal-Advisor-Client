@@ -7,13 +7,14 @@ import "./Page.css";
 import { Link } from "react-router-dom";
 
 function Page(){
+ 
     const [places, setPlaces] = useState([]);
     // valeur de search ou filtre
     const [valueSearch, setValueSearch] = useState('')
     
     // recupere la valeur dans state
     let value  = useLocation().state;
-
+    console.log("page",value);
     useEffect(() => {
         getPlaces();
       }, [valueSearch]);

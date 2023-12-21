@@ -4,7 +4,7 @@ import { useState } from "react";
 
 function NavFilter() {
   const [value, setValue] = useState('test')
-
+  console.log("filtere", value);
   return (
     <div className="littleFilter">
       <div className="linkFilter">
